@@ -35,10 +35,12 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   95% placement target. That retry showed that the initial placer still adds
   the same 1,999.541 um^2 pin-density adjustment even with routability-driven
   placement disabled. Trial `33318273256` confirmed that skipping initial
-  placement also leaves the adjustment active. The next bounded trial uses
-  OpenROAD's documented `-disable_pin_density_adjust` switch. Raw movable plus
-  fixed utilization is 94.12%, below the configured 95% target; routing and
-  DRC remain mandatory.
+  placement also leaves the adjustment active. Trial `33318697303` showed the
+  first workflow injection was overwritten by the action's Python setup, so
+  the OpenROAD command remained unchanged. The next bounded trial preserves
+  OpenROAD's documented `-disable_pin_density_adjust` switch across that
+  setup. Raw movable plus fixed utilization is 94.12%, below the configured
+  95% target; routing and DRC remain mandatory.
 
 ## Required before any tapeout claim
 

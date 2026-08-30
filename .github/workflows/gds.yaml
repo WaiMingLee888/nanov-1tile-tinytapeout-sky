@@ -38,6 +38,32 @@ jobs:
               raise SystemExit(f"unexpected LibreLane GPL script: {script}")
           script.write_text(text.replace(marker, replacement), encoding="utf-8")
           print(f"patched {script}")
+
+          # The composite TinyTapeout action runs setup-python again. Install
+          # an idempotent startup guard so any package restoration is patched
+          # before tt_tool starts LibreLane.
+          import base64
+          import site
+
+          guard = '''
+          from pathlib import Path
+          import librelane
+          p = Path(librelane.__file__).parent / "scripts/openroad/gpl.tcl"
+          t = p.read_text(encoding="utf-8")
+          m = "set arg_list [list]\\n"
+          r = m + "lappend arg_list -disable_pin_density_adjust\\n"
+          if r not in t:
+              if t.count(m) != 1:
+                  raise RuntimeError(f"unexpected LibreLane GPL script: {p}")
+              p.write_text(t.replace(m, r), encoding="utf-8")
+          '''
+          encoded = base64.b64encode(guard.encode("utf-8")).decode("ascii")
+          startup = Path(site.getsitepackages()[0]) / "nanov_exact_density.pth"
+          startup.write_text(
+              f"import base64;exec(base64.b64decode('{encoded}'))\n",
+              encoding="utf-8",
+          )
+          print(f"installed startup guard {startup}")
           PY
 
       - name: Build GDS
