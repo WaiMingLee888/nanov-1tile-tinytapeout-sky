@@ -83,7 +83,12 @@ def main() -> None:
     workflow = (ROOT / ".github" / "workflows" / "gds.yaml").read_text(
         encoding="utf-8"
     )
-    require(r'lappend arg_list -disable_pin_density_adjust', workflow,
+    placement_patch = (ROOT / "scripts" / "patch_librelane_gpl.py").read_text(
+        encoding="utf-8"
+    )
+    require(r'LIBRELANE_IMAGE_OVERRIDE:\s*nanov-librelane:3\.0\.5', workflow,
+            "patched LibreLane container selection")
+    require(r'lappend arg_list -disable_pin_density_adjust', placement_patch,
             "exact-density OpenROAD placement flag")
     require(r'"RUN_LINTER"\s*:\s*1', config, "enabled RTL linter")
     require(r'"RUN_CTS"\s*:\s*1', config, "enabled clock-tree synthesis")

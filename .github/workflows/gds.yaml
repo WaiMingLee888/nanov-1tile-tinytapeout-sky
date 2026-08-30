@@ -42,25 +42,17 @@ jobs:
         shell: bash
         run: pip install librelane==3.0.5
 
-      - name: Enable exact-density OpenROAD placement
+      - name: Build exact-density LibreLane image
         shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import librelane
-
-          script = Path(librelane.__file__).parent / "scripts/openroad/gpl.tcl"
-          text = script.read_text(encoding="utf-8")
-          marker = "set arg_list [list]\n"
-          replacement = marker + "lappend arg_list -disable_pin_density_adjust\n"
-          if text.count(marker) != 1:
-              raise SystemExit(f"unexpected LibreLane GPL script: {script}")
-          script.write_text(text.replace(marker, replacement), encoding="utf-8")
-          print(f"patched {script}")
-          PY
+        run: >-
+          docker build
+          -f .github/librelane-exact-density.Dockerfile
+          -t nanov-librelane:3.0.5 .
 
       - name: Build GDS
         shell: bash
+        env:
+          LIBRELANE_IMAGE_OVERRIDE: nanov-librelane:3.0.5
         run: ./tt/tt_tool.py --harden $TT_ARGS
 
       - name: Publish build logs
