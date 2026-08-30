@@ -101,6 +101,12 @@ module nanoV_cpu_external (
         2'b00
     };
     wire write_required = rd != 0 && rd != 3 && rd != 4;
+    wire rs1_is_fixed = rs1 == 0 || rs1 == 3 || rs1 == 4;
+    wire rs2_is_fixed = rs2 == 0 || rs2 == 3 || rs2 == 4;
+    wire [31:0] rs1_fixed_value = rs1 == 3 ? 32'h00001000 :
+                                   rs1 == 4 ? 32'h10000000 : 32'b0;
+    wire [31:0] rs2_fixed_value = rs2 == 3 ? 32'h00001000 :
+                                   rs2 == 4 ? 32'h10000000 : 32'b0;
     wire general_mmio = !is_fast_mem && core_data_out[31:28] == 4'h1;
     wire mmio_input_select = is_fast_mem ? fast_addr_imm[2] : core_data_out[2];
     assign is_mmio = is_fast_mem || general_mmio;
@@ -164,13 +170,12 @@ module nanoV_cpu_external (
         .result_next_bit(data_rd_next),
         .capture_load(engine_read_valid && state == STATE_DATA_WAIT && !is_store),
         .normalize_result(state == STATE_LOAD_CAPTURE),
-        .load_rs1_word(state == STATE_DATA_START && is_mmio && !is_store),
-        .rs1_load_word(mmio_input_select ? {24'b0, gpio_in} : 32'b0),
-        .load_rs2_word(state == STATE_NORMALIZE && is_jump),
-        .rs2_load_word({10'b0, pc} + 32'd4),
-        .counter(counter),
-        .rs1(rs1),
-        .rs2(rs2),
+        .load_rs1_word((state == STATE_DATA_START && is_mmio && !is_store) ||
+                       (state == STATE_NORMALIZE && rs1_is_fixed)),
+        .rs1_load_word(state == STATE_NORMALIZE ? rs1_fixed_value :
+                       mmio_input_select ? {24'b0, gpio_in} : 32'b0),
+        .load_rs2_word(state == STATE_NORMALIZE && (is_jump || rs2_is_fixed)),
+        .rs2_load_word(is_jump ? {10'b0, pc} + 32'd4 : rs2_fixed_value),
         .data_rs1(data_rs1),
         .data_rs2(data_rs2),
         .rs1_value(rs1_value),

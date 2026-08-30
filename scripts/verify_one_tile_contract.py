@@ -80,8 +80,10 @@ def main() -> None:
     require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*95', config, "measured 95% placement target")
     require(r'"PL_ROUTABILITY_DRIVEN"\s*:\s*false', config,
             "disabled routability-driven placement")
-    require(r'"SYNTH_STRATEGY"\s*:\s*"AREA 1"', config,
-            "area-recovery synthesis strategy")
+    require(r'"SYNTH_STRATEGY"\s*:\s*"AREA 0"', config,
+            "best measured synthesis strategy")
+    require(r'"RUN_POST_GPL_DESIGN_REPAIR"\s*:\s*false', config,
+            "deferred high-fanout repair until after legalization")
     workflow = (ROOT / ".github" / "workflows" / "gds.yaml").read_text(
         encoding="utf-8"
     )

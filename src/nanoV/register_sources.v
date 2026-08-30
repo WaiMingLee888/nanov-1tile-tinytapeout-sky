@@ -16,9 +16,6 @@ module nanoV_external_sources (
     input [31:0] rs1_load_word,
     input load_rs2_word,
     input [31:0] rs2_load_word,
-    input [4:0] counter,
-    input [3:0] rs1,
-    input [3:0] rs2,
     output data_rs1,
     output data_rs2,
     output [31:0] rs1_value,
@@ -78,19 +75,9 @@ module nanoV_external_sources (
             rs2_ring <= {rs2_ring[0], rs2_ring[31:1]};
     end
 
-    wire source_rs1 = (rs1 == 0) ? 1'b0 :
-                      (rs1 == 3) ? (counter == 12) :
-                      (rs1 == 4) ? (counter == 28) : rs1_ring[1];
-    wire source_rs2 = (rs2 == 0) ? 1'b0 :
-                      (rs2 == 3) ? (counter == 12) :
-                      (rs2 == 4) ? (counter == 28) : rs2_ring[1];
-
-    assign data_rs1 = source_rs1;
-    assign data_rs2 = source_rs2;
+    assign data_rs1 = rs1_ring[1];
+    assign data_rs2 = rs2_ring[1];
     assign rs1_value = {rs1_ring[0], rs1_ring[31:1]};
     assign rs2_raw_value = {rs2_ring[0], rs2_ring[31:1]};
-    assign rs2_value = (rs2 == 0) ? 32'b0 :
-                       (rs2 == 3) ? 32'h00001000 :
-                       (rs2 == 4) ? 32'h10000000 :
-                       rs2_raw_value;
+    assign rs2_value = rs2_raw_value;
 endmodule

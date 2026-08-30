@@ -46,8 +46,14 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
 - Trial `33319317296` confirmed the container patch: pin-density adjustment
   was 0, raw movable utilization was 93.909%, and global placement completed.
   Post-GPL repair then failed detailed legalization on 126 reported instance
-  placements. The next trial uses LibreLane's `AREA 1` recovery strategy;
-  local SKY130 mapping reduced 39 cells and 181.424 um^2 with unchanged RTL.
+  placements. This led to a bounded trial of LibreLane's `AREA 1` recovery
+  strategy, which had looked smaller in a local mapping context.
+- Trial `33319510770` showed `AREA 1` was worse in the official flow:
+  15,016.902 um^2 and 122 failed placements. The flow is restored to `AREA 0`.
+  The post-GPL repair failure is caused by 10 input buffers followed by 142
+  repair buffers for 27 slew and 45 fanout violations. The next bounded trial
+  defers that repair until after ordinary detailed placement; CTS, subsequent
+  timing repair, routing, and signoff remain enabled.
 
 ## Required before any tapeout claim
 
