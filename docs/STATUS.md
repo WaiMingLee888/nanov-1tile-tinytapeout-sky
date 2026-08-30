@@ -39,11 +39,15 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   first workflow injection was overwritten by the action's Python setup, and
   trial `33318909097` confirmed a startup guard still targeted the wrong
   runtime context. Trial `33319109423` exposed why: TinyTapeout hardening runs
-  inside LibreLane's official 3.0.5 container. The next bounded trial derives
-  a container from that exact image with only OpenROAD's documented
-  `-disable_pin_density_adjust` switch added. Raw movable plus fixed
-  utilization is 94.12%, below the configured 95% target; routing and DRC
-  remain mandatory.
+  inside LibreLane's official 3.0.5 container. The flow now derives a container
+  from that exact image with only OpenROAD's documented
+  `-disable_pin_density_adjust` switch added. Routing and DRC remain mandatory.
+
+- Trial `33319317296` confirmed the container patch: pin-density adjustment
+  was 0, raw movable utilization was 93.909%, and global placement completed.
+  Post-GPL repair then failed detailed legalization on 126 reported instance
+  placements. The next trial uses LibreLane's `AREA 1` recovery strategy;
+  local SKY130 mapping reduced 39 cells and 181.424 um^2 with unchanged RTL.
 
 ## Required before any tapeout claim
 
