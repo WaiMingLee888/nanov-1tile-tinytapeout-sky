@@ -1,0 +1,4 @@
+read_verilog src/nanoV/register_external.v
+hierarchy -check -top nanoV_external_registers
+synth -top nanoV_external_registers
+stat
