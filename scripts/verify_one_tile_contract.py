@@ -77,7 +77,9 @@ def main() -> None:
     require(r'rd\s*!=\s*0\s*&&\s*rd\s*!=\s*3\s*&&\s*rd\s*!=\s*4', cpu,
             "writable external RV32E register namespace")
     require(r'wire\s+is_mul\s*=\s*1\'b0\s*;', core, "disabled optional multiplier")
-    require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*92', config, "measured 92% placement target")
+    require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*95', config, "measured 95% placement target")
+    require(r'"PL_ROUTABILITY_DRIVEN"\s*:\s*false', config,
+            "disabled GPL pin-density inflation")
     require(r'"RUN_LINTER"\s*:\s*1', config, "enabled RTL linter")
     require(r'"RUN_CTS"\s*:\s*1', config, "enabled clock-tree synthesis")
 

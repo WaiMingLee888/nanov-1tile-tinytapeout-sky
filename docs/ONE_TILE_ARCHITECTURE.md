@@ -78,6 +78,7 @@ The pin-level Tiny Tapeout wrapper passes the 97-word self-check and a 48-word
 GCC RV32E program. Directed coverage also includes branches, JAL/JALR, all
 three shifts, signed and unsigned comparisons, byte/half/word loads and stores,
 and GPIO. The complete wrapper maps to 1,318 SKY130 cells and 14,652.8032 um^2,
-including 197 flip-flops. A 92% placement target is now used for the first
-physical trial. Placement, routing, timing, DRC, LVS, gate-level simulation,
+including 197 flip-flops. The first physical trial's routability-driven
+pin-density inflation caused 106.469% effective utilization. A 95% target with
+that inflation disabled is the next measured trial. Placement, routing, timing, DRC, LVS, gate-level simulation,
 and precheck remain required before the one-tile objective is complete.

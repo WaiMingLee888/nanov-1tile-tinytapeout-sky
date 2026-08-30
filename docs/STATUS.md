@@ -29,8 +29,10 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   `b9e7ade029630c47eaa6b985acc2af743d836f4c7790a0bb77c809587c947b3c`).
 - The earlier internal-register GDS trial `33312477537` failed at 21,577.910
   um^2 movable area and 135.548% utilization. The current mapped candidate is
-  materially smaller, but mapping is not proof that 92%-target placement and
-  routing will succeed.
+  materially smaller. Trial `33317487603` then reached global placement but
+  routability-driven pin-density inflation raised movable area to 16,948.879
+  um^2 (106.469%). The next bounded trial disables that inflation and uses a
+  95% placement target; routing and DRC remain mandatory.
 
 ## Required before any tapeout claim
 
