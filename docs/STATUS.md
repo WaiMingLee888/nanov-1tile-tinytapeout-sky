@@ -32,7 +32,11 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   materially smaller. Trial `33317487603` then reached global placement but
   routability-driven pin-density inflation raised movable area to 16,948.879
   um^2 (106.469%). The next bounded trial disables that inflation and uses a
-  95% placement target; routing and DRC remain mandatory.
+  95% placement target. That retry showed that the initial placer still adds
+  the same 1,999.541 um^2 pin-density adjustment even with routability-driven
+  placement disabled. The next bounded trial skips only that optional initial
+  placement phase and proceeds to the main global placer; routing and DRC
+  remain mandatory.
 
 ## Required before any tapeout claim
 

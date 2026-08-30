@@ -79,7 +79,9 @@ def main() -> None:
     require(r'wire\s+is_mul\s*=\s*1\'b0\s*;', core, "disabled optional multiplier")
     require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*95', config, "measured 95% placement target")
     require(r'"PL_ROUTABILITY_DRIVEN"\s*:\s*false', config,
-            "disabled GPL pin-density inflation")
+            "disabled routability-driven placement")
+    require(r'"PL_SKIP_INITIAL_PLACEMENT"\s*:\s*true', config,
+            "bypassed infeasible pin-density initial placement")
     require(r'"RUN_LINTER"\s*:\s*1', config, "enabled RTL linter")
     require(r'"RUN_CTS"\s*:\s*1', config, "enabled clock-tree synthesis")
 
