@@ -38,7 +38,7 @@ spec-compliance-certified processor.
 - `uo[7:0]`: eight GPIO outputs.
 - `uio[0]`: SPI MOSI.
 - `uio[1]`: active-low SPI chip select.
-- `uio[2]`: SPI clock.
-- `uio[3]`: SPI MISO.
+- `uio[2]`: mode-0 SPI clock, non-inverted from the controller clock.
+- `uio[3]`: SPI MISO, sampled directly on the rising controller/SPI edge.
 - `uio[7]`: SPI HOLD behavior inherited from NanoV.
 - `uio[6:4]`: unused.

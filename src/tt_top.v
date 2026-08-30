@@ -23,27 +23,27 @@ module tt_um_WaiMingLee888_nanov_1tile (
     wire spi_select;
     wire spi_mosi;
     wire spi_clk_enable;
+    // Mode-0 SPI: the memory captures MOSI and presents MISO relative to the
+    // same rising edge used by the controller.  Keeping SCK non-inverted also
+    // avoids treating a package-output inverter as part of the internal clock
+    // tree during physical design.
     assign uio_out = {
         spi_clk_enable,
         4'b0000,
-        (!clk && spi_clk_enable),
+        (clk && spi_clk_enable),
         spi_select,
         spi_mosi
     };
-    reg buffered_spi_in;
 
     // Switch SPI bidis to inputs when in reset (allows external programming of SPI RAM
     // while in reset).
     assign uio_oe = rst_n ? 8'b10000111 : 8'b00000000;
 
-    always @(negedge clk)
-        buffered_spi_in <= uio_in[3];
-
     wire unused_retire;
     nanoV_cpu_external nano (
         .clk(clk),
         .rstn(rst_n),
-        .spi_data_in(buffered_spi_in),
+        .spi_data_in(uio_in[3]),
         .spi_select(spi_select),
         .spi_out(spi_mosi),
         .spi_clk_enable(spi_clk_enable),

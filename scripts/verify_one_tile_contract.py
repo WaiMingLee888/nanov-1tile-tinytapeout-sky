@@ -72,6 +72,12 @@ def main() -> None:
     )
     require(r'module\s+tt_um_WaiMingLee888_nanov_1tile\s*\(', top, "one-tile RTL top")
     require(r'nanoV_cpu_external\s+nano\s*\(', top, "external-register CPU")
+    require(r'\(clk\s*&&\s*spi_clk_enable\)', top,
+            "non-inverted mode-0 SPI clock")
+    require(r'\.spi_data_in\s*\(\s*uio_in\[3\]\s*\)', top,
+            "direct rising-edge SPI MISO sampling")
+    if re.search(r'negedge\s+clk', top):
+        raise AssertionError("top-level falling-edge SPI sampler was reintroduced")
     require(r'parameter\s+NUM_REGS\s*=\s*16', core, "16-register core default")
     require(r'\.NUM_REGS\s*\(\s*16\s*\)', cpu, "16-register RV32E core instance")
     require(r'rd\s*!=\s*0\s*&&\s*rd\s*!=\s*3\s*&&\s*rd\s*!=\s*4', cpu,

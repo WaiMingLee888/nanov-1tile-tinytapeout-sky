@@ -11,7 +11,9 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   hardwired x0, x3, and x4 retain signed NanoV semantics. Two rotating source
   rings are reused in place for destination writeback, avoiding a third ring.
 - Program/data images and SPI transactions use conventional little-endian byte
-  ordering. No firmware-side bit reversal is required.
+  ordering. No firmware-side bit reversal is required. The wrapper exposes a
+  conventional non-inverted mode-0 SCK and samples MISO directly on its rising
+  edge; the former falling-edge sample register has been removed.
 - The full Tiny Tapeout wrapper passes the 97-word self-checking RV32E
   regression through modeled SPI RAM and GPIO. It covers ALU, shifts,
   comparisons, branches, JAL/JALR, byte/half/word loads and stores, and reaches
@@ -54,6 +56,12 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   repair buffers for 27 slew and 45 fanout violations. The next bounded trial
   defers that repair until after ordinary detailed placement; CTS, subsequent
   timing repair, routing, and signoff remain enabled.
+- Trial `33320278688` reduced the official movable area to 14,560.214 um^2
+  (91.464% raw utilization), and both global and detailed placement passed.
+  OpenROAD then crashed in CTS because the direct inverted SCK output appeared
+  as an inverter clock sink with no downstream instance. The wrapper now uses
+  mode-0 non-inverted SCK and no falling-edge MISO register, eliminating that
+  invalid CTS topology while preserving the SPI protocol in RTL regression.
 
 ## Required before any tapeout claim
 
