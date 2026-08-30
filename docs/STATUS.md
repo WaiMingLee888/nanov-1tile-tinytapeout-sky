@@ -1,7 +1,11 @@
 # Verification status
 
-This is an experimental 1x1 derivative. It has not yet passed physical-design
-or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
+This 1x1 NanoV RV32E derivative passed the official Tiny Tapeout SKY130
+hardening workflow at physical commit
+`aea43d652be6ea42b024105291aadba46a345347`. Run `33322018202` completed GDS,
+gate-level simulation, precheck, and viewer successfully. This is a
+GDS-verified derivative; it has not yet been fabricated, so no
+silicon-proven claim is made for the 1x1 implementation.
 
 ## Current evidence
 
@@ -68,11 +72,36 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   replay of that run's step-33 database now passes CTS legalization with a
   genuine 17-buffer `clkbuf_2` tree occupying 85.08 um^2. The replay uses a
   30-sink fanout/cluster constraint and OpenROAD's documented no-dummy-load and
-  no-insertion-delay modes; timing, slew, routing, and signoff checks remain
-  enabled to validate the smaller tree.
+  no-insertion-delay modes; routing, extracted setup/hold timing, and physical
+  signoff checks remain enabled to validate the smaller tree.
 
-## Required before any tapeout claim
+- Official run `33322018202` completed the full 72-step LibreLane flow. The
+  final design occupies the Tiny Tapeout 1x1 die (`161 x 111.52 um`), routes
+  1,346 signal nets with zero final TritonRoute DRC errors, and has zero
+  antenna, Magic DRC, LVS, power-grid, critical-disconnected-pin, setup, and
+  hold violations. The worst extracted setup slack is 22.938 ns and the worst
+  extracted hold slack is 0.102 ns across all nine reported corners.
+- The official gate-level simulation and Tiny Tapeout precheck both passed.
+  GitHub Pages is configured for Actions deployment and the official viewer
+  job passed on run attempt 3.
+- The final GDS SHA-256 is
+  `c8e6f15acb0c01c7546e8ecdf358bc3eeb79ce8621fab1328a99d1413d66a799`;
+  the final OAS SHA-256 is
+  `c2e60b41621b05a368bf8353420bdbac796c15af3c6420f9e6c775a68e90cca9`.
+- Raw extracted metrics also report 1,012 max-slew, 10 max-capacitance, and 11
+  max-fanout limit exceedances at the worst corner. The standard Tiny Tapeout
+  checker configuration does not make those categories fatal for this macro;
+  they are recorded here rather than being misrepresented as zero. Setup and
+  hold timing are clean at the required 12 MHz clock.
 
-1. Official 1x1 placement, CTS, routing, extraction, and multi-corner timing pass.
-2. DRC, LVS, antenna, Tiny Tapeout precheck, and extracted gate-level test pass.
-3. An immutable source commit is bound to all artifacts and independently audited.
+## Signoff result
+
+1. Official 1x1 placement, CTS, routing, extraction, and multi-corner
+   setup/hold timing: passed.
+2. DRC, LVS, antenna, Tiny Tapeout precheck, and extracted gate-level test:
+   passed.
+3. Physical source and artifacts: bound to commit
+   `aea43d652be6ea42b024105291aadba46a345347` and tag
+   `nanov-1tile-ttsky26c-gds-33322018202`.
+
+See `SIGNOFF.md` for the requirement-by-requirement audit and artifact hashes.
