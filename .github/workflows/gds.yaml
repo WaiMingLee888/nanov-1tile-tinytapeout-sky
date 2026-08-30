@@ -13,6 +13,33 @@ jobs:
         with:
           submodules: recursive
 
+      # LibreLane 3.0.5 does not expose OpenROAD's
+      # -disable_pin_density_adjust switch as a configuration variable. The
+      # raw design plus fixed cells uses 94.12% of the core, but the default
+      # pin-density heuristic inflates it to 106.47% before placement starts.
+      - name: Setup Python for LibreLane patch
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Enable exact-density OpenROAD placement
+        shell: bash
+        run: |
+          pip install librelane==3.0.5
+          python - <<'PY'
+          from pathlib import Path
+          import librelane
+
+          script = Path(librelane.__file__).parent / "scripts/openroad/gpl.tcl"
+          text = script.read_text(encoding="utf-8")
+          marker = "set arg_list [list]\n"
+          replacement = marker + "lappend arg_list -disable_pin_density_adjust\n"
+          if text.count(marker) != 1:
+              raise SystemExit(f"unexpected LibreLane GPL script: {script}")
+          script.write_text(text.replace(marker, replacement), encoding="utf-8")
+          print(f"patched {script}")
+          PY
+
       - name: Build GDS
         uses: TinyTapeout/tt-gds-action@ttsky26c
         with:

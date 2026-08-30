@@ -80,8 +80,11 @@ def main() -> None:
     require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*95', config, "measured 95% placement target")
     require(r'"PL_ROUTABILITY_DRIVEN"\s*:\s*false', config,
             "disabled routability-driven placement")
-    require(r'"PL_SKIP_INITIAL_PLACEMENT"\s*:\s*true', config,
-            "bypassed infeasible pin-density initial placement")
+    workflow = (ROOT / ".github" / "workflows" / "gds.yaml").read_text(
+        encoding="utf-8"
+    )
+    require(r'lappend arg_list -disable_pin_density_adjust', workflow,
+            "exact-density OpenROAD placement flag")
     require(r'"RUN_LINTER"\s*:\s*1', config, "enabled RTL linter")
     require(r'"RUN_CTS"\s*:\s*1', config, "enabled clock-tree synthesis")
 

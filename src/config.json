@@ -15,7 +15,6 @@
   "//": "Users have reported that values up to 80 worked well for them.",
   "PL_TARGET_DENSITY_PCT": 95,
   "PL_ROUTABILITY_DRIVEN": false,
-  "PL_SKIP_INITIAL_PLACEMENT": true,
 
   "//": "Tiny Tapeout supplies a 12 MHz input clock (83.333 ns period).",
   "CLOCK_PERIOD": 83.333,
