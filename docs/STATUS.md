@@ -84,6 +84,11 @@ silicon-proven claim is made for the 1x1 implementation.
 - The official gate-level simulation and Tiny Tapeout precheck both passed.
   GitHub Pages is configured for Actions deployment and the official viewer
   job passed on run attempt 3.
+- Independent full rerun `33323135770` passed GDS, gate-level simulation,
+  precheck, and viewer on its first attempt. Its OAS layout and post-PNR
+  netlist are bit-identical to run `33322018202`; its nominal SPEF differs only
+  in the generated `*DATE` line. The GDS files have equal length and differ in
+  only 136 timestamp-field bytes (68 repeated minute/second pairs).
 - The final GDS SHA-256 is
   `c8e6f15acb0c01c7546e8ecdf358bc3eeb79ce8621fab1328a99d1413d66a799`;
   the final OAS SHA-256 is

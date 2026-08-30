@@ -6,6 +6,7 @@
 - Physical commit: `aea43d652be6ea42b024105291aadba46a345347`
 - Immutable tag: `nanov-1tile-ttsky26c-gds-33322018202`
 - Official workflow: `33322018202`, successful on attempt 3
+- Independent full rerun: `33323135770`, successful on attempt 1
 - Tiny Tapeout target: `ttsky26c`, SKY130A, 1x1 tile
 
 The viewer retries did not rebuild the physical design. Attempt 1 produced the
@@ -71,6 +72,14 @@ Downloaded official artifacts are retained locally under
 GitHub artifacts `GDS_logs`, `tt_submission`, `gds_render`,
 `gatelevel_test_results`, and `precheck_reports` are attached to official run
 `33322018202`.
+
+Independent run `33323135770` repeated all four jobs successfully. Its OAS
+SHA-256 and post-PNR Verilog SHA-256 exactly match the table above. Its nominal
+SPEF differs only in the generated `*DATE` line. Its GDS has the same 3,270,812
+byte length and differs in 136 bytes; all differences are the same two
+minute/second timestamp fields repeated across 68 GDS structure headers. The
+second timestamp-bearing GDS SHA-256 is
+`e3446d6705129d897ed8d24d6ec411ae3325c1e0a67ef7ace04aecccc70691e6`.
 
 ## Claim boundary
 
