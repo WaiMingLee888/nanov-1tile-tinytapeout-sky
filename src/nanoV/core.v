@@ -3,7 +3,11 @@
    This core module takes instructions and produces output data
  */
 
-module nanoV_core #(parameter NUM_REGS=16, parameter REG_ADDR_BITS=4) (
+module nanoV_core #(
+    parameter NUM_REGS=16,
+    parameter REG_ADDR_BITS=4,
+    parameter EXTERNAL_REGISTERS=0
+) (
     input clk,
     input rstn,
 
@@ -20,7 +24,22 @@ module nanoV_core #(parameter NUM_REGS=16, parameter REG_ADDR_BITS=4) (
     output shift_pc,
     output [31:0] data_out,
     output rs2_out,
-    output branch
+    output branch,
+
+    // Optional bit-serial register interface. The signed NanoV-compatible
+    // path keeps EXTERNAL_REGISTERS=0; the one-tile controller sets it to 1.
+    input ext_data_rs1,
+    input ext_data_rs2,
+    output ext_wr_en,
+    output ext_wr_next_en,
+    output ext_read_through,
+    output [REG_ADDR_BITS-1:0] ext_next_rs1,
+    output [REG_ADDR_BITS-1:0] ext_next_rs2,
+    output [REG_ADDR_BITS-1:0] ext_rs1,
+    output [REG_ADDR_BITS-1:0] ext_rs2,
+    output [REG_ADDR_BITS-1:0] ext_rd,
+    output ext_data_rd,
+    output ext_data_rd_next
 );
 
     wire is_jmp = (instr[6:4] == 3'b110 && instr[2] == 1'b1);
@@ -57,8 +76,28 @@ module nanoV_core #(parameter NUM_REGS=16, parameter REG_ADDR_BITS=4) (
     wire wr_en = alu_write || ((is_jmp || is_mul) && cycle == 1) || is_load_upper || (is_mem && !is_store && (cycle == (is_fast_mem ? 0 : 2)));
     wire wr_next_en = slt_req;
     wire read_through = wr_next_en;
-    nanoV_registers #(.REG_ADDR_BITS(REG_ADDR_BITS), .NUM_REGS(NUM_REGS)) 
-        i_registers(clk, rstn, wr_en, wr_next_en, read_through, counter, next_rs1, next_rs2, rs1, rs2, rd, data_rs1, data_rs2, data_rd, data_rd_next);
+    generate
+        if (EXTERNAL_REGISTERS) begin : external_register_path
+            assign data_rs1 = ext_data_rs1;
+            assign data_rs2 = ext_data_rs2;
+        end else begin : internal_register_path
+            nanoV_registers #(.REG_ADDR_BITS(REG_ADDR_BITS), .NUM_REGS(NUM_REGS))
+                i_registers(clk, rstn, wr_en, wr_next_en, read_through,
+                            counter, next_rs1, next_rs2, rs1, rs2, rd,
+                            data_rs1, data_rs2, data_rd, data_rd_next);
+        end
+    endgenerate
+
+    assign ext_wr_en = wr_en;
+    assign ext_wr_next_en = wr_next_en;
+    assign ext_read_through = read_through;
+    assign ext_next_rs1 = next_rs1;
+    assign ext_next_rs2 = next_rs2;
+    assign ext_rs1 = rs1;
+    assign ext_rs2 = rs2;
+    assign ext_rd = rd;
+    assign ext_data_rd = data_rd;
+    assign ext_data_rd_next = data_rd_next;
 
     reg cy;
     wire is_branch_cycle1 = is_branch && cycle[0];

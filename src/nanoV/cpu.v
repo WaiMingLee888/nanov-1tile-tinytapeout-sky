@@ -113,21 +113,33 @@ module nanoV_cpu #(parameter NUM_REGS=16) (
         last_data_in <= instr[14] ? 1'b0 : data_in;
 
     nanoV_core #(.REG_ADDR_BITS($clog2(NUM_REGS)), .NUM_REGS(NUM_REGS)) core (
-        clk,
-        rstn,
-        (next_cycle == instr_cycles_assume_branch_not_taken) ? decoded_next_instr[30:2] : instr[30:2],
-        instr,
-        cycle,
-        counter,
-        pc[0],
-        data_in,
-        ext_data_in[counter],
-        use_ext_data_in,
-        shift_data_out,
-        read_pc,
-        core_data_out,
-        core_rs2_out,
-        take_branch
+        .clk(clk),
+        .rstn(rstn),
+        .next_instr((next_cycle == instr_cycles_assume_branch_not_taken) ? decoded_next_instr[30:2] : instr[30:2]),
+        .instr(instr),
+        .cycle(cycle),
+        .counter(counter),
+        .pc(pc[0]),
+        .data_in(data_in),
+        .ext_data_in(ext_data_in[counter]),
+        .use_ext_data_in(use_ext_data_in),
+        .shift_data_out(shift_data_out),
+        .shift_pc(read_pc),
+        .data_out(core_data_out),
+        .rs2_out(core_rs2_out),
+        .branch(take_branch),
+        .ext_data_rs1(1'b0),
+        .ext_data_rs2(1'b0),
+        .ext_wr_en(),
+        .ext_wr_next_en(),
+        .ext_read_through(),
+        .ext_next_rs1(),
+        .ext_next_rs2(),
+        .ext_rs1(),
+        .ext_rs2(),
+        .ext_rd(),
+        .ext_data_rd(),
+        .ext_data_rd_next()
     );
 
     reg start_instr_stream;

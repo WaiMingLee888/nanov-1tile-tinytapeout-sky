@@ -6,6 +6,7 @@ module external_register_tb;
     reg load_sources = 0;
     reg [31:0] rs1_word = 0;
     reg [31:0] rs2_word = 0;
+    reg rotate = 1;
     reg wr_en = 0;
     reg wr_next_en = 0;
     reg read_through = 0;
@@ -30,11 +31,31 @@ module external_register_tb;
     always #5 clk = ~clk;
 
     nanoV_external_registers dut (
-        clk, rstn, load_sources, rs1_word, rs2_word,
-        wr_en, wr_next_en, read_through, counter,
-        next_rs1, next_rs2, rs1, rs2, rd,
-        data_rs1, data_rs2, data_rd, data_rd_next,
-        write_word, write_required
+        .clk(clk),
+        .rstn(rstn),
+        .load_sources(load_sources),
+        .rs1_word(rs1_word),
+        .rs2_word(rs2_word),
+        .capture_rs1(1'b0),
+        .capture_rs2(1'b0),
+        .normalize_sources(1'b0),
+        .serial_bit(1'b0),
+        .rotate(rotate),
+        .wr_en(wr_en),
+        .wr_next_en(wr_next_en),
+        .read_through(read_through),
+        .counter(counter),
+        .next_rs1(next_rs1),
+        .next_rs2(next_rs2),
+        .rs1(rs1),
+        .rs2(rs2),
+        .rd(rd),
+        .data_rs1(data_rs1),
+        .data_rs2(data_rs2),
+        .data_rd(data_rd),
+        .data_rd_next(data_rd_next),
+        .write_word(write_word),
+        .write_required(write_required)
     );
 
     initial begin

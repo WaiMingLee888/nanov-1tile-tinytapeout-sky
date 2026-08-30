@@ -1,13 +1,5 @@
-RUN_STARTED=2026-08-30T09:04:19-04:00
+RUN_STARTED=2026-08-30T09:42:17-04:00
 make: Entering directory '/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/firmware'
-rm -rf build
-make: Leaving directory '/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/firmware'
-make: Entering directory '/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/firmware'
-mkdir -p build
-/mnt/d/riscv/kianRiscV/asic/os/ulinux_asic_kianv_soc/buildroot/output/host/bin/riscv32-buildroot-linux-uclibc-gcc -march=rv32e -mabi=ilp32e -Os -ffreestanding -fno-builtin -fno-pic -mno-relax -msmall-data-limit=0 -ffixed-x3 -ffixed-x4 -ffunction-sections -fdata-sections -Wall -Wextra -Werror -nostdlib -nostartfiles -static -Wl,--no-relax,--gc-sections -Wl,-Map=build/nanov_test.map -T linker.ld start.S main.c -o build/nanov_test.elf
-/mnt/d/riscv/kianRiscV/asic/os/ulinux_asic_kianv_soc/buildroot/output/host/bin/riscv32-buildroot-linux-uclibc-objcopy -O binary build/nanov_test.elf build/nanov_test.bin
-python3 bin_to_mem.py build/nanov_test.bin build/nanov_test.mem
-wrote 48 compiler-generated RV32E words to build/nanov_test.mem
 /mnt/d/riscv/kianRiscV/asic/os/ulinux_asic_kianv_soc/buildroot/output/host/bin/riscv32-buildroot-linux-uclibc-readelf -h build/nanov_test.elf > build/nanov_test.readelf.txt
 /mnt/d/riscv/kianRiscV/asic/os/ulinux_asic_kianv_soc/buildroot/output/host/bin/riscv32-buildroot-linux-uclibc-objdump -d build/nanov_test.elf > build/nanov_test.disasm.txt
 /mnt/d/riscv/kianRiscV/asic/os/ulinux_asic_kianv_soc/buildroot/output/host/bin/riscv32-buildroot-linux-uclibc-objdump -h build/nanov_test.elf > build/nanov_test.sections.txt
@@ -28,7 +20,7 @@ COCOTB_TEST_MODULES=test COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tb
      -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.10.14 interpreter at /mnt/d/riscv/nanov-tinytapeout-sky/.venv/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Icarus Verilog version 13.0 (stable)
-     0.00ns INFO     cocotb                             Seeding Python random module with 1788095067
+     0.00ns INFO     cocotb                             Seeding Python random module with 1788097345
      0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /mnt/d/riscv/nanov-tinytapeout-sky/.venv/lib/python3.10/site-packages/cocotb
      0.00ns INFO     cocotb                             Running tests
      0.00ns INFO     cocotb.regression                  running test.test_rv32e_program (1/1)
@@ -36,9 +28,9 @@ COCOTB_TEST_MODULES=test COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tb
 195584.90ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test.test_rv32e_program        PASS      195584.90           0.24     818243.72  **
+                                                        ** test.test_rv32e_program        PASS      195584.90           0.24     803411.43  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             195584.90           0.25     794407.50  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             195584.90           0.25     775878.48  **
                                                         **************************************************************************************
 FST info: dumpfile tb.fst opened for output.
 make[2]: Leaving directory '/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test'

@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1788095067" />
-    <testcase name="test_rv32e_program" classname="test" file="/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/test.py" lineno="8" time="0.239030122756958" sim_time_ns="195584.898" ratio_time="818243.7248667089" />
+    <property name="random_seed" value="1788097345" />
+    <testcase name="test_rv32e_program" classname="test" file="/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/test.py" lineno="8" time="0.24344301223754883" sim_time_ns="195584.898" ratio_time="803411.4275958373" />
   </testsuite>
 </testsuites>

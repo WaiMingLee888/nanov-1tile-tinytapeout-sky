@@ -1,0 +1,5 @@
+read_verilog src/nanoV/alu.v src/nanoV/shift.v src/nanoV/register.v src/nanoV/core.v src/nanoV/register_external.v src/nanoV/register_spi.v src/nanoV/register_subsystem.v src/nanoV/external_core_harness.v
+hierarchy -check -top nanoV_external_core_harness
+flatten
+synth -top nanoV_external_core_harness
+stat

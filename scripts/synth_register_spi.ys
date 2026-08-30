@@ -1,0 +1,4 @@
+read_verilog src/nanoV/register_spi.v
+hierarchy -check -top nanoV_register_spi
+synth -top nanoV_register_spi
+stat

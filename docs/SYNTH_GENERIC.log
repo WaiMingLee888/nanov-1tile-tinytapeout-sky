@@ -45,9 +45,9 @@ Successfully finished Verilog frontend.
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     \nanoV_cpu
 Used module:         \nanoV_core
+Used module:             \nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             \nanoV_registers
 Parameter \NUM_REGS = 16
 
 7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\nanoV_cpu'.
@@ -73,9 +73,9 @@ Warning: Replacing memory \registers with list of registers. See src/nanoV/regis
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000
 Used module:         \nanoV_core
+Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Parameter \NUM_REGS = 16
 Parameter \REG_ADDR_BITS = 4
 Found cached RTLIL representation for module `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core'.
@@ -84,9 +84,9 @@ Found cached RTLIL representation for module `$paramod$c6073fd8a5b287029e036048d
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000
 Used module:         $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core
+Used module:             \nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             \nanoV_registers
 Parameter \NUM_REGS = 16
 Parameter \REG_ADDR_BITS = 4
 Found cached RTLIL representation for module `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers'.
@@ -95,25 +95,24 @@ Found cached RTLIL representation for module `$paramod$c6073fd8a5b287029e036048d
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000
 Used module:         $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core
+Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 
 7.8. Analyzing design hierarchy..
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000
 Used module:         $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core
+Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Removing unused module `\nanoV_registers'.
 Removing unused module `\nanoV_cpu'.
 Removing unused module `\nanoV_core'.
 Removed 3 unused modules.
+Mapping positional arguments of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.internal_register_path.i_registers ($paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers).
 Mapping positional arguments of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.shifter (nanoV_shift).
 Mapping positional arguments of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.alu (nanoV_alu).
-Mapping positional arguments of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.i_registers ($paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers).
-Mapping positional arguments of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.core ($paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core).
 
 8. Executing SYNTH pass.
 
@@ -123,17 +122,17 @@ Mapping positional arguments of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000
 Used module:         $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core
+Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 
 8.1.2. Analyzing design hierarchy..
 Top module:  \tt_um_WaiMingLee888_nanov_1tile
 Used module:     $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000
 Used module:         $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core
+Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Used module:             \nanoV_shift
 Used module:             \nanoV_alu
-Used module:             $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers
 Removed 0 unused modules.
 
 8.2. Executing PROC pass (convert processes to netlists).
@@ -159,10 +158,10 @@ Marked 2 switch rules as full_case in process $proc$src/nanoV/register.v:123$759
 Marked 2 switch rules as full_case in process $proc$src/nanoV/register.v:123$754 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.
 Marked 2 switch rules as full_case in process $proc$src/nanoV/register.v:123$749 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.
 Marked 2 switch rules as full_case in process $proc$src/nanoV/register.v:123$744 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.
-Marked 1 switch rules as full_case in process $proc$src/nanoV/core.v:113$718 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.
-Marked 1 switch rules as full_case in process $proc$src/nanoV/core.v:86$671 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.
-Marked 1 switch rules as full_case in process $proc$src/nanoV/cpu.v:260$593 in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.
-Marked 16 switch rules as full_case in process $proc$src/nanoV/cpu.v:153$549 in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.
+Marked 1 switch rules as full_case in process $proc$src/nanoV/core.v:152$718 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.
+Marked 1 switch rules as full_case in process $proc$src/nanoV/core.v:125$671 in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.
+Marked 1 switch rules as full_case in process $proc$src/nanoV/cpu.v:272$593 in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.
+Marked 16 switch rules as full_case in process $proc$src/nanoV/cpu.v:165$549 in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.
 Marked 6 switch rules as full_case in process $proc$src/nanoV/cpu.v:76$466 in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.
 Marked 1 switch rules as full_case in process $proc$src/nanoV/cpu.v:48$435 in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.
 Marked 1 switch rules as full_case in process $proc$src/nanoV/alu.v:0$28 in module nanoV_alu.
@@ -228,19 +227,19 @@ Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f
      1/2: $0\registers[1][31:0] [1]
      2/2: $0\registers[1][31:0] [0]
 Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$proc$src/nanoV/register.v:43$741'.
-Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:113$718'.
+Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:152$718'.
      1/3: $0\stored_data[31:0] [30:1]
      2/3: $0\stored_data[31:0] [0]
      3/3: $0\stored_data[31:0] [31]
-Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:93$672'.
+Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:132$672'.
      1/2: $0\shift_amt_reg[4:0] [4]
      2/2: $0\shift_amt_reg[4:0] [3:0]
-Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:86$671'.
+Creating decoders for process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:125$671'.
      1/1: $0\is_equal_reg[0:0]
-Creating decoders for process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$593'.
+Creating decoders for process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:272$593'.
      1/1: $0\next_instr[31:0]
-Creating decoders for process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:248$578'.
-Creating decoders for process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating decoders for process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$578'.
+Creating decoders for process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
      1/11: $0\pc[21:0]
      2/11: $0\data_xfer[0:0]
      3/11: $0\starting_data_stream[0:0]
@@ -336,39 +335,39 @@ Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\
   created $dff cell `$procdff$1388' with positive edge clock.
 Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.\read_through_rs2' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$proc$src/nanoV/register.v:43$741'.
   created $dff cell `$procdff$1389' with positive edge clock.
-Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\stored_data' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:113$718'.
+Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\stored_data' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:152$718'.
   created $dff cell `$procdff$1390' with positive edge clock.
-Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\shift_amt_reg' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:93$672'.
+Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\shift_amt_reg' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:132$672'.
   created $dff cell `$procdff$1391' with positive edge clock.
-Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\cy' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:86$671'.
+Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\cy' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:125$671'.
   created $dff cell `$procdff$1392' with positive edge clock.
-Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\is_equal_reg' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:86$671'.
+Creating register for signal `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.\is_equal_reg' using process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:125$671'.
   created $dff cell `$procdff$1393' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\next_instr' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$593'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\next_instr' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:272$593'.
   created $dff cell `$procdff$1394' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\last_data_xfer' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:248$578'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\last_data_xfer' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$578'.
   created $dff cell `$procdff$1395' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\spi_select' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\spi_select' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1396' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\spi_clk_enable' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\spi_clk_enable' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1397' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\pc' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\pc' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1398' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\use_ext_data_in_reg' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\use_ext_data_in_reg' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1399' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\start_instr_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\start_instr_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1400' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\starting_instr_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\starting_instr_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1401' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\read_instr' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\read_instr' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1402' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\first_instr' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\first_instr' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1403' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\start_data_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\start_data_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1404' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\starting_data_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\starting_data_stream' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1405' with positive edge clock.
-Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\data_xfer' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\data_xfer' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
   created $dff cell `$procdff$1406' with positive edge clock.
 Creating register for signal `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.\last_data_in' using process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:112$520'.
   created $dff cell `$procdff$1407' with positive edge clock.
@@ -430,17 +429,17 @@ Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_
 Found and cleaned up 2 empty switches in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$proc$src/nanoV/register.v:123$744'.
 Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$proc$src/nanoV/register.v:123$744'.
 Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$proc$src/nanoV/register.v:43$741'.
-Found and cleaned up 2 empty switches in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:113$718'.
-Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:113$718'.
-Found and cleaned up 1 empty switch in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:93$672'.
-Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:93$672'.
-Found and cleaned up 1 empty switch in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:86$671'.
-Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:86$671'.
-Found and cleaned up 1 empty switch in `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$593'.
-Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$593'.
-Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:248$578'.
-Found and cleaned up 23 empty switches in `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
-Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:153$549'.
+Found and cleaned up 2 empty switches in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:152$718'.
+Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:152$718'.
+Found and cleaned up 1 empty switch in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:132$672'.
+Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:132$672'.
+Found and cleaned up 1 empty switch in `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:125$671'.
+Removing empty process `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$proc$src/nanoV/core.v:125$671'.
+Found and cleaned up 1 empty switch in `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:272$593'.
+Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:272$593'.
+Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:260$578'.
+Found and cleaned up 23 empty switches in `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
+Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:165$549'.
 Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:112$520'.
 Found and cleaned up 6 empty switches in `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:76$466'.
 Removing empty process `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$proc$src/nanoV/cpu.v:76$466'.
@@ -855,7 +854,7 @@ Removed a total of 0 cells.
 
 8.8.6. Executing OPT_DFF pass (perform DFF optimizations).
 Adding SRST signal on $procdff$1393 ($dff) from module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core (D = \is_equal, Q = \is_equal_reg, rval = 1'1).
-Adding EN signal on $procdff$1391 ($dff) from module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core (D = { $ternary$src/nanoV/core.v:95$677_Y \shift_amt_reg [4:1] }, Q = \shift_amt_reg).
+Adding EN signal on $procdff$1391 ($dff) from module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core (D = { $ternary$src/nanoV/core.v:134$677_Y \shift_amt_reg [4:1] }, Q = \shift_amt_reg).
 Adding EN signal on $procdff$1390 ($dff) from module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core (D = $0\stored_data[31:0], Q = \stored_data).
 Adding SRST signal on $procdff$1413 ($dff) from module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000 (D = \next_counter [4:0], Q = \counter, rval = 5'00000).
 Adding SRST signal on $procdff$1410 ($dff) from module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000 (D = $procmux$1335_Y, Q = \instr_cycles_reg, rval = 3'011).
@@ -1049,17 +1048,17 @@ Optimizing module tt_um_WaiMingLee888_nanov_1tile.
 8.8.23. Finished OPT passes. (There is nothing left to do.)
 
 8.9. Executing WREDUCE pass (reducing word size of cells).
-Removed top 2 bits (of 5) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:30$603 ($eq).
-Removed top 30 bits (of 32) from mux cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$ternary$src/nanoV/core.v:57$617 ($mux).
-Removed top 30 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:57$618 ($eq).
-Removed top 3 bits (of 5) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:70$643 ($eq).
-Removed top 1 bits (of 2) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:80$666 ($eq).
-Removed top 29 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$lt$src/nanoV/core.v:94$673 ($lt).
-Removed top 1 bits (of 2) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:105$684 ($eq).
-Removed top 2 bits (of 3) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:111$703 ($eq).
-Removed top 27 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$lt$src/nanoV/core.v:127$725 ($lt).
-Removed top 30 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$lt$src/nanoV/core.v:127$727 ($lt).
-Removed top 30 bits (of 32) from wire $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$ternary$src/nanoV/core.v:57$617_Y.
+Removed top 2 bits (of 5) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:49$603 ($eq).
+Removed top 30 bits (of 32) from mux cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$ternary$src/nanoV/core.v:76$617 ($mux).
+Removed top 30 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:76$618 ($eq).
+Removed top 3 bits (of 5) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:109$643 ($eq).
+Removed top 1 bits (of 2) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:119$666 ($eq).
+Removed top 29 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$lt$src/nanoV/core.v:133$673 ($lt).
+Removed top 1 bits (of 2) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:144$684 ($eq).
+Removed top 2 bits (of 3) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$eq$src/nanoV/core.v:150$703 ($eq).
+Removed top 27 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$lt$src/nanoV/core.v:166$725 ($lt).
+Removed top 30 bits (of 32) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$lt$src/nanoV/core.v:166$727 ($lt).
+Removed top 30 bits (of 32) from wire $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.$ternary$src/nanoV/core.v:76$617_Y.
 Removed top 30 bits (of 32) from mux cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$procmux$818 ($pmux).
 Removed top 3 bits (of 4) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$procmux$850_CMP0 ($eq).
 Removed top 2 bits (of 4) from port B of cell $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers.$procmux$849_CMP0 ($eq).
@@ -1113,27 +1112,27 @@ Removed top 31 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'
 Removed top 30 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:92$507 ($mux).
 Removed top 30 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:92$508 ($eq).
 Removed top 2 bits (of 3) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:93$512 ($eq).
-Removed top 27 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$lt$src/nanoV/cpu.v:137$526 ($lt).
-Removed top 29 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:141$541 ($add).
-Removed top 9 bits (of 32) from port Y of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:141$541 ($add).
-Removed top 10 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:141$543 ($mux).
-Removed top 27 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$lt$src/nanoV/cpu.v:147$544 ($lt).
-Removed top 1 bits (of 3) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:207$562 ($eq).
-Removed top 2 bits (of 5) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:210$564 ($eq).
-Removed top 31 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:225$567 ($add).
-Removed top 28 bits (of 32) from port Y of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:225$567 ($add).
-Removed top 28 bits (of 32) from port A of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:225$568 ($eq).
-Removed top 28 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$gt$src/nanoV/cpu.v:240$576 ($gt).
-Removed top 31 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:254$586 ($mux).
-Removed top 31 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:253$588 ($mux).
-Removed top 31 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:252$590 ($mux).
+Removed top 27 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$lt$src/nanoV/cpu.v:149$526 ($lt).
+Removed top 29 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:153$541 ($add).
+Removed top 9 bits (of 32) from port Y of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:153$541 ($add).
+Removed top 10 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:153$543 ($mux).
+Removed top 27 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$lt$src/nanoV/cpu.v:159$544 ($lt).
+Removed top 1 bits (of 3) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:219$562 ($eq).
+Removed top 2 bits (of 5) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:222$564 ($eq).
+Removed top 31 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:237$567 ($add).
+Removed top 28 bits (of 32) from port Y of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:237$567 ($add).
+Removed top 28 bits (of 32) from port A of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$eq$src/nanoV/cpu.v:237$568 ($eq).
+Removed top 28 bits (of 32) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$gt$src/nanoV/cpu.v:252$576 ($gt).
+Removed top 31 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:266$586 ($mux).
+Removed top 31 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:265$588 ($mux).
+Removed top 31 bits (of 32) from mux cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:264$590 ($mux).
 Removed top 1 bits (of 8) from port B of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$auto$opt_dff.cc:195:make_patterns_logic$1509 ($ne).
-Removed top 1 bits (of 23) from port Y of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:141$541 ($add).
+Removed top 1 bits (of 23) from port Y of cell $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:153$541 ($add).
 Removed top 1 bits (of 3) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$6\cycles_for_instr$func$src/nanoV/cpu.v:85$433.$result[2:0]$492.
-Removed top 10 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:141$541_Y.
-Removed top 28 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:225$567_Y.
-Removed top 31 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:253$588_Y.
-Removed top 31 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:254$586_Y.
+Removed top 10 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:153$541_Y.
+Removed top 28 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$add$src/nanoV/cpu.v:237$567_Y.
+Removed top 31 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:265$588_Y.
+Removed top 31 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:266$586_Y.
 Removed top 31 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:91$502_Y.
 Removed top 30 bits (of 32) from wire $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000.$ternary$src/nanoV/cpu.v:92$507_Y.
 Removed top 1 bits (of 2) from port A of cell nanoV_alu.$add$src/nanoV/alu.v:25$24 ($add).
@@ -1161,32 +1160,32 @@ Removed 0 unused cells and 19 unused wires.
 
 8.12. Executing ALUMACC pass (create $alu and $macc cells).
 Extracting $alu and $macc cells in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core:
-  creating $alu model for $lt$src/nanoV/core.v:127$725 ($lt): new $alu
-  creating $alu model for $lt$src/nanoV/core.v:127$727 ($lt): new $alu
-  creating $alu model for $lt$src/nanoV/core.v:94$673 ($lt): new $alu
-  creating $alu cell for $lt$src/nanoV/core.v:94$673: $auto$alumacc.cc:485:replace_alu$1669
-  creating $alu cell for $lt$src/nanoV/core.v:127$727: $auto$alumacc.cc:485:replace_alu$1680
-  creating $alu cell for $lt$src/nanoV/core.v:127$725: $auto$alumacc.cc:485:replace_alu$1691
+  creating $alu model for $lt$src/nanoV/core.v:133$673 ($lt): new $alu
+  creating $alu model for $lt$src/nanoV/core.v:166$725 ($lt): new $alu
+  creating $alu model for $lt$src/nanoV/core.v:166$727 ($lt): new $alu
+  creating $alu cell for $lt$src/nanoV/core.v:166$727: $auto$alumacc.cc:485:replace_alu$1669
+  creating $alu cell for $lt$src/nanoV/core.v:166$725: $auto$alumacc.cc:485:replace_alu$1680
+  creating $alu cell for $lt$src/nanoV/core.v:133$673: $auto$alumacc.cc:485:replace_alu$1691
   created 3 $alu and 0 $macc cells.
 Extracting $alu and $macc cells in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers:
   created 0 $alu and 0 $macc cells.
 Extracting $alu and $macc cells in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000:
-  creating $macc model for $add$src/nanoV/cpu.v:141$541 ($add).
-  creating $macc model for $add$src/nanoV/cpu.v:225$567 ($add).
+  creating $macc model for $add$src/nanoV/cpu.v:153$541 ($add).
+  creating $macc model for $add$src/nanoV/cpu.v:237$567 ($add).
   creating $macc model for $add$src/nanoV/cpu.v:24$434 ($add).
   creating $macc model for $add$src/nanoV/cpu.v:73$453 ($add).
   creating $alu model for $macc $add$src/nanoV/cpu.v:73$453.
   creating $alu model for $macc $add$src/nanoV/cpu.v:24$434.
-  creating $alu model for $macc $add$src/nanoV/cpu.v:225$567.
-  creating $alu model for $macc $add$src/nanoV/cpu.v:141$541.
-  creating $alu model for $gt$src/nanoV/cpu.v:240$576 ($gt): new $alu
-  creating $alu model for $lt$src/nanoV/cpu.v:137$526 ($lt): new $alu
-  creating $alu model for $lt$src/nanoV/cpu.v:147$544 ($lt): new $alu
-  creating $alu cell for $lt$src/nanoV/cpu.v:147$544: $auto$alumacc.cc:485:replace_alu$1705
-  creating $alu cell for $lt$src/nanoV/cpu.v:137$526: $auto$alumacc.cc:485:replace_alu$1716
-  creating $alu cell for $gt$src/nanoV/cpu.v:240$576: $auto$alumacc.cc:485:replace_alu$1727
-  creating $alu cell for $add$src/nanoV/cpu.v:141$541: $auto$alumacc.cc:485:replace_alu$1732
-  creating $alu cell for $add$src/nanoV/cpu.v:225$567: $auto$alumacc.cc:485:replace_alu$1735
+  creating $alu model for $macc $add$src/nanoV/cpu.v:237$567.
+  creating $alu model for $macc $add$src/nanoV/cpu.v:153$541.
+  creating $alu model for $gt$src/nanoV/cpu.v:252$576 ($gt): new $alu
+  creating $alu model for $lt$src/nanoV/cpu.v:149$526 ($lt): new $alu
+  creating $alu model for $lt$src/nanoV/cpu.v:159$544 ($lt): new $alu
+  creating $alu cell for $lt$src/nanoV/cpu.v:159$544: $auto$alumacc.cc:485:replace_alu$1705
+  creating $alu cell for $lt$src/nanoV/cpu.v:149$526: $auto$alumacc.cc:485:replace_alu$1716
+  creating $alu cell for $gt$src/nanoV/cpu.v:252$576: $auto$alumacc.cc:485:replace_alu$1727
+  creating $alu cell for $add$src/nanoV/cpu.v:153$541: $auto$alumacc.cc:485:replace_alu$1732
+  creating $alu cell for $add$src/nanoV/cpu.v:237$567: $auto$alumacc.cc:485:replace_alu$1735
   creating $alu cell for $add$src/nanoV/cpu.v:24$434: $auto$alumacc.cc:485:replace_alu$1738
   creating $alu cell for $add$src/nanoV/cpu.v:73$453: $auto$alumacc.cc:485:replace_alu$1741
   created 7 $alu and 0 $macc cells.
@@ -1530,7 +1529,7 @@ Removed 0 multiplexer ports.
 
 8.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core.
-    Consolidated identical input bits for $mux cell $ternary$src/nanoV/core.v:57$617:
+    Consolidated identical input bits for $mux cell $ternary$src/nanoV/core.v:76$617:
       Old ports: A=2'10, B=2'00, Y=$auto$wreduce.cc:461:run$1652 [1:0]
       New ports: A=1'1, B=1'0, Y=$auto$wreduce.cc:461:run$1652 [1]
       New connections: $auto$wreduce.cc:461:run$1652 [0] = 1'0
@@ -1816,7 +1815,7 @@ Running muxtree optimizer on module $paramod$constmap:09e8cffe755c4655b20709a667
     dead port 2/2 on $mux $procmux$2100.
     dead port 2/2 on $mux $procmux$2094.
 Removed 5 multiplexer ports.
-<suppressed ~1806 debug messages>
+<suppressed ~1808 debug messages>
 
 8.20.53. Executing OPT_EXPR pass (perform const folding).
 Optimizing module $paramod$constmap:09e8cffe755c4655b20709a667f3c8a396cf4419$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx.
@@ -1938,10 +1937,10 @@ Optimizing module $paramod$constmap:0a7d3e565dd5506d8282ab0bde3636f22c7bf390$par
 <suppressed ~3 debug messages>
 Removed 0 unused cells and 11 unused wires.
 Using template $paramod$constmap:0a7d3e565dd5506d8282ab0bde3636f22c7bf390$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
-Using template $paramod$f85408ed1aa3d09e465edae8a7bf590332ae9f7b\_90_alu for cells of type $alu.
 Using template $paramod$79fc7abbb3333dbd5736999d565fd903198fb1eb\_90_alu for cells of type $alu.
+Using template $paramod$f85408ed1aa3d09e465edae8a7bf590332ae9f7b\_90_alu for cells of type $alu.
 No more expansions possible.
-<suppressed ~186 debug messages>
+<suppressed ~184 debug messages>
 
 8.21. Executing OPT pass (performing simple optimizations).
 
@@ -1965,13 +1964,13 @@ Finding identical cells in module `$paramod$c6073fd8a5b287029e036048d234daa072bb
 Finding identical cells in module `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers'.
 <suppressed ~471 debug messages>
 Finding identical cells in module `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000'.
-<suppressed ~300 debug messages>
+<suppressed ~306 debug messages>
 Finding identical cells in module `\nanoV_alu'.
 <suppressed ~12 debug messages>
 Finding identical cells in module `\nanoV_shift'.
 Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
 <suppressed ~105 debug messages>
-Removed a total of 559 cells.
+Removed a total of 561 cells.
 
 8.21.3. Executing OPT_DFF pass (perform DFF optimizations).
 
@@ -1982,7 +1981,7 @@ Finding unused cells or wires in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000
 Finding unused cells or wires in module \nanoV_alu..
 Finding unused cells or wires in module \nanoV_shift..
 Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
-Removed 681 unused cells and 1068 unused wires.
+Removed 681 unused cells and 1071 unused wires.
 <suppressed ~688 debug messages>
 
 8.21.5. Finished fast OPT passes.
@@ -1995,14 +1994,14 @@ Extracted 282 gates and 381 wires to a netlist network with 98 inputs and 63 out
 8.22.1.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
-ABC: 
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
 ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
-ABC: + strash 
-ABC: + dretime 
-ABC: + map 
-ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
 
 8.22.1.2. Re-integrating ABC results.
 ABC RESULTS:               XOR cells:        2
@@ -2026,14 +2025,14 @@ Extracted 298 gates and 358 wires to a netlist network with 59 inputs and 30 out
 8.22.2.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
-ABC: 
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
 ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
-ABC: + strash 
-ABC: + dretime 
-ABC: + map 
-ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
 
 8.22.2.2. Re-integrating ABC results.
 ABC RESULTS:               XOR cells:        8
@@ -2051,32 +2050,32 @@ Removing temp directory.
 
 8.22.3. Extracting gate netlist of module `$paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000' to `<abc-temp-dir>/input.blif'..
 Replacing 2 occurrences of constant undef bits with constant zero bits
-Extracted 573 gates and 747 wires to a netlist network with 171 inputs and 127 outputs.
+Extracted 571 gates and 745 wires to a netlist network with 171 inputs and 127 outputs.
 
 8.22.3.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
-ABC: 
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
 ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
-ABC: + strash 
-ABC: + dretime 
-ABC: + map 
-ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
 
 8.22.3.2. Re-integrating ABC results.
 ABC RESULTS:              XNOR cells:        1
 ABC RESULTS:             ORNOT cells:       25
-ABC RESULTS:               NOR cells:       22
+ABC RESULTS:               NOR cells:       25
 ABC RESULTS:               AND cells:       20
-ABC RESULTS:               NOT cells:       17
+ABC RESULTS:               NOT cells:       16
 ABC RESULTS:               MUX cells:      148
-ABC RESULTS:                OR cells:      103
+ABC RESULTS:                OR cells:      101
 ABC RESULTS:              NAND cells:       20
-ABC RESULTS:            ANDNOT cells:      128
+ABC RESULTS:            ANDNOT cells:      125
 ABC RESULTS:               XOR cells:       36
-ABC RESULTS:        internal signals:      449
+ABC RESULTS:        internal signals:      447
 ABC RESULTS:           input signals:      171
 ABC RESULTS:          output signals:      127
 Removing temp directory.
@@ -2087,14 +2086,14 @@ Extracted 38 gates and 46 wires to a netlist network with 7 inputs and 3 outputs
 8.22.4.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
-ABC: 
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
 ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
-ABC: + strash 
-ABC: + dretime 
-ABC: + map 
-ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
 
 8.22.4.2. Re-integrating ABC results.
 ABC RESULTS:               NOT cells:        1
@@ -2118,14 +2117,14 @@ Extracted 59 gates and 104 wires to a netlist network with 44 inputs and 3 outpu
 8.22.5.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
-ABC: 
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
 ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
-ABC: + strash 
-ABC: + dretime 
-ABC: + map 
-ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
 
 8.22.5.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        1
@@ -2146,14 +2145,14 @@ Extracted 72 gates and 128 wires to a netlist network with 55 inputs and 12 outp
 8.22.6.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ABC command line: "source <abc-temp-dir>/abc.script".
-ABC: 
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
 ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
-ABC: + strash 
-ABC: + dretime 
-ABC: + map 
-ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
 
 8.22.6.2. Re-integrating ABC results.
 ABC RESULTS:               NOR cells:        1
@@ -2199,7 +2198,7 @@ Finding unused cells or wires in module $paramod\nanoV_cpu\NUM_REGS=s32'00000000
 Finding unused cells or wires in module \nanoV_alu..
 Finding unused cells or wires in module \nanoV_shift..
 Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
-Removed 8 unused cells and 1296 unused wires.
+Removed 8 unused cells and 1293 unused wires.
 <suppressed ~50 debug messages>
 
 8.23.5. Finished fast OPT passes.
@@ -2227,12 +2226,12 @@ Removed 0 unused modules.
 
 === $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core ===
 
-   Number of wires:                241
-   Number of wire bits:            578
-   Number of public wires:          52
-   Number of public wire bits:     358
-   Number of ports:                 15
-   Number of port bits:            109
+   Number of wires:                253
+   Number of wire bits:            605
+   Number of public wires:          64
+   Number of public wire bits:     385
+   Number of ports:                 27
+   Number of port bits:            136
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
@@ -2278,8 +2277,8 @@ Removed 0 unused modules.
 
 === $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000 ===
 
-   Number of wires:                509
-   Number of wire bits:            856
+   Number of wires:                506
+   Number of wire bits:            853
    Number of public wires:          44
    Number of public wire bits:     389
    Number of ports:                 12
@@ -2287,16 +2286,16 @@ Removed 0 unused modules.
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                624
-     $_ANDNOT_                     128
+   Number of cells:                621
+     $_ANDNOT_                     125
      $_AND_                         20
      $_DFF_P_                        1
      $_MUX_                        148
      $_NAND_                        18
-     $_NOR_                         22
-     $_NOT_                         15
+     $_NOR_                         25
+     $_NOT_                         14
      $_ORNOT_                       25
-     $_OR_                         102
+     $_OR_                         100
      $_SDFFE_PN0N_                  27
      $_SDFFE_PN0P_                  25
      $_SDFFE_PN1N_                   6
@@ -2386,27 +2385,27 @@ Removed 0 unused modules.
          nanoV_alu                   1
          nanoV_shift                 1
 
-   Number of wires:               1197
-   Number of wire bits:           3304
-   Number of public wires:         188
-   Number of public wire bits:    1859
-   Number of ports:                 64
-   Number of port bits:            350
+   Number of wires:               1206
+   Number of wire bits:           3328
+   Number of public wires:         200
+   Number of public wire bits:    1886
+   Number of ports:                 76
+   Number of port bits:            377
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:               1728
-     $_ANDNOT_                     237
+   Number of cells:               1725
+     $_ANDNOT_                     234
      $_AND_                         68
      $_DFFE_PP_                     37
      $_DFF_N_                        1
      $_DFF_P_                      424
      $_MUX_                        331
      $_NAND_                        39
-     $_NOR_                         60
-     $_NOT_                         32
+     $_NOR_                         63
+     $_NOT_                         31
      $_ORNOT_                       57
-     $_OR_                         259
+     $_OR_                         257
      $_SDFFE_PN0N_                  27
      $_SDFFE_PN0P_                  33
      $_SDFFE_PN1N_                   6
@@ -2433,12 +2432,12 @@ Found and reported 0 problems.
 
 === $paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_core ===
 
-   Number of wires:                241
-   Number of wire bits:            578
-   Number of public wires:          52
-   Number of public wire bits:     358
-   Number of ports:                 15
-   Number of port bits:            109
+   Number of wires:                253
+   Number of wire bits:            605
+   Number of public wires:          64
+   Number of public wire bits:     385
+   Number of ports:                 27
+   Number of port bits:            136
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
@@ -2484,8 +2483,8 @@ Found and reported 0 problems.
 
 === $paramod\nanoV_cpu\NUM_REGS=s32'00000000000000000000000000010000 ===
 
-   Number of wires:                509
-   Number of wire bits:            856
+   Number of wires:                506
+   Number of wire bits:            853
    Number of public wires:          44
    Number of public wire bits:     389
    Number of ports:                 12
@@ -2493,16 +2492,16 @@ Found and reported 0 problems.
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                624
-     $_ANDNOT_                     128
+   Number of cells:                621
+     $_ANDNOT_                     125
      $_AND_                         20
      $_DFF_P_                        1
      $_MUX_                        148
      $_NAND_                        18
-     $_NOR_                         22
-     $_NOT_                         15
+     $_NOR_                         25
+     $_NOT_                         14
      $_ORNOT_                       25
-     $_OR_                         102
+     $_OR_                         100
      $_SDFFE_PN0N_                  27
      $_SDFFE_PN0P_                  25
      $_SDFFE_PN1N_                   6
@@ -2592,27 +2591,27 @@ Found and reported 0 problems.
          nanoV_alu                   1
          nanoV_shift                 1
 
-   Number of wires:               1197
-   Number of wire bits:           3304
-   Number of public wires:         188
-   Number of public wire bits:    1859
-   Number of ports:                 64
-   Number of port bits:            350
+   Number of wires:               1206
+   Number of wire bits:           3328
+   Number of public wires:         200
+   Number of public wire bits:    1886
+   Number of ports:                 76
+   Number of port bits:            377
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:               1728
-     $_ANDNOT_                     237
+   Number of cells:               1725
+     $_ANDNOT_                     234
      $_AND_                         68
      $_DFFE_PP_                     37
      $_DFF_N_                        1
      $_DFF_P_                      424
      $_MUX_                        331
      $_NAND_                        39
-     $_NOR_                         60
-     $_NOT_                         32
+     $_NOR_                         63
+     $_NOT_                         31
      $_ORNOT_                       57
-     $_OR_                         259
+     $_OR_                         257
      $_SDFFE_PN0N_                  27
      $_SDFFE_PN0P_                  33
      $_SDFFE_PN1N_                   6
@@ -2629,6 +2628,6 @@ Found and reported 0 problems.
 10. Executing JSON backend.
 
 Warnings: 1 unique messages, 2 total
-End of script. Logfile hash: c91d9ee673, CPU: user 0.80s system 0.06s, MEM: 34.18 MB peak
+End of script. Logfile hash: 08bd2ca56d, CPU: user 0.63s system 0.05s, MEM: 34.42 MB peak
 Yosys 0.45+106 (git sha1 dcf9f5831, g++ 9.5.0-1ubuntu1~22.04 -fPIC -O3)
-Time spent: 26% 1x abc (0 sec), 17% 38x opt_expr (0 sec), ...
+Time spent: 29% 1x abc (0 sec), 17% 38x opt_expr (0 sec), ...

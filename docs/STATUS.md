@@ -16,8 +16,8 @@ result, precheck result, shuttle order, or fabricated silicon claim.
   and completed without warnings. The first compile had exposed inherited
   declaration-after-use constructs; declarations were moved before use without
   changing logic before this successful run.
-- Generic Yosys synthesis reports 1,728 cells, down from 2,087 cells for the
-  signed 1x2 source baseline (359 cells, or 17.2%). This comparison proves a
+- Generic Yosys synthesis reports 1,725 cells, down from 2,087 cells for the
+  signed 1x2 source baseline (362 cells, or 17.3%). This comparison proves a
   real reduction but does not substitute for SKY130 placement and routing.
 - GCC 12.3 compiled a freestanding 48-word RV32E/ILP32E firmware image. It
   passed RTL simulation and reached `0xA5` after exercising GPIO and external
@@ -26,11 +26,15 @@ result, precheck result, shuttle order, or fabricated silicon claim.
 - Official GDS trial `33312477537` measured 21,577.910 um^2 of movable standard
   cells in a 16,493.318 um^2 core: 135.548% utilization. This proves the first
   derivative does not yet fit one tile and requires substantial RTL area work.
-- The selected external-register architecture now has a tested staging block.
-  It retains x0-x15 semantics while moving writable words to reserved SPI RAM;
-  standalone synthesis uses 99 state cells and 220 total generic cells versus
-  419 and 655 for the internal register file. SPI phase integration remains in
-  progress, so this result is not yet a top-level area or signoff claim.
+- The selected external-register architecture retains x0-x15 semantics while
+  moving writable words to reserved SPI RAM. The fully flattened register/SPI
+  subsystem passes real modeled transactions and uses 132 state cells and 411
+  total generic cells versus 419 and 655 for the internal register file.
+- The parameterized original NanoV core executes `ADDI`, dependent `ADD`, and
+  `SUB` through that subsystem, with persistent x5/x6/x7 results. The original
+  internal path still passes both full regressions. Instruction fetch,
+  multi-cycle execution, load/store, PC, and GPIO integration remain pending,
+  so this is not yet a top-level area or signoff claim.
 
 ## Required before any tapeout claim
 

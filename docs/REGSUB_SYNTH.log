@@ -1,0 +1,945 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.45+106 (git sha1 dcf9f5831, g++ 9.5.0-1ubuntu1~22.04 -fPIC -O3)
+
+-- Executing script file `scripts/synth_register_subsystem.ys' --
+
+1. Executing Verilog-2005 frontend: src/nanoV/register_external.v
+Parsing Verilog input from `src/nanoV/register_external.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_external_registers'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: src/nanoV/register_spi.v
+Parsing Verilog input from `src/nanoV/register_spi.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_register_spi'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: src/nanoV/register_subsystem.v
+Parsing Verilog input from `src/nanoV/register_subsystem.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_external_register_subsystem'.
+Successfully finished Verilog frontend.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \nanoV_external_register_subsystem
+Used module:     \nanoV_external_registers
+Used module:     \nanoV_register_spi
+
+4.2. Analyzing design hierarchy..
+Top module:  \nanoV_external_register_subsystem
+Used module:     \nanoV_external_registers
+Used module:     \nanoV_register_spi
+Removed 0 unused modules.
+
+5. Executing FLATTEN pass (flatten design).
+Deleting now unused module nanoV_register_spi.
+Deleting now unused module nanoV_external_registers.
+<suppressed ~2 debug messages>
+
+6. Executing SYNTH pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \nanoV_external_register_subsystem
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \nanoV_external_register_subsystem
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 7 switch rules as full_case in process $flatten\staging.$proc$src/nanoV/register_external.v:81$7 in module nanoV_external_register_subsystem.
+Marked 5 switch rules as full_case in process $flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46 in module nanoV_external_register_subsystem.
+Removed 1 dead cases from process $proc$src/nanoV/register_subsystem.v:121$78 in module nanoV_external_register_subsystem.
+Marked 4 switch rules as full_case in process $proc$src/nanoV/register_subsystem.v:121$78 in module nanoV_external_register_subsystem.
+Removed a total of 1 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 3 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~25 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+     1/8: $flatten\staging.$0\write_ring[31:0] [1]
+     2/8: $flatten\staging.$0\write_ring[31:0] [0]
+     3/8: $flatten\staging.$0\write_ring[31:0] [31:2]
+     4/8: $flatten\staging.$0\read_through_rs1[0:0]
+     5/8: $flatten\staging.$0\last_data_rd_next[0:0]
+     6/8: $flatten\staging.$0\read_through_rs2[0:0]
+     7/8: $flatten\staging.$0\rs2_ring[31:0]
+     8/8: $flatten\staging.$0\rs1_ring[31:0]
+Creating decoders for process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+     1/8: $flatten\spi_engine.$0\done[0:0]
+     2/8: $flatten\spi_engine.$0\read_shift[31:0]
+     3/8: $flatten\spi_engine.$0\reg_index_latched[3:0]
+     4/8: $flatten\spi_engine.$0\write_latched[0:0]
+     5/8: $flatten\spi_engine.$0\bit_count[4:0]
+     6/8: $flatten\spi_engine.$0\state[1:0]
+     7/8: $flatten\spi_engine.$0\spi_select[0:0]
+     8/8: $flatten\spi_engine.$0\busy[0:0]
+Creating decoders for process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+     1/6: $0\commit_done[0:0]
+     2/6: $0\load_done[0:0]
+     3/6: $0\rd_latched[3:0]
+     4/6: $0\rs2_latched[3:0]
+     5/6: $0\rs1_latched[3:0]
+     6/6: $0\state[2:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\nanoV_external_register_subsystem.\staging.rs1_ring' using process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+  created $dff cell `$procdff$337' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\staging.rs2_ring' using process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+  created $dff cell `$procdff$338' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\staging.write_ring' using process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+  created $dff cell `$procdff$339' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\staging.last_data_rd_next' using process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+  created $dff cell `$procdff$340' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\staging.read_through_rs1' using process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+  created $dff cell `$procdff$341' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\staging.read_through_rs2' using process `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+  created $dff cell `$procdff$342' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.busy' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$343' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.done' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$344' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.spi_select' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$345' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.state' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$346' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.bit_count' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$347' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.write_latched' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$348' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.reg_index_latched' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$349' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\spi_engine.read_shift' using process `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+  created $dff cell `$procdff$350' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\state' using process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+  created $dff cell `$procdff$351' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\load_done' using process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+  created $dff cell `$procdff$352' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\commit_done' using process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+  created $dff cell `$procdff$353' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\rs1_latched' using process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+  created $dff cell `$procdff$354' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\rs2_latched' using process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+  created $dff cell `$procdff$355' with positive edge clock.
+Creating register for signal `\nanoV_external_register_subsystem.\rd_latched' using process `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+  created $dff cell `$procdff$356' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 10 empty switches in `\nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+Removing empty process `nanoV_external_register_subsystem.$flatten\staging.$proc$src/nanoV/register_external.v:81$7'.
+Found and cleaned up 7 empty switches in `\nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+Removing empty process `nanoV_external_register_subsystem.$flatten\spi_engine.$proc$src/nanoV/register_spi.v:73$46'.
+Found and cleaned up 8 empty switches in `\nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+Removing empty process `nanoV_external_register_subsystem.$proc$src/nanoV/register_subsystem.v:121$78'.
+Cleaned up 25 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~27 debug messages>
+
+6.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 9 unused cells and 128 unused wires.
+<suppressed ~10 debug messages>
+
+6.5. Executing CHECK pass (checking for obvious problems).
+Checking module nanoV_external_register_subsystem...
+Found and reported 0 problems.
+
+6.6. Executing OPT pass (performing simple optimizations).
+
+6.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+<suppressed ~72 debug messages>
+Removed a total of 24 cells.
+
+6.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~25 debug messages>
+
+6.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 0 unused cells and 29 unused wires.
+<suppressed ~5 debug messages>
+
+6.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~1 debug messages>
+
+6.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~25 debug messages>
+
+6.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+6.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.6.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.6.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~25 debug messages>
+
+6.6.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.6.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.6.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.6.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.6.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.6.23. Finished OPT passes. (There is nothing left to do.)
+
+6.7. Executing FSM pass (extract and optimize FSM).
+
+6.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register nanoV_external_register_subsystem.spi_engine.state.
+Not marking nanoV_external_register_subsystem.state as FSM state register:
+    Users of register don't seem to benefit from recoding.
+
+6.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\spi_engine.state' from module `\nanoV_external_register_subsystem'.
+  found $dff cell for state register: $procdff$346
+  root of input selection tree: $flatten\spi_engine.$0\state[1:0]
+  found reset state: 2'00 (guessed from mux tree)
+  found ctrl input: \rstn
+  found state code: 2'00
+  found ctrl input: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:86$48_Y
+  found ctrl input: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:51$35_Y
+  found ctrl input: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:107$53_Y
+  found state code: 2'10
+  found ctrl input: \engine_start
+  found state code: 2'01
+  found ctrl output: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:86$48_Y
+  found ctrl output: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:52$38_Y
+  found ctrl output: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:51$35_Y
+  ctrl inputs: { $flatten\spi_engine.$eq$src/nanoV/register_spi.v:107$53_Y \engine_start \rstn }
+  ctrl outputs: { $flatten\spi_engine.$eq$src/nanoV/register_spi.v:51$35_Y $flatten\spi_engine.$eq$src/nanoV/register_spi.v:52$38_Y $flatten\spi_engine.$0\state[1:0] $flatten\spi_engine.$eq$src/nanoV/register_spi.v:86$48_Y }
+  transition:       2'00 3'--0 ->       2'00 5'00001
+  transition:       2'00 3'-01 ->       2'00 5'00001
+  transition:       2'00 3'-11 ->       2'01 5'00011
+  transition:       2'10 3'--0 ->       2'00 5'01000
+  transition:       2'10 3'0-1 ->       2'10 5'01100
+  transition:       2'10 3'1-1 ->       2'00 5'01000
+  transition:       2'01 3'--0 ->       2'00 5'10000
+  transition:       2'01 3'0-1 ->       2'01 5'10010
+  transition:       2'01 3'1-1 ->       2'10 5'10100
+
+6.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\spi_engine.state$357' from module `\nanoV_external_register_subsystem'.
+
+6.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 10 unused cells and 10 unused wires.
+<suppressed ~11 debug messages>
+
+6.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\spi_engine.state$357' from module `\nanoV_external_register_subsystem'.
+  Removing unused output signal $flatten\spi_engine.$0\state[1:0] [0].
+  Removing unused output signal $flatten\spi_engine.$0\state[1:0] [1].
+
+6.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\spi_engine.state$357' from module `\nanoV_external_register_subsystem' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> --1
+  10 -> -1-
+  01 -> 1--
+
+6.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\spi_engine.state$357' from module `nanoV_external_register_subsystem':
+-------------------------------------
+
+  Information on FSM $fsm$\spi_engine.state$357 (\spi_engine.state):
+
+  Number of input signals:    3
+  Number of output signals:   3
+  Number of state bits:       3
+
+  Input signals:
+    0: \rstn
+    1: \engine_start
+    2: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:107$53_Y
+
+  Output signals:
+    0: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:86$48_Y
+    1: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:52$38_Y
+    2: $flatten\spi_engine.$eq$src/nanoV/register_spi.v:51$35_Y
+
+  State encoding:
+    0:      3'--1  <RESET STATE>
+    1:      3'-1-
+    2:      3'1--
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 3'--0   ->     0 3'001
+      1:     0 3'-01   ->     0 3'001
+      2:     0 3'-11   ->     2 3'001
+      3:     1 3'--0   ->     0 3'010
+      4:     1 3'1-1   ->     0 3'010
+      5:     1 3'0-1   ->     1 3'010
+      6:     2 3'--0   ->     0 3'100
+      7:     2 3'1-1   ->     1 3'100
+      8:     2 3'0-1   ->     2 3'100
+
+-------------------------------------
+
+6.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\spi_engine.state$357' from module `\nanoV_external_register_subsystem'.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~1 debug messages>
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~24 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$356 ($dff) from module nanoV_external_register_subsystem (D = $procmux$276_Y, Q = \rd_latched, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$395 ($sdff) from module nanoV_external_register_subsystem (D = \rd, Q = \rd_latched).
+Adding SRST signal on $procdff$355 ($dff) from module nanoV_external_register_subsystem (D = $procmux$291_Y, Q = \rs2_latched, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$399 ($sdff) from module nanoV_external_register_subsystem (D = \rs2, Q = \rs2_latched).
+Adding SRST signal on $procdff$354 ($dff) from module nanoV_external_register_subsystem (D = $procmux$306_Y, Q = \rs1_latched, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$403 ($sdff) from module nanoV_external_register_subsystem (D = \rs1, Q = \rs1_latched).
+Adding SRST signal on $procdff$353 ($dff) from module nanoV_external_register_subsystem (D = $procmux$245_Y, Q = \commit_done, rval = 1'0).
+Adding SRST signal on $procdff$352 ($dff) from module nanoV_external_register_subsystem (D = $procmux$261_Y, Q = \load_done, rval = 1'0).
+Adding SRST signal on $procdff$351 ($dff) from module nanoV_external_register_subsystem (D = $procmux$313_Y, Q = \state, rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$409 ($sdff) from module nanoV_external_register_subsystem (D = $procmux$313_Y, Q = \state).
+Adding SRST signal on $procdff$349 ($dff) from module nanoV_external_register_subsystem (D = $procmux$168_Y, Q = \spi_engine.reg_index_latched, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$425 ($sdff) from module nanoV_external_register_subsystem (D = \engine_reg_index, Q = \spi_engine.reg_index_latched).
+Adding SRST signal on $procdff$348 ($dff) from module nanoV_external_register_subsystem (D = $procmux$176_Y, Q = \spi_engine.write_latched, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$429 ($sdff) from module nanoV_external_register_subsystem (D = \engine_write, Q = \spi_engine.write_latched).
+Adding SRST signal on $procdff$347 ($dff) from module nanoV_external_register_subsystem (D = $procmux$193_Y, Q = \spi_engine.bit_count, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$433 ($sdff) from module nanoV_external_register_subsystem (D = $procmux$193_Y, Q = \spi_engine.bit_count).
+Adding SRST signal on $procdff$345 ($dff) from module nanoV_external_register_subsystem (D = $procmux$224_Y, Q = \spi_engine.spi_select, rval = 1'1).
+Adding EN signal on $auto$ff.cc:266:slice$437 ($sdff) from module nanoV_external_register_subsystem (D = $procmux$224_Y, Q = \spi_engine.spi_select).
+Adding SRST signal on $procdff$344 ($dff) from module nanoV_external_register_subsystem (D = $procmux$141_Y, Q = \spi_engine.done, rval = 1'0).
+Adding SRST signal on $procdff$343 ($dff) from module nanoV_external_register_subsystem (D = $procmux$238_Y, Q = \spi_engine.busy, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$452 ($sdff) from module nanoV_external_register_subsystem (D = $procmux$238_Y, Q = \spi_engine.busy).
+Adding SRST signal on $procdff$342 ($dff) from module nanoV_external_register_subsystem (D = $procmux$113_Y, Q = \staging.read_through_rs2, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$462 ($sdff) from module nanoV_external_register_subsystem (D = $flatten\staging.$logic_and$src/nanoV/register_external.v:121$13_Y, Q = \staging.read_through_rs2).
+Adding SRST signal on $procdff$341 ($dff) from module nanoV_external_register_subsystem (D = $procmux$103_Y, Q = \staging.read_through_rs1, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$464 ($sdff) from module nanoV_external_register_subsystem (D = $flatten\staging.$logic_and$src/nanoV/register_external.v:120$11_Y, Q = \staging.read_through_rs1).
+Adding SRST signal on $procdff$340 ($dff) from module nanoV_external_register_subsystem (D = $procmux$108_Y, Q = \staging.last_data_rd_next, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$466 ($sdff) from module nanoV_external_register_subsystem (D = \data_rd_next, Q = \staging.last_data_rd_next).
+Adding EN signal on $procdff$339 ($dff) from module nanoV_external_register_subsystem (D = { \staging.write_ring [0] \staging.write_ring [31:3] $procmux$83_Y $procmux$91_Y }, Q = \staging.write_ring).
+Adding EN signal on $procdff$338 ($dff) from module nanoV_external_register_subsystem (D = { $flatten\staging.$0\rs2_ring[31:0] [31:29] $flatten\staging.$0\rs2_ring[31:0] [27:21] $flatten\staging.$0\rs2_ring[31:0] [19:13] $flatten\staging.$0\rs2_ring[31:0] [11:5] $flatten\staging.$0\rs2_ring[31:0] [3:0] }, Q = { \staging.rs2_ring [31:29] \staging.rs2_ring [27:21] \staging.rs2_ring [19:13] \staging.rs2_ring [11:5] \staging.rs2_ring [3:0] }).
+Adding EN signal on $procdff$338 ($dff) from module nanoV_external_register_subsystem (D = { $procmux$121_Y [28] $procmux$121_Y [20] $procmux$121_Y [12] $procmux$121_Y [4] }, Q = { \staging.rs2_ring [28] \staging.rs2_ring [20] \staging.rs2_ring [12] \staging.rs2_ring [4] }).
+Adding EN signal on $procdff$337 ($dff) from module nanoV_external_register_subsystem (D = { $flatten\staging.$0\rs1_ring[31:0] [31:29] $flatten\staging.$0\rs1_ring[31:0] [27:21] $flatten\staging.$0\rs1_ring[31:0] [19:13] $flatten\staging.$0\rs1_ring[31:0] [11:5] $flatten\staging.$0\rs1_ring[31:0] [3:0] }, Q = { \staging.rs1_ring [31:29] \staging.rs1_ring [27:21] \staging.rs1_ring [19:13] \staging.rs1_ring [11:5] \staging.rs1_ring [3:0] }).
+Adding EN signal on $procdff$337 ($dff) from module nanoV_external_register_subsystem (D = { $procmux$132_Y [28] $procmux$132_Y [20] $procmux$132_Y [12] $procmux$132_Y [4] }, Q = { \staging.rs1_ring [28] \staging.rs1_ring [20] \staging.rs1_ring [12] \staging.rs1_ring [4] }).
+
+6.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 36 unused cells and 42 unused wires.
+<suppressed ~37 debug messages>
+
+6.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~7 debug messages>
+
+6.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+6.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+<suppressed ~33 debug messages>
+Removed a total of 11 cells.
+
+6.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 0 unused cells and 11 unused wires.
+<suppressed ~1 debug messages>
+
+6.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+6.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.8.23. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell nanoV_external_register_subsystem.$auto$fsm_map.cc:77:implement_pattern_cache$369 ($eq).
+Removed top 2 bits (of 3) from port B of cell nanoV_external_register_subsystem.$eq$src/nanoV/register_subsystem.v:56$55 ($eq).
+Removed top 1 bits (of 3) from port B of cell nanoV_external_register_subsystem.$eq$src/nanoV/register_subsystem.v:57$56 ($eq).
+Removed top 1 bits (of 3) from port B of cell nanoV_external_register_subsystem.$eq$src/nanoV/register_subsystem.v:61$64 ($eq).
+Removed top 1 bits (of 2) from port B of cell nanoV_external_register_subsystem.$auto$opt_dff.cc:195:make_patterns_logic$418 ($ne).
+Removed top 1 bits (of 2) from port B of cell nanoV_external_register_subsystem.$auto$fsm_map.cc:77:implement_pattern_cache$391 ($eq).
+Removed top 27 bits (of 32) from port A of cell nanoV_external_register_subsystem.$flatten\spi_engine.$sub$src/nanoV/register_spi.v:51$36 ($sub).
+Removed top 26 bits (of 32) from port Y of cell nanoV_external_register_subsystem.$flatten\spi_engine.$sub$src/nanoV/register_spi.v:51$36 ($sub).
+Removed top 7 bits (of 8) from mux cell nanoV_external_register_subsystem.$flatten\spi_engine.$ternary$src/nanoV/register_spi.v:46$33 ($mux).
+Removed top 18 bits (of 24) from port B of cell nanoV_external_register_subsystem.$flatten\spi_engine.$add$src/nanoV/register_spi.v:44$32 ($add).
+Removed top 1 bits (of 4) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$eq$src/nanoV/register_external.v:135$25 ($eq).
+Removed top 2 bits (of 4) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$eq$src/nanoV/register_external.v:134$23 ($eq).
+Removed top 1 bits (of 4) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$eq$src/nanoV/register_external.v:132$17 ($eq).
+Removed top 1 bits (of 5) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$eq$src/nanoV/register_external.v:131$16 ($eq).
+Removed top 2 bits (of 4) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$eq$src/nanoV/register_external.v:131$15 ($eq).
+Removed top 1 bits (of 4) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$ne$src/nanoV/register_external.v:57$4 ($ne).
+Removed top 2 bits (of 4) from port B of cell nanoV_external_register_subsystem.$flatten\staging.$ne$src/nanoV/register_external.v:57$2 ($ne).
+Removed top 1 bits (of 2) from port B of cell nanoV_external_register_subsystem.$auto$opt_dff.cc:195:make_patterns_logic$422 ($ne).
+Removed top 1 bits (of 2) from port B of cell nanoV_external_register_subsystem.$auto$opt_dff.cc:195:make_patterns_logic$420 ($ne).
+
+6.10. Executing PEEPOPT pass (run peephole optimizers).
+
+6.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module nanoV_external_register_subsystem:
+  creating $macc model for $flatten\spi_engine.$add$src/nanoV/register_spi.v:101$51 ($add).
+  creating $macc model for $flatten\spi_engine.$add$src/nanoV/register_spi.v:44$32 ($add).
+  creating $macc model for $flatten\spi_engine.$sub$src/nanoV/register_spi.v:51$36 ($sub).
+  creating $alu model for $macc $flatten\spi_engine.$sub$src/nanoV/register_spi.v:51$36.
+  creating $alu model for $macc $flatten\spi_engine.$add$src/nanoV/register_spi.v:44$32.
+  creating $alu model for $macc $flatten\spi_engine.$add$src/nanoV/register_spi.v:101$51.
+  creating $alu model for $flatten\spi_engine.$eq$src/nanoV/register_spi.v:107$53 ($eq): merged with $flatten\spi_engine.$sub$src/nanoV/register_spi.v:51$36.
+  creating $alu cell for $flatten\spi_engine.$add$src/nanoV/register_spi.v:101$51: $auto$alumacc.cc:485:replace_alu$493
+  creating $alu cell for $flatten\spi_engine.$add$src/nanoV/register_spi.v:44$32: $auto$alumacc.cc:485:replace_alu$496
+  creating $alu cell for $flatten\spi_engine.$sub$src/nanoV/register_spi.v:51$36, $flatten\spi_engine.$eq$src/nanoV/register_spi.v:107$53: $auto$alumacc.cc:485:replace_alu$499
+  created 3 $alu and 0 $macc cells.
+
+6.13. Executing SHARE pass (SAT-based resource sharing).
+
+6.14. Executing OPT pass (performing simple optimizations).
+
+6.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+6.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+6.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+6.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.14.16. Finished OPT passes. (There is nothing left to do.)
+
+6.15. Executing MEMORY pass.
+
+6.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+6.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+6.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+6.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+6.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+6.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+6.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+6.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.17. Executing OPT pass (performing simple optimizations).
+
+6.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~33 debug messages>
+
+6.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 0 unused cells and 24 unused wires.
+<suppressed ~1 debug messages>
+
+6.17.5. Finished fast OPT passes.
+
+6.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+6.19. Executing OPT pass (performing simple optimizations).
+
+6.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~2 debug messages>
+
+6.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~13 debug messages>
+
+6.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+    Consolidated identical input bits for $mux cell $procmux$121:
+      Old ports: A={ \staging.rs2_ring [0] \staging.rs2_ring [31:1] }, B={ \spi_data_in \staging.rs2_ring [31:1] }, Y=$procmux$121_Y
+      New ports: A=\staging.rs2_ring [0], B=\spi_data_in, Y=$procmux$121_Y [31]
+      New connections: $procmux$121_Y [30:0] = \staging.rs2_ring [31:1]
+    Consolidated identical input bits for $mux cell $procmux$132:
+      Old ports: A={ \staging.rs1_ring [0] \staging.rs1_ring [31:1] }, B={ \spi_data_in \staging.rs1_ring [31:1] }, Y=$procmux$132_Y
+      New ports: A=\staging.rs1_ring [0], B=\spi_data_in, Y=$procmux$132_Y [31]
+      New connections: $procmux$132_Y [30:0] = \staging.rs1_ring [31:1]
+    New ctrl vector for $pmux cell $procmux$313: { $eq$src/nanoV/register_subsystem.v:56$55_Y $eq$src/nanoV/register_subsystem.v:61$64_Y $eq$src/nanoV/register_subsystem.v:57$56_Y $eq$src/nanoV/register_subsystem.v:62$67_Y $eq$src/nanoV/register_subsystem.v:58$58_Y $auto$opt_reduce.cc:134:opt_pmux$519 }
+    Consolidated identical input bits for $mux cell $procmux$331:
+      Old ports: A=3'110, B=3'001, Y=$procmux$331_Y
+      New ports: A=2'10, B=2'01, Y=$procmux$331_Y [1:0]
+      New connections: $procmux$331_Y [2] = $procmux$331_Y [1]
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 4 changes.
+
+6.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.19.6. Executing OPT_SHARE pass.
+
+6.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+6.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nanoV_external_register_subsystem..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~11 debug messages>
+
+6.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nanoV_external_register_subsystem.
+Performed a total of 0 changes.
+
+6.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+Removed a total of 0 cells.
+
+6.19.14. Executing OPT_SHARE pass.
+
+6.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+
+6.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+
+6.19.18. Finished OPT passes. (There is nothing left to do.)
+
+6.20. Executing TECHMAP pass (map to technology primitives).
+
+6.20.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+6.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$constmap:e2101c44e3f83a0dc2da774cd1fdd19ff2da5f4f$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $sdff.
+Using template $paramod$constmap:59004451172ce990e25cadb50235357f450d1d76$paramod$ca93286f7961be860b2f584db090ff912fac4775\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $dffe.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using template $paramod$57f63e8a3282e053be0430389b09fa050ac7dca0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~868 debug messages>
+
+6.21. Executing OPT pass (performing simple optimizations).
+
+6.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~1164 debug messages>
+
+6.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+<suppressed ~156 debug messages>
+Removed a total of 52 cells.
+
+6.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 240 unused cells and 214 unused wires.
+<suppressed ~241 debug messages>
+
+6.21.5. Finished fast OPT passes.
+
+6.22. Executing ABC pass (technology mapping using ABC).
+
+6.22.1. Extracting gate netlist of module `\nanoV_external_register_subsystem' to `<abc-temp-dir>/input.blif'..
+Extracted 317 gates and 471 wires to a netlist network with 152 inputs and 96 outputs.
+
+6.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_library <abc-temp-dir>/stdcells.genlib
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash
+ABC: + dretime
+ABC: + map
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+6.22.1.2. Re-integrating ABC results.
+ABC RESULTS:             ORNOT cells:       13
+ABC RESULTS:               NOR cells:        9
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:       11
+ABC RESULTS:              NAND cells:       11
+ABC RESULTS:               NOT cells:       10
+ABC RESULTS:               AND cells:        6
+ABC RESULTS:            ANDNOT cells:       54
+ABC RESULTS:                OR cells:       48
+ABC RESULTS:               MUX cells:      117
+ABC RESULTS:        internal signals:      223
+ABC RESULTS:           input signals:      152
+ABC RESULTS:          output signals:       96
+Removing temp directory.
+
+6.23. Executing OPT pass (performing simple optimizations).
+
+6.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nanoV_external_register_subsystem.
+<suppressed ~21 debug messages>
+
+6.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nanoV_external_register_subsystem'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nanoV_external_register_subsystem..
+Removed 2 unused cells and 342 unused wires.
+<suppressed ~15 debug messages>
+
+6.23.5. Finished fast OPT passes.
+
+6.24. Executing HIERARCHY pass (managing design hierarchy).
+
+6.24.1. Analyzing design hierarchy..
+Top module:  \nanoV_external_register_subsystem
+
+6.24.2. Analyzing design hierarchy..
+Top module:  \nanoV_external_register_subsystem
+Removed 0 unused modules.
+
+6.25. Printing statistics.
+
+=== nanoV_external_register_subsystem ===
+
+   Number of wires:                351
+   Number of wire bits:            789
+   Number of public wires:          86
+   Number of public wire bits:     518
+   Number of ports:                 25
+   Number of port bits:             44
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                411
+     $_ANDNOT_                      54
+     $_AND_                          6
+     $_DFFE_PP_                     96
+     $_DFF_P_                        3
+     $_MUX_                        116
+     $_NAND_                        11
+     $_NOR_                          9
+     $_NOT_                          8
+     $_ORNOT_                       13
+     $_OR_                          48
+     $_SDFFE_PN0P_                  26
+     $_SDFFE_PN1P_                   1
+     $_SDFFE_PP0P_                   3
+     $_SDFF_PN0_                     2
+     $_SDFF_PP0_                     1
+     $_XNOR_                         1
+     $_XOR_                         11
+     $scopeinfo                      2
+
+6.26. Executing CHECK pass (checking for obvious problems).
+Checking module nanoV_external_register_subsystem...
+Found and reported 0 problems.
+
+7. Printing statistics.
+
+=== nanoV_external_register_subsystem ===
+
+   Number of wires:                351
+   Number of wire bits:            789
+   Number of public wires:          86
+   Number of public wire bits:     518
+   Number of ports:                 25
+   Number of port bits:             44
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                411
+     $_ANDNOT_                      54
+     $_AND_                          6
+     $_DFFE_PP_                     96
+     $_DFF_P_                        3
+     $_MUX_                        116
+     $_NAND_                        11
+     $_NOR_                          9
+     $_NOT_                          8
+     $_ORNOT_                       13
+     $_OR_                          48
+     $_SDFFE_PN0P_                  26
+     $_SDFFE_PN1P_                   1
+     $_SDFFE_PP0P_                   3
+     $_SDFF_PN0_                     2
+     $_SDFF_PP0_                     1
+     $_XNOR_                         1
+     $_XOR_                         11
+     $scopeinfo                      2
+
+End of script. Logfile hash: b2a7f779c8, CPU: user 0.21s system 0.02s, MEM: 24.69 MB peak
+Yosys 0.45+106 (git sha1 dcf9f5831, g++ 9.5.0-1ubuntu1~22.04 -fPIC -O3)
+Time spent: 19% 25x opt_expr (0 sec), 18% 1x abc (0 sec), ...

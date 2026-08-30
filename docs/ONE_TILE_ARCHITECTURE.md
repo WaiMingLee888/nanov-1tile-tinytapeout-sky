@@ -31,38 +31,60 @@ range. The register region is private implementation state and may use an
 opaque serial layout; ordinary program and data images remain conventional
 little-endian bytes.
 
-## Proven staging result
+## Proven external-register path
 
 `nanoV_external_registers` has the same bit-serial operand, destination, SLT
-boundary-write, x0, x3, and x4 behavior needed by `nanoV_core`. Its standalone
-self-check passes. Generic Yosys synthesis reports:
+boundary-write, x0, x3, and x4 behavior needed by `nanoV_core`. The SPI engine
+performs consecutive standard `02h` writes and `03h` reads against the actual
+NanoV simulation RAM. The flattened subsystem directly captures serial operand
+bits, normalizes byte bit order, holds ring orientation during transactions,
+and writes persistent destination words.
+
+All standalone tests pass. Generic Yosys synthesis reports:
 
 | Implementation | State cells | Total generic cells |
 | --- | ---: | ---: |
 | Current internal register file | 419 | 655 |
-| External-register staging block | 99 | 220 |
-| Reduction before SPI sequencing | 320 | 435 |
+| Serial-capable staging block | 99 | 295 |
+| SPI engine with optional word-read output | 48 | 176 |
+| Flattened staging + SPI subsystem | 132 | 411 |
+| Register-file replacement reduction | 287 | 244 |
 
-The corresponding `docs/EXTREG_SYNTH.log` SHA-256 is
-`32bcee7865c933120b1e59265741c39b52197e6a1e5c96f8cc28839dd886fe1c`.
+The optional SPI word-read buffer is optimized away in the flattened subsystem
+because operand rings consume the serial stream directly. Evidence SHA-256
+values are:
 
-At the mapped `dfxtp_2` area, 320 removed state cells correspond to 6,806.4
-um^2. This is a directional estimate, not signoff: the shared SPI transaction
-sequencer will add logic, clock buffering will change, and only the official
-SKY130 flow can establish final utilization.
+| Artifact | SHA-256 |
+| --- | --- |
+| `docs/EXTREG_SYNTH.log` | `204706ece39f2998fdab71d969a1c32dcad8303d9600856b4c38c2cde13c0cc5` |
+| `docs/REGSPI_SYNTH.log` | `e4142a8abb2183570d267333075e951528ebaf6f82b6cf849d0e7c48df020d3a` |
+| `docs/REGSUB_SYNTH.log` | `b88b8bf40d7d82b21e3b5b2b9845209514d6d4a03b457930c87ed771913829d7` |
+| `docs/EXTCORE_SYNTH.log` | `eebb10fecc776600440280b6be758db821147feac944a3185616573f535c1cf3` |
+
+At the mapped `dfxtp_2` area, 287 removed state cells correspond to 6,104.49
+um^2. Applying only this sequential saving to the failed placement result gives
+a provisional 93.8% movable utilization. The subsystem also has 244 fewer
+generic cells overall, but generic counts cannot predict mapped combinational
+area. This is a directional estimate, not signoff; only the complete official
+SKY130 flow can establish routability.
+
+`nanoV_core` now has a parameterized external bit-serial register interface.
+The signed-compatible internal path still passes both the 97-word handwritten
+regression and 48-word GCC firmware. An external-core harness executes real
+RV32E `ADDI`, dependent `ADD`, and `SUB` instructions and verifies persistent
+x5, x6, and x7 SPI-register results. The flattened harness is 770 generic cells
+with 217 state cells; it does not yet include instruction fetch, load/store, PC,
+GPIO, or the final CPU arbitration FSM.
 
 ## Integration sequence
 
-1. Extend the SPI controller with private register-read and register-write
-   phases while retaining commands `03h` and `02h`.
-2. Load rs1 and rs2 staging rings before each instruction execution.
-3. Execute the existing `nanoV_core` cycles without changing RV32E decode or
-   ALU behavior.
-4. Write the destination ring to its reserved slot when rd is writable.
-5. Resume instruction fetch and preserve the existing load/store and GPIO
-   paths.
-6. Run the 97-word regression and compiler firmware, then obtain a new
-   official mapped-area result before further optimization.
+1. Replace the one-cycle harness with a CPU FSM that fetches instructions,
+   loads both operands, runs all required NanoV core cycles, and commits rd.
+2. Preserve existing load/store SPI transactions, PC changes, and GPIO paths.
+3. Extend regression coverage to shifts, branches, jumps, loads, stores, and
+   back-to-back dependencies on the external-register top.
+4. Run the compiler firmware on that top and obtain a new official mapped-area
+   result before further optimization.
 
 If three rings plus the new sequencer still exceed routable density, the next
 bounded optimization is to reuse `nanoV_core.stored_data` for writeback or to

@@ -1,0 +1,5 @@
+read_verilog src/nanoV/register_external.v src/nanoV/register_spi.v src/nanoV/register_subsystem.v
+hierarchy -check -top nanoV_external_register_subsystem
+flatten
+synth -top nanoV_external_register_subsystem
+stat
