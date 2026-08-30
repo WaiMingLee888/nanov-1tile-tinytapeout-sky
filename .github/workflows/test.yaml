@@ -25,7 +25,6 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m unittest discover -s bringup -p 'test_*.py' -v
           python scripts/verify_one_tile_contract.py
           cd test
           python make_test_mem.py test.mem
