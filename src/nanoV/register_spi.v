@@ -22,13 +22,21 @@ module nanoV_register_spi (
     output [31:0] read_word,
     output read_bit,
     output read_bit_valid,
-    output reg busy,
-    output reg done,
+    output busy,
+    output done,
 
     input spi_data_in,
-    output reg spi_select,
+    output spi_select,
     output spi_out,
-    output spi_clk_enable
+    output spi_clk_enable,
+
+    // Optional direct address for instruction/data transactions. Keep these
+    // stable until done; register transactions use the reserved address above.
+    input direct_address_enable,
+    input [23:0] direct_address,
+    // 0: byte, 1: halfword, 2/3: word. Reads normally use word mode so the
+    // caller can perform RV32 sign/zero extension after one transaction.
+    input [1:0] transfer_size
 );
 
     localparam STATE_IDLE = 2'd0;
@@ -37,26 +45,30 @@ module nanoV_register_spi (
 
     reg [1:0] state;
     reg [4:0] bit_count;
-    reg write_latched;
-    reg [3:0] reg_index_latched;
     reg [31:0] read_shift;
 
-    wire [23:0] register_address = 24'hffffc0 + {18'b0, reg_index_latched, 2'b00};
+    wire [23:0] register_address = 24'hffffc0 + {18'b0, reg_index, 2'b00};
+    wire [23:0] transaction_address = direct_address_enable ? direct_address : register_address;
     wire [31:0] command_word = {
-        write_latched ? 8'h02 : 8'h03,
-        register_address
+        write ? 8'h02 : 8'h03,
+        transaction_address
     };
     wire [4:0] write_bit_index = {bit_count[4:3], ~bit_count[2:0]};
 
     assign spi_out = (state == STATE_COMMAND) ? command_word[31-bit_count] :
-                     (state == STATE_DATA && write_latched) ? write_word[write_bit_index] :
+                     (state == STATE_DATA && write) ? write_word[write_bit_index] :
                      1'b0;
     assign read_bit = spi_data_in;
-    assign read_bit_valid = state == STATE_DATA && !write_latched;
+    assign read_bit_valid = state == STATE_DATA && !write;
     // Keep SCK running while CS is high. This is harmless for a real SPI RAM
     // and gives the NanoV simulation model a deselected edge between adjacent
     // transactions, matching the behavior of the existing CPU controller.
     assign spi_clk_enable = 1'b1;
+    wire [4:0] final_data_bit = transfer_size == 0 ? 5'd7 :
+                                transfer_size == 1 ? 5'd15 : 5'd31;
+    assign done = state == STATE_DATA && bit_count == final_data_bit;
+    assign busy = state != STATE_IDLE && !done;
+    assign spi_select = state == STATE_IDLE;
 
     wire [31:0] decoded_read_shift = {
         read_shift[24], read_shift[25], read_shift[26], read_shift[27],
@@ -74,24 +86,13 @@ module nanoV_register_spi (
         if (!rstn) begin
             state <= STATE_IDLE;
             bit_count <= 0;
-            write_latched <= 0;
-            reg_index_latched <= 0;
             read_shift <= 0;
-            busy <= 0;
-            done <= 0;
-            spi_select <= 1;
         end else begin
-            done <= 0;
-
             if (state == STATE_IDLE) begin
                 if (start) begin
                     state <= STATE_COMMAND;
                     bit_count <= 0;
-                    write_latched <= write;
-                    reg_index_latched <= reg_index;
                     read_shift <= 0;
-                    busy <= 1;
-                    spi_select <= 0;
                 end
             end else if (state == STATE_COMMAND) begin
                 if (bit_count == 31) begin
@@ -101,15 +102,12 @@ module nanoV_register_spi (
                     bit_count <= bit_count + 1'b1;
                 end
             end else begin
-                if (!write_latched)
+                if (!write)
                     read_shift <= {spi_data_in, read_shift[31:1]};
 
-                if (bit_count == 31) begin
+                if (bit_count == final_data_bit) begin
                     state <= STATE_IDLE;
                     bit_count <= 0;
-                    busy <= 0;
-                    done <= 1;
-                    spi_select <= 1;
                 end else begin
                     bit_count <= bit_count + 1'b1;
                 end

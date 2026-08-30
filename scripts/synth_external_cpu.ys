@@ -1,0 +1,5 @@
+read_verilog src/nanoV/alu.v src/nanoV/shift.v src/nanoV/register.v src/nanoV/core.v src/nanoV/register_sources.v src/nanoV/register_spi.v src/nanoV/cpu_external.v
+hierarchy -check -top nanoV_cpu_external
+flatten
+synth -top nanoV_cpu_external
+stat

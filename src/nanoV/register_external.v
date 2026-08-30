@@ -25,6 +25,8 @@ module nanoV_external_registers (
     input normalize_sources,
     input serial_bit,
     input rotate,
+    input capture_writeback,
+    input load_writeback,
 
     input wr_en,
     input wr_next_en,
@@ -43,7 +45,9 @@ module nanoV_external_registers (
     input data_rd_next,
 
     output [31:0] write_word,
-    output write_required
+    output write_required,
+    output [31:0] rs1_value,
+    output [31:0] rs2_value
 );
 
     reg [31:0] rs1_ring;
@@ -77,6 +81,16 @@ module nanoV_external_registers (
         rs2_ring[0],  rs2_ring[1],  rs2_ring[2],  rs2_ring[3],
         rs2_ring[4],  rs2_ring[5],  rs2_ring[6],  rs2_ring[7]
     };
+    wire [31:0] decoded_write_ring = {
+        write_ring[24], write_ring[25], write_ring[26], write_ring[27],
+        write_ring[28], write_ring[29], write_ring[30], write_ring[31],
+        write_ring[16], write_ring[17], write_ring[18], write_ring[19],
+        write_ring[20], write_ring[21], write_ring[22], write_ring[23],
+        write_ring[8],  write_ring[9],  write_ring[10], write_ring[11],
+        write_ring[12], write_ring[13], write_ring[14], write_ring[15],
+        write_ring[0],  write_ring[1],  write_ring[2],  write_ring[3],
+        write_ring[4],  write_ring[5],  write_ring[6],  write_ring[7]
+    };
 
     always @(posedge clk) begin
         if (load_sources) begin
@@ -99,7 +113,11 @@ module nanoV_external_registers (
                 rs2_ring <= {rs2_ring[0], rs2_ring[31:1]};
         end
 
-        if (normalize_sources) begin
+        if (capture_writeback) begin
+            write_ring <= {serial_bit, write_ring[31:1]};
+        end else if (load_writeback) begin
+            write_ring <= {decoded_write_ring[30:0], decoded_write_ring[31]};
+        end else if (normalize_sources) begin
             last_data_rd_next <= 0;
             read_through_rs1 <= 0;
             read_through_rs2 <= 0;
@@ -140,6 +158,8 @@ module nanoV_external_registers (
     // Convert the physical ring orientation back to a normal 32-bit word.
     assign write_word = {write_ring[0], write_ring[31:1]};
     assign write_required = rd_writable;
+    assign rs1_value = {rs1_ring[0], rs1_ring[31:1]};
+    assign rs2_value = {rs2_ring[0], rs2_ring[31:1]};
     wire unused_rstn_sink = unused_rstn;
 
 endmodule

@@ -69,24 +69,15 @@ area. This is a directional estimate, not signoff; only the complete official
 SKY130 flow can establish routability.
 
 `nanoV_core` now has a parameterized external bit-serial register interface.
-The signed-compatible internal path still passes both the 97-word handwritten
-regression and 48-word GCC firmware. An external-core harness executes real
-RV32E `ADDI`, dependent `ADD`, and `SUB` instructions and verifies persistent
-x5, x6, and x7 SPI-register results. The flattened harness is 770 generic cells
-with 217 state cells; it does not yet include instruction fetch, load/store, PC,
-GPIO, or the final CPU arbitration FSM.
+The integrated controller fetches instructions, reads both source registers,
+executes every required serial cycle, and commits the destination through one
+shared SPI engine. The rs1 source ring is overwritten in place after each bit is
+consumed, eliminating the separate 32-bit destination ring.
 
-## Integration sequence
-
-1. Replace the one-cycle harness with a CPU FSM that fetches instructions,
-   loads both operands, runs all required NanoV core cycles, and commits rd.
-2. Preserve existing load/store SPI transactions, PC changes, and GPIO paths.
-3. Extend regression coverage to shifts, branches, jumps, loads, stores, and
-   back-to-back dependencies on the external-register top.
-4. Run the compiler firmware on that top and obtain a new official mapped-area
-   result before further optimization.
-
-If three rings plus the new sequencer still exceed routable density, the next
-bounded optimization is to reuse `nanoV_core.stored_data` for writeback or to
-stream the second operand during execution. Reducing the architectural register
-count is not an acceptable fallback because the objective requires RV32E.
+The pin-level Tiny Tapeout wrapper passes the 97-word self-check and a 48-word
+GCC RV32E program. Directed coverage also includes branches, JAL/JALR, all
+three shifts, signed and unsigned comparisons, byte/half/word loads and stores,
+and GPIO. The complete wrapper maps to 1,318 SKY130 cells and 14,652.8032 um^2,
+including 197 flip-flops. A 92% placement target is now used for the first
+physical trial. Placement, routing, timing, DRC, LVS, gate-level simulation,
+and precheck remain required before the one-tile objective is complete.

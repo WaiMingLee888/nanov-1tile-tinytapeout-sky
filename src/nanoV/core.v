@@ -10,6 +10,7 @@ module nanoV_core #(
 ) (
     input clk,
     input rstn,
+    input execute_enable,
 
     input [30:2] next_instr,
     input [31:2] instr,
@@ -123,14 +124,19 @@ module nanoV_core #(
     wire is_equal = is_equal_reg && (data_rs1 == data_rs2);
 
     always @(posedge clk) begin
-        if (last_count) is_equal_reg <= 1;
-        else is_equal_reg <= is_equal;
-        cy <= cy_out;
+        if (!rstn)
+            is_equal_reg <= 1;
+        else if (execute_enable) begin
+            if (last_count) is_equal_reg <= 1;
+            else is_equal_reg <= is_equal;
+        end
+        if (execute_enable)
+            cy <= cy_out;
     end
 
     reg [4:0] shift_amt_reg;
     always @(posedge clk) begin
-        if (counter < 5 && cycle == 0) begin
+        if (execute_enable && counter < 5 && cycle == 0) begin
             shift_amt_reg[4] <= alu_op[2] ? data_rs2 : ~data_rs2;
             shift_amt_reg[3:0] <= shift_amt_reg[4:1];
         end
@@ -150,11 +156,11 @@ module nanoV_core #(
                          (alu_op[1:0] == 2'b01) ? ((cycle == 1 && shift_stored) ? shift_in : data_rs1) : data_rs2;
     wire do_store = ((alu_op[1:0] == 2'b01) && (cycle == 0 || shift_stored)) || is_mem || is_jmp || is_branch_cycle1 || (is_mul && !cycle[0]);
     always @(posedge clk) begin
-        if (shift_data_out) begin
+        if (execute_enable && shift_data_out) begin
             stored_data[31:1] <= stored_data[30:0];
             stored_data[0] <= is_mem ? (is_store ? data_rs2 : data_in) : 
                               stored_data[31];
-        end else if (do_store) begin
+        end else if (execute_enable && do_store) begin
             stored_data[31] <= store_data_in;
             stored_data[30:0] <= stored_data[31:1];
         end

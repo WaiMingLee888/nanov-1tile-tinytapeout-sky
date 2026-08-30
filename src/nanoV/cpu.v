@@ -115,6 +115,7 @@ module nanoV_cpu #(parameter NUM_REGS=16) (
     nanoV_core #(.REG_ADDR_BITS($clog2(NUM_REGS)), .NUM_REGS(NUM_REGS)) core (
         .clk(clk),
         .rstn(rstn),
+        .execute_enable(1'b1),
         .next_instr((next_cycle == instr_cycles_assume_branch_not_taken) ? decoded_next_instr[30:2] : instr[30:2]),
         .instr(instr),
         .cycle(cycle),

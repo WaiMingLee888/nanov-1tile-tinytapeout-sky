@@ -17,7 +17,9 @@ project:
     - "tt_top.v"
     - "nanoV/alu.v"
     - "nanoV/core.v"
-    - "nanoV/cpu.v"
+    - "nanoV/cpu_external.v"
+    - "nanoV/register_sources.v"
+    - "nanoV/register_spi.v"
     - "nanoV/register.v"
     - "nanoV/shift.v"
 
@@ -32,7 +34,7 @@ pinout:
   ui[6]: "GPIO input 6"
   ui[7]: "GPIO input 7"
 
-  # GPIO outputs at address 0x10000000; also suitable for a 7-segment display.
+  # GPIO outputs at address 0x10000000; inputs are at 0x10000004.
   uo[0]: "GPIO output 0 / segment a"
   uo[1]: "GPIO output 1 / segment b"
   uo[2]: "GPIO output 2 / segment c"

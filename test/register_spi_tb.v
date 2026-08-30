@@ -29,7 +29,8 @@ module register_spi_tb;
     nanoV_register_spi dut (
         clk, rstn, start, write, reg_index, write_word,
         read_word, read_bit, read_bit_valid, busy, done,
-        buffered_spi_in, spi_select, spi_out, spi_clk_enable
+        buffered_spi_in, spi_select, spi_out, spi_clk_enable,
+        1'b0, 24'b0, 2'd2
     );
 
     sim_spi_ram ram (

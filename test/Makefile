@@ -11,7 +11,9 @@ PROJECT_SOURCES = \
 	tt_top.v \
 	nanoV/alu.v \
 	nanoV/core.v \
-	nanoV/cpu.v \
+	nanoV/cpu_external.v \
+	nanoV/register_sources.v \
+	nanoV/register_spi.v \
 	nanoV/register.v \
 	nanoV/shift.v
 

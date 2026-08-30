@@ -1,0 +1,1742 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.45+106 (git sha1 dcf9f5831, g++ 9.5.0-1ubuntu1~22.04 -fPIC -O3)
+
+-- Running command `read_verilog -I src src/tt_top.v src/nanoV/alu.v src/nanoV/core.v src/nanoV/cpu_external.v src/nanoV/register_sources.v src/nanoV/register_spi.v src/nanoV/register.v src/nanoV/shift.v; hierarchy -check -top tt_um_WaiMingLee888_nanov_1tile; flatten; synth -top tt_um_WaiMingLee888_nanov_1tile; dfflibmap -liberty /home/ai/ttsetup/gds-run-33257620930/runs/wokwi/tmp/f86ce36cc21f4640a293ca28932ff2d5.lib; abc -liberty /home/ai/ttsetup/gds-run-33257620930/runs/wokwi/tmp/f86ce36cc21f4640a293ca28932ff2d5.lib; stat -liberty /home/ai/ttsetup/gds-run-33257620930/runs/wokwi/tmp/f86ce36cc21f4640a293ca28932ff2d5.lib' --
+
+1. Executing Verilog-2005 frontend: src/tt_top.v
+Parsing Verilog input from `src/tt_top.v' to AST representation.
+Generating RTLIL representation for module `\tt_um_WaiMingLee888_nanov_1tile'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: src/nanoV/alu.v
+Parsing Verilog input from `src/nanoV/alu.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_alu'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: src/nanoV/core.v
+Parsing Verilog input from `src/nanoV/core.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_core'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: src/nanoV/cpu_external.v
+Parsing Verilog input from `src/nanoV/cpu_external.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_cpu_external'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: src/nanoV/register_sources.v
+Parsing Verilog input from `src/nanoV/register_sources.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_external_sources'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: src/nanoV/register_spi.v
+Parsing Verilog input from `src/nanoV/register_spi.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_register_spi'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: src/nanoV/register.v
+Parsing Verilog input from `src/nanoV/register.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_registers'.
+Warning: Replacing memory \registers with list of registers. See src/nanoV/register.v:125
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: src/nanoV/shift.v
+Parsing Verilog input from `src/nanoV/shift.v' to AST representation.
+Generating RTLIL representation for module `\nanoV_shift'.
+Successfully finished Verilog frontend.
+
+9. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+Used module:     \nanoV_cpu_external
+Used module:         \nanoV_core
+Used module:             \nanoV_registers
+Used module:             \nanoV_shift
+Used module:             \nanoV_alu
+Used module:         \nanoV_external_sources
+Used module:         \nanoV_register_spi
+Parameter \NUM_REGS = 16
+Parameter \REG_ADDR_BITS = 4
+Parameter \EXTERNAL_REGISTERS = 1
+
+9.2. Executing AST frontend in derive mode using pre-parsed AST for module `\nanoV_core'.
+Parameter \NUM_REGS = 16
+Parameter \REG_ADDR_BITS = 4
+Parameter \EXTERNAL_REGISTERS = 1
+Generating RTLIL representation for module `$paramod$33888f5d831c51a153c9e2370a5a4a047106b43c\nanoV_core'.
+Parameter \NUM_REGS = 16
+Parameter \REG_ADDR_BITS = 4
+
+9.3. Executing AST frontend in derive mode using pre-parsed AST for module `\nanoV_registers'.
+Parameter \NUM_REGS = 16
+Parameter \REG_ADDR_BITS = 4
+Generating RTLIL representation for module `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers'.
+Warning: Replacing memory \registers with list of registers. See src/nanoV/register.v:125
+
+9.4. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+Used module:     \nanoV_cpu_external
+Used module:         $paramod$33888f5d831c51a153c9e2370a5a4a047106b43c\nanoV_core
+Used module:             \nanoV_shift
+Used module:             \nanoV_alu
+Used module:         \nanoV_external_sources
+Used module:         \nanoV_register_spi
+
+9.5. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+Used module:     \nanoV_cpu_external
+Used module:         $paramod$33888f5d831c51a153c9e2370a5a4a047106b43c\nanoV_core
+Used module:             \nanoV_shift
+Used module:             \nanoV_alu
+Used module:         \nanoV_external_sources
+Used module:         \nanoV_register_spi
+Removing unused module `$paramod$c6073fd8a5b287029e036048d234daa072bb204f\nanoV_registers'.
+Removing unused module `\nanoV_registers'.
+Removing unused module `\nanoV_core'.
+Removed 3 unused modules.
+Mapping positional arguments of cell $paramod$33888f5d831c51a153c9e2370a5a4a047106b43c\nanoV_core.shifter (nanoV_shift).
+Mapping positional arguments of cell $paramod$33888f5d831c51a153c9e2370a5a4a047106b43c\nanoV_core.alu (nanoV_alu).
+
+10. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$33888f5d831c51a153c9e2370a5a4a047106b43c\nanoV_core.
+Deleting now unused module nanoV_register_spi.
+Deleting now unused module nanoV_external_sources.
+Deleting now unused module nanoV_cpu_external.
+Deleting now unused module nanoV_shift.
+Deleting now unused module nanoV_alu.
+<suppressed ~6 debug messages>
+
+11. Executing SYNTH pass.
+
+11.1. Executing HIERARCHY pass (managing design hierarchy).
+
+11.1.1. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+
+11.1.2. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+Removed 0 unused modules.
+
+11.2. Executing PROC pass (convert processes to netlists).
+
+11.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+11.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 14 switch rules as full_case in process $flatten\nano.$proc$src/nanoV/cpu_external.v:231$300 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 4 switch rules as full_case in process $flatten\nano.$proc$src/nanoV/cpu_external.v:0$347 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 4 switch rules as full_case in process $flatten\nano.$proc$src/nanoV/cpu_external.v:0$369 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 5 switch rules as full_case in process $flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 9 switch rules as full_case in process $flatten\nano.\staging.$proc$src/nanoV/register_sources.v:52$391 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 1 switch rules as full_case in process $flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 1 switch rules as full_case in process $flatten\nano.\core.$proc$src/nanoV/core.v:158$673 in module tt_um_WaiMingLee888_nanov_1tile.
+Marked 2 switch rules as full_case in process $flatten\nano.\core.$proc$src/nanoV/core.v:126$624 in module tt_um_WaiMingLee888_nanov_1tile.
+Removed a total of 0 dead cases.
+
+11.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 15 assignments to connections.
+
+11.2.4. Executing PROC_INIT pass (extract init attributes).
+
+11.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+11.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~56 debug messages>
+
+11.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+     1/19: $flatten\nano.$8\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$338
+     2/19: $flatten\nano.$7\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$330
+     3/19: $flatten\nano.$6\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$324
+     4/19: $flatten\nano.$5\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$322
+     5/19: $flatten\nano.$4\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.decoded_instr[29:0]$320
+     6/19: $flatten\nano.$4\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$319
+     7/19: $flatten\nano.$3\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.decoded_instr[29:0]$316
+     8/19: $flatten\nano.$3\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$315
+     9/19: $flatten\nano.$2\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.decoded_instr[29:0]$313
+    10/19: $flatten\nano.$2\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$312
+    11/19: $flatten\nano.$1\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.decoded_instr[29:0]$305
+    12/19: $flatten\nano.$1\cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result[2:0]$304
+    13/19: $flatten\nano.$0\branch_taken[0:0]
+    14/19: $flatten\nano.$0\instruction[31:0]
+    15/19: $flatten\nano.$0\state[3:0]
+    16/19: $flatten\nano.$0\pc[21:0]
+    17/19: $flatten\nano.$0\counter[4:0]
+    18/19: $flatten\nano.$0\cycle[2:0]
+    19/19: $flatten\nano.$0\gpio_out[7:0]
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$347'.
+     1/4: $flatten\nano.$4\cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.$result[2:0]$368
+     2/4: $flatten\nano.$3\cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.$result[2:0]$360
+     3/4: $flatten\nano.$2\cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.$result[2:0]$354
+     4/4: $flatten\nano.$1\cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.$result[2:0]$352
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$369'.
+     1/4: $flatten\nano.$4\cycles_for_instr$func$src/nanoV/cpu_external.v:220$168.$result[2:0]$390
+     2/4: $flatten\nano.$3\cycles_for_instr$func$src/nanoV/cpu_external.v:220$168.$result[2:0]$382
+     3/4: $flatten\nano.$2\cycles_for_instr$func$src/nanoV/cpu_external.v:220$168.$result[2:0]$376
+     4/4: $flatten\nano.$1\cycles_for_instr$func$src/nanoV/cpu_external.v:220$168.$result[2:0]$374
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441'.
+     1/3: $flatten\nano.\spi_engine.$0\read_shift[31:0]
+     2/3: $flatten\nano.\spi_engine.$0\bit_count[4:0]
+     3/3: $flatten\nano.\spi_engine.$0\state[1:0]
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$proc$src/nanoV/register_sources.v:52$391'.
+     1/4: $flatten\nano.\staging.$0\rs1_ring[31:0] [31:2]
+     2/4: $flatten\nano.\staging.$0\rs1_ring[31:0] [0]
+     3/4: $flatten\nano.\staging.$0\rs1_ring[31:0] [1]
+     4/4: $flatten\nano.\staging.$0\rs2_ring[31:0]
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+     1/1: $flatten\nano.\core.\alu.$1\operate$func$src/nanoV/alu.v:44$7.$result[0:0]$22
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:158$673'.
+     1/3: $flatten\nano.\core.$0\stored_data[31:0] [30:1]
+     2/3: $flatten\nano.\core.$0\stored_data[31:0] [0]
+     3/3: $flatten\nano.\core.$0\stored_data[31:0] [31]
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:138$626'.
+     1/2: $flatten\nano.\core.$0\shift_amt_reg[4:0] [4]
+     2/2: $flatten\nano.\core.$0\shift_amt_reg[4:0] [3:0]
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:126$624'.
+     1/2: $flatten\nano.\core.$0\is_equal_reg[0:0]
+     2/2: $flatten\nano.\core.$0\cy[0:0]
+Creating decoders for process `\tt_um_WaiMingLee888_nanov_1tile.$proc$src/tt_top.v:39$4'.
+
+11.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:161$164.$result' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$347'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.$result' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$347'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.decoded_instr' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$347'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:220$165.$result' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$369'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:220$168.$result' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$369'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:220$168.decoded_instr' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$369'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.alu.operate$func$src/nanoV/alu.v:44$6.$result' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.alu.operate$func$src/nanoV/alu.v:44$7.$result' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.alu.operate$func$src/nanoV/alu.v:44$7.op_op' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.alu.operate$func$src/nanoV/alu.v:44$7.op_a' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.alu.operate$func$src/nanoV/alu.v:44$7.op_b' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+No latch inferred for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.alu.operate$func$src/nanoV/alu.v:44$7.op_s' from process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+
+11.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.gpio_out' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1347' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycle' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1348' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.counter' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1349' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.pc' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1350' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.state' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1351' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.instruction' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1352' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.branch_taken' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1353' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.$result' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1354' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.cycles_for_instr$func$src/nanoV/cpu_external.v:280$166.decoded_instr' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+  created $dff cell `$procdff$1355' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.spi_engine.state' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441'.
+  created $dff cell `$procdff$1356' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.spi_engine.bit_count' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441'.
+  created $dff cell `$procdff$1357' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.spi_engine.read_shift' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441'.
+  created $dff cell `$procdff$1358' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.staging.rs1_ring' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$proc$src/nanoV/register_sources.v:52$391'.
+  created $dff cell `$procdff$1359' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.staging.rs2_ring' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$proc$src/nanoV/register_sources.v:52$391'.
+  created $dff cell `$procdff$1360' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.stored_data' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:158$673'.
+  created $dff cell `$procdff$1361' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.shift_amt_reg' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:138$626'.
+  created $dff cell `$procdff$1362' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.cy' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:126$624'.
+  created $dff cell `$procdff$1363' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\nano.core.is_equal_reg' using process `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:126$624'.
+  created $dff cell `$procdff$1364' with positive edge clock.
+Creating register for signal `\tt_um_WaiMingLee888_nanov_1tile.\buffered_spi_in' using process `\tt_um_WaiMingLee888_nanov_1tile.$proc$src/tt_top.v:39$4'.
+  created $dff cell `$procdff$1365' with negative edge clock.
+
+11.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+11.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 22 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:231$300'.
+Found and cleaned up 4 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$347'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$347'.
+Found and cleaned up 4 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$369'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$proc$src/nanoV/cpu_external.v:0$369'.
+Found and cleaned up 7 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$proc$src/nanoV/register_spi.v:85$441'.
+Found and cleaned up 11 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$proc$src/nanoV/register_sources.v:52$391'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$proc$src/nanoV/register_sources.v:52$391'.
+Found and cleaned up 1 empty switch in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$proc$src/nanoV/alu.v:0$15'.
+Found and cleaned up 2 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:158$673'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:158$673'.
+Found and cleaned up 1 empty switch in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:138$626'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:138$626'.
+Found and cleaned up 4 empty switches in `\tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:126$624'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$proc$src/nanoV/core.v:126$624'.
+Removing empty process `tt_um_WaiMingLee888_nanov_1tile.$proc$src/tt_top.v:39$4'.
+Cleaned up 56 empty switches.
+
+11.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~79 debug messages>
+
+11.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 98 unused cells and 415 unused wires.
+<suppressed ~112 debug messages>
+
+11.5. Executing CHECK pass (checking for obvious problems).
+Checking module tt_um_WaiMingLee888_nanov_1tile...
+Found and reported 0 problems.
+
+11.6. Executing OPT pass (performing simple optimizations).
+
+11.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~306 debug messages>
+Removed a total of 102 cells.
+
+11.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1138.
+    dead port 1/2 on $mux $procmux$1141.
+    dead port 1/2 on $mux $procmux$1144.
+    dead port 1/2 on $mux $procmux$1150.
+    dead port 1/2 on $mux $procmux$1153.
+    dead port 1/2 on $mux $procmux$1159.
+    dead port 1/2 on $mux $procmux$792.
+    dead port 1/2 on $mux $procmux$795.
+    dead port 1/2 on $mux $procmux$798.
+    dead port 1/2 on $mux $procmux$801.
+    dead port 2/2 on $mux $procmux$803.
+    dead port 2/2 on $mux $procmux$805.
+    dead port 2/2 on $mux $procmux$808.
+    dead port 1/2 on $mux $procmux$821.
+    dead port 1/2 on $mux $procmux$824.
+    dead port 1/2 on $mux $procmux$827.
+    dead port 2/2 on $mux $procmux$829.
+    dead port 2/2 on $mux $procmux$831.
+    dead port 2/2 on $mux $procmux$834.
+    dead port 1/2 on $mux $procmux$847.
+    dead port 1/2 on $mux $procmux$850.
+    dead port 2/2 on $mux $procmux$852.
+    dead port 2/2 on $mux $procmux$854.
+    dead port 2/2 on $mux $procmux$857.
+Removed 24 multiplexer ports.
+<suppressed ~47 debug messages>
+
+11.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 1 changes.
+
+11.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+11.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 0 unused cells and 131 unused wires.
+<suppressed ~4 debug messages>
+
+11.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~47 debug messages>
+
+11.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.6.16. Finished OPT passes. (There is nothing left to do.)
+
+11.7. Executing FSM pass (extract and optimize FSM).
+
+11.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register tt_um_WaiMingLee888_nanov_1tile.nano.spi_engine.state.
+Found FSM state register tt_um_WaiMingLee888_nanov_1tile.nano.state.
+
+11.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\nano.spi_engine.state' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+  found $dff cell for state register: $procdff$1356
+  root of input selection tree: $flatten\nano.\spi_engine.$0\state[1:0]
+  found reset state: 2'00 (guessed from mux tree)
+  found ctrl input: \rst_n
+  found state code: 2'00
+  found ctrl input: \nano.spi_engine.spi_select
+  found ctrl input: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:58$419_Y
+  found ctrl input: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:108$448_Y
+  found ctrl input: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:98$445_Y
+  found state code: 2'10
+  found ctrl input: \nano.engine_start
+  found state code: 2'01
+  found ctrl output: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:58$419_Y
+  found ctrl output: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:59$422_Y
+  found ctrl output: \nano.spi_engine.spi_select
+  ctrl inputs: { \nano.engine_start $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:108$448_Y $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:98$445_Y \rst_n }
+  ctrl outputs: { $flatten\nano.\spi_engine.$0\state[1:0] $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:59$422_Y $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:58$419_Y \nano.spi_engine.spi_select }
+  transition:       2'00 4'---0 ->       2'00 5'00001
+  transition:       2'00 4'0--1 ->       2'00 5'00001
+  transition:       2'00 4'1--1 ->       2'01 5'01001
+  transition:       2'10 4'---0 ->       2'00 5'00100
+  transition:       2'10 4'-0-1 ->       2'10 5'10100
+  transition:       2'10 4'-1-1 ->       2'00 5'00100
+  transition:       2'01 4'---0 ->       2'00 5'00010
+  transition:       2'01 4'--01 ->       2'01 5'01010
+  transition:       2'01 4'--11 ->       2'10 5'10010
+Extracting FSM `\nano.state' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+  found $dff cell for state register: $procdff$1351
+  root of input selection tree: $flatten\nano.$0\state[3:0]
+  found reset state: 4'0000 (guessed from mux tree)
+  found ctrl input: \rst_n
+  found state code: 4'0000
+  found ctrl input: \nano.staging.normalize_result
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:165$256_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:167$261_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:68$199_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:58$175_Y
+  found ctrl input: \nano.core.execute_enable
+  found ctrl input: \nano.staging.normalize_sources
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:128$231_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:128$230_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:127$228_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:127$227_Y
+  found ctrl input: $procmux$1045_CMP
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:70$204_Y
+  found ctrl input: $flatten\nano.$eq$src/nanoV/cpu_external.v:55$170_Y
+  found state code: 4'1000
+  found ctrl input: \nano.engine_done
+  found ctrl input: \nano.is_store
+  found state code: 4'1100
+  found ctrl input: \nano.is_mmio
+  found state code: 4'1011
+  found state code: 4'1001
+  found ctrl input: \nano.core.last_count
+  found ctrl input: $flatten\nano.$logic_and$src/nanoV/cpu_external.v:277$318_Y
+  found ctrl input: $flatten\nano.$lt$src/nanoV/cpu_external.v:280$340_Y
+  found ctrl input: \nano.commit_after_execute
+  found state code: 4'1010
+  found state code: 4'0111
+  found state code: 4'0110
+  found state code: 4'0101
+  found state code: 4'0100
+  found state code: 4'0011
+  found state code: 4'0010
+  found state code: 4'1101
+  found state code: 4'0001
+  found ctrl output: $procmux$1045_CMP
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:167$261_Y
+  found ctrl output: \nano.staging.normalize_result
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:165$256_Y
+  found ctrl output: \nano.staging.normalize_sources
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:128$231_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:128$230_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:127$228_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:127$227_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:70$204_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:68$199_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:58$175_Y
+  found ctrl output: $flatten\nano.$eq$src/nanoV/cpu_external.v:55$170_Y
+  found ctrl output: \nano.core.execute_enable
+  ctrl inputs: { \nano.is_mmio \nano.is_store \nano.engine_done \nano.commit_after_execute $flatten\nano.$logic_and$src/nanoV/cpu_external.v:277$318_Y $flatten\nano.$lt$src/nanoV/cpu_external.v:280$340_Y \nano.core.last_count \rst_n }
+  ctrl outputs: { $flatten\nano.$eq$src/nanoV/cpu_external.v:55$170_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:58$175_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:68$199_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:70$204_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:127$227_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:127$228_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:128$230_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:128$231_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:165$256_Y $flatten\nano.$eq$src/nanoV/cpu_external.v:167$261_Y $flatten\nano.$0\state[3:0] \nano.staging.normalize_result \nano.staging.normalize_sources \nano.core.execute_enable $procmux$1045_CMP }
+  transition:     4'0000 8'-------0 ->     4'0000 18'100000000000000000
+  transition:     4'0000 8'-------1 ->     4'0001 18'100000000000010000
+  transition:     4'1000 8'-------0 ->     4'0000 18'010000000000000000
+  transition:     4'1000 8'-------1 ->     4'1001 18'010000000010010000
+  transition:     4'0100 8'-------0 ->     4'0000 18'000000100000000000
+  transition:     4'0100 8'-------1 ->     4'0101 18'000000100001010000
+  transition:     4'1100 8'-------0 ->     4'0000 18'000000000000001000
+  transition:     4'1100 8'-------1 ->     4'1000 18'000000000010001000
+  transition:     4'0010 8'-------0 ->     4'0000 18'000010000000000000
+  transition:     4'0010 8'-------1 ->     4'0011 18'000010000000110000
+  transition:     4'1010 8'-------0 ->     4'0000 18'000000000100000000
+  transition:     4'1010 8'0------1 ->     4'1011 18'000000000110110000
+  transition:     4'1010 8'10-----1 ->     4'1000 18'000000000110000000
+  transition:     4'1010 8'11-----1 ->     4'0000 18'000000000100000000
+  transition:     4'0110 8'-------0 ->     4'0000 18'000000000000000100
+  transition:     4'0110 8'-------1 ->     4'0111 18'000000000001110100
+  transition:     4'0001 8'-------0 ->     4'0000 18'000100000000000000
+  transition:     4'0001 8'--0----1 ->     4'0001 18'000100000000010000
+  transition:     4'0001 8'--1----1 ->     4'1101 18'000100000011010000
+  transition:     4'1001 8'-------0 ->     4'0000 18'001000000000000000
+  transition:     4'1001 8'--0----1 ->     4'1001 18'001000000010010000
+  transition:     4'1001 8'--1----1 ->     4'0000 18'001000000000000000
+  transition:     4'0101 8'-------0 ->     4'0000 18'000000010000000000
+  transition:     4'0101 8'--0----1 ->     4'0101 18'000000010001010000
+  transition:     4'0101 8'--1----1 ->     4'0110 18'000000010001100000
+  transition:     4'1101 8'-------0 ->     4'0000 18'000000000000000001
+  transition:     4'1101 8'-------1 ->     4'0010 18'000000000000100001
+  transition:     4'0011 8'-------0 ->     4'0000 18'000001000000000000
+  transition:     4'0011 8'--0----1 ->     4'0011 18'000001000000110000
+  transition:     4'0011 8'--1----1 ->     4'0100 18'000001000001000000
+  transition:     4'1011 8'-------0 ->     4'0000 18'000000001000000000
+  transition:     4'1011 8'--0----1 ->     4'1011 18'000000001010110000
+  transition:     4'1011 8'-01----1 ->     4'1100 18'000000001011000000
+  transition:     4'1011 8'-11----1 ->     4'0000 18'000000001000000000
+  transition:     4'0111 8'-------0 ->     4'0000 18'000000000000000010
+  transition:     4'0111 8'------01 ->     4'0111 18'000000000001110010
+  transition:     4'0111 8'---00011 ->     4'0000 18'000000000000000010
+  transition:     4'0111 8'---10011 ->     4'1000 18'000000000010000010
+  transition:     4'0111 8'----0111 ->     4'0111 18'000000000001110010
+  transition:     4'0111 8'----1-11 ->     4'1010 18'000000000010100010
+
+11.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\nano.state$1371' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+Optimizing FSM `$fsm$\nano.spi_engine.state$1366' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+
+11.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 39 unused cells and 39 unused wires.
+<suppressed ~40 debug messages>
+
+11.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\nano.spi_engine.state$1366' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+  Removing unused output signal $flatten\nano.\spi_engine.$0\state[1:0] [0].
+  Removing unused output signal $flatten\nano.\spi_engine.$0\state[1:0] [1].
+Optimizing FSM `$fsm$\nano.state$1371' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+  Removing unused output signal $flatten\nano.$0\state[3:0] [0].
+  Removing unused output signal $flatten\nano.$0\state[3:0] [1].
+  Removing unused output signal $flatten\nano.$0\state[3:0] [2].
+  Removing unused output signal $flatten\nano.$0\state[3:0] [3].
+
+11.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\nano.spi_engine.state$1366' from module `\tt_um_WaiMingLee888_nanov_1tile' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> --1
+  10 -> -1-
+  01 -> 1--
+Recoding FSM `$fsm$\nano.state$1371' from module `\tt_um_WaiMingLee888_nanov_1tile' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  0000 -> -------------1
+  1000 -> ------------1-
+  0100 -> -----------1--
+  1100 -> ----------1---
+  0010 -> ---------1----
+  1010 -> --------1-----
+  0110 -> -------1------
+  0001 -> ------1-------
+  1001 -> -----1--------
+  0101 -> ----1---------
+  1101 -> ---1----------
+  0011 -> --1-----------
+  1011 -> -1------------
+  0111 -> 1-------------
+
+11.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\nano.spi_engine.state$1366' from module `tt_um_WaiMingLee888_nanov_1tile':
+-------------------------------------
+
+  Information on FSM $fsm$\nano.spi_engine.state$1366 (\nano.spi_engine.state):
+
+  Number of input signals:    4
+  Number of output signals:   3
+  Number of state bits:       3
+
+  Input signals:
+    0: \rst_n
+    1: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:98$445_Y
+    2: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:108$448_Y
+    3: \nano.engine_start
+
+  Output signals:
+    0: \nano.spi_engine.spi_select
+    1: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:58$419_Y
+    2: $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:59$422_Y
+
+  State encoding:
+    0:      3'--1  <RESET STATE>
+    1:      3'-1-
+    2:      3'1--
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 4'---0   ->     0 3'001
+      1:     0 4'0--1   ->     0 3'001
+      2:     0 4'1--1   ->     2 3'001
+      3:     1 4'---0   ->     0 3'100
+      4:     1 4'-1-1   ->     0 3'100
+      5:     1 4'-0-1   ->     1 3'100
+      6:     2 4'---0   ->     0 3'010
+      7:     2 4'--11   ->     1 3'010
+      8:     2 4'--01   ->     2 3'010
+
+-------------------------------------
+
+FSM `$fsm$\nano.state$1371' from module `tt_um_WaiMingLee888_nanov_1tile':
+-------------------------------------
+
+  Information on FSM $fsm$\nano.state$1371 (\nano.state):
+
+  Number of input signals:    8
+  Number of output signals:  14
+  Number of state bits:      14
+
+  Input signals:
+    0: \rst_n
+    1: \nano.core.last_count
+    2: $flatten\nano.$lt$src/nanoV/cpu_external.v:280$340_Y
+    3: $flatten\nano.$logic_and$src/nanoV/cpu_external.v:277$318_Y
+    4: \nano.commit_after_execute
+    5: \nano.engine_done
+    6: \nano.is_store
+    7: \nano.is_mmio
+
+  Output signals:
+    0: $procmux$1045_CMP
+    1: \nano.core.execute_enable
+    2: \nano.staging.normalize_sources
+    3: \nano.staging.normalize_result
+    4: $flatten\nano.$eq$src/nanoV/cpu_external.v:167$261_Y
+    5: $flatten\nano.$eq$src/nanoV/cpu_external.v:165$256_Y
+    6: $flatten\nano.$eq$src/nanoV/cpu_external.v:128$231_Y
+    7: $flatten\nano.$eq$src/nanoV/cpu_external.v:128$230_Y
+    8: $flatten\nano.$eq$src/nanoV/cpu_external.v:127$228_Y
+    9: $flatten\nano.$eq$src/nanoV/cpu_external.v:127$227_Y
+   10: $flatten\nano.$eq$src/nanoV/cpu_external.v:70$204_Y
+   11: $flatten\nano.$eq$src/nanoV/cpu_external.v:68$199_Y
+   12: $flatten\nano.$eq$src/nanoV/cpu_external.v:58$175_Y
+   13: $flatten\nano.$eq$src/nanoV/cpu_external.v:55$170_Y
+
+  State encoding:
+    0: 14'-------------1  <RESET STATE>
+    1: 14'------------1-
+    2: 14'-----------1--
+    3: 14'----------1---
+    4: 14'---------1----
+    5: 14'--------1-----
+    6: 14'-------1------
+    7: 14'------1-------
+    8: 14'-----1--------
+    9: 14'----1---------
+   10: 14'---1----------
+   11: 14'--1-----------
+   12: 14'-1------------
+   13: 14'1-------------
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 8'-------0   ->     0 14'10000000000000
+      1:     0 8'-------1   ->     7 14'10000000000000
+      2:     1 8'-------0   ->     0 14'01000000000000
+      3:     1 8'-------1   ->     8 14'01000000000000
+      4:     2 8'-------0   ->     0 14'00000010000000
+      5:     2 8'-------1   ->     9 14'00000010000000
+      6:     3 8'-------0   ->     0 14'00000000001000
+      7:     3 8'-------1   ->     1 14'00000000001000
+      8:     4 8'-------0   ->     0 14'00001000000000
+      9:     4 8'-------1   ->    11 14'00001000000000
+     10:     5 8'-------0   ->     0 14'00000000010000
+     11:     5 8'11-----1   ->     0 14'00000000010000
+     12:     5 8'10-----1   ->     1 14'00000000010000
+     13:     5 8'0------1   ->    12 14'00000000010000
+     14:     6 8'-------0   ->     0 14'00000000000100
+     15:     6 8'-------1   ->    13 14'00000000000100
+     16:     7 8'-------0   ->     0 14'00010000000000
+     17:     7 8'--0----1   ->     7 14'00010000000000
+     18:     7 8'--1----1   ->    10 14'00010000000000
+     19:     8 8'-------0   ->     0 14'00100000000000
+     20:     8 8'--1----1   ->     0 14'00100000000000
+     21:     8 8'--0----1   ->     8 14'00100000000000
+     22:     9 8'-------0   ->     0 14'00000001000000
+     23:     9 8'--1----1   ->     6 14'00000001000000
+     24:     9 8'--0----1   ->     9 14'00000001000000
+     25:    10 8'-------0   ->     0 14'00000000000001
+     26:    10 8'-------1   ->     4 14'00000000000001
+     27:    11 8'-------0   ->     0 14'00000100000000
+     28:    11 8'--1----1   ->     2 14'00000100000000
+     29:    11 8'--0----1   ->    11 14'00000100000000
+     30:    12 8'-------0   ->     0 14'00000000100000
+     31:    12 8'-11----1   ->     0 14'00000000100000
+     32:    12 8'-01----1   ->     3 14'00000000100000
+     33:    12 8'--0----1   ->    12 14'00000000100000
+     34:    13 8'-------0   ->     0 14'00000000000010
+     35:    13 8'---00011   ->     0 14'00000000000010
+     36:    13 8'---10011   ->     1 14'00000000000010
+     37:    13 8'----1-11   ->     5 14'00000000000010
+     38:    13 8'------01   ->    13 14'00000000000010
+     39:    13 8'----0111   ->    13 14'00000000000010
+
+-------------------------------------
+
+11.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\nano.spi_engine.state$1366' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+Mapping FSM `$fsm$\nano.state$1371' from module `\tt_um_WaiMingLee888_nanov_1tile'.
+
+11.8. Executing OPT pass (performing simple optimizations).
+
+11.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~9 debug messages>
+
+11.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~24 debug messages>
+Removed a total of 8 cells.
+
+11.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~45 debug messages>
+
+11.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$1364 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1340_Y, Q = \nano.core.is_equal_reg, rval = 1'1).
+Adding EN signal on $auto$ff.cc:266:slice$1538 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1338_Y, Q = \nano.core.is_equal_reg).
+Adding EN signal on $procdff$1363 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = \nano.core.alu.sum [1], Q = \nano.core.cy).
+Adding EN signal on $procdff$1362 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = { $flatten\nano.\core.$ternary$src/nanoV/core.v:140$632_Y \nano.core.shift_amt_reg [4:1] }, Q = \nano.core.shift_amt_reg).
+Adding EN signal on $procdff$1361 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $flatten\nano.\core.$0\stored_data[31:0], Q = \nano.core.stored_data).
+Adding EN signal on $procdff$1360 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = { $flatten\nano.\staging.$0\rs2_ring[31:0] [31:29] $flatten\nano.\staging.$0\rs2_ring[31:0] [27:21] $flatten\nano.\staging.$0\rs2_ring[31:0] [19:13] $flatten\nano.\staging.$0\rs2_ring[31:0] [11:5] $flatten\nano.\staging.$0\rs2_ring[31:0] [3:0] }, Q = { \nano.staging.rs2_ring [31:29] \nano.staging.rs2_ring [27:21] \nano.staging.rs2_ring [19:13] \nano.staging.rs2_ring [11:5] \nano.staging.rs2_ring [3:0] }).
+Adding EN signal on $procdff$1360 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = { $flatten\nano.\staging.$0\rs2_ring[31:0] [28] $flatten\nano.\staging.$0\rs2_ring[31:0] [20] $flatten\nano.\staging.$0\rs2_ring[31:0] [12] $flatten\nano.\staging.$0\rs2_ring[31:0] [4] }, Q = { \nano.staging.rs2_ring [28] \nano.staging.rs2_ring [20] \nano.staging.rs2_ring [12] \nano.staging.rs2_ring [4] }).
+Adding EN signal on $procdff$1359 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = { $flatten\nano.\staging.$0\rs1_ring[31:0] [31:29] $flatten\nano.\staging.$0\rs1_ring[31:0] [27:21] $flatten\nano.\staging.$0\rs1_ring[31:0] [19:13] $flatten\nano.\staging.$0\rs1_ring[31:0] [11:5] $flatten\nano.\staging.$0\rs1_ring[31:0] [3:0] }, Q = { \nano.staging.rs1_ring [31:29] \nano.staging.rs1_ring [27:21] \nano.staging.rs1_ring [19:13] \nano.staging.rs1_ring [11:5] \nano.staging.rs1_ring [3:0] }).
+Adding EN signal on $procdff$1359 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = { $flatten\nano.\staging.$0\rs1_ring[31:0] [28] $flatten\nano.\staging.$0\rs1_ring[31:0] [20] $flatten\nano.\staging.$0\rs1_ring[31:0] [12] $flatten\nano.\staging.$0\rs1_ring[31:0] [4] }, Q = { \nano.staging.rs1_ring [28] \nano.staging.rs1_ring [20] \nano.staging.rs1_ring [12] \nano.staging.rs1_ring [4] }).
+Adding SRST signal on $procdff$1357 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1219_Y, Q = \nano.spi_engine.bit_count, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$1567 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1219_Y, Q = \nano.spi_engine.bit_count).
+Adding SRST signal on $procdff$1353 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$977_Y, Q = \nano.branch_taken, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1571 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$977_Y, Q = \nano.branch_taken).
+Adding SRST signal on $procdff$1352 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$995_Y, Q = \nano.instruction, rval = 19).
+Adding EN signal on $auto$ff.cc:266:slice$1579 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$995_Y, Q = \nano.instruction).
+Adding SRST signal on $procdff$1350 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1065_Y, Q = \nano.pc, rval = 22'0000000000000000000000).
+Adding SRST signal on $procdff$1349 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1093_Y, Q = \nano.counter, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:266:slice$1588 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1093_Y, Q = \nano.counter).
+Adding SRST signal on $procdff$1348 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1114_Y, Q = \nano.cycle, rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$1592 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1114_Y, Q = \nano.cycle).
+Adding SRST signal on $procdff$1347 ($dff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1129_Y, Q = \nano.gpio_out, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1600 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = \nano.rs2_value [7:0], Q = \nano.gpio_out).
+
+11.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 15 unused cells and 48 unused wires.
+<suppressed ~16 debug messages>
+
+11.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~9 debug messages>
+
+11.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~42 debug messages>
+
+11.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+11.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+11.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~42 debug messages>
+
+11.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.8.23. Finished OPT passes. (There is nothing left to do.)
+
+11.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$opt_dff.cc:195:make_patterns_logic$1584 ($ne).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$opt_dff.cc:195:make_patterns_logic$1576 ($ne).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$opt_dff.cc:195:make_patterns_logic$1570 ($ne).
+Removed top 1 bits (of 3) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1461 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$opt_dff.cc:195:make_patterns_logic$1564 ($ne).
+Removed top 1 bits (of 3) from mux cell tt_um_WaiMingLee888_nanov_1tile.$procmux$1135 ($mux).
+Removed top 1 bits (of 3) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$opt_dff.cc:195:make_patterns_logic$1562 ($ne).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1407 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1521 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1412 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1526 ($eq).
+Removed top 1 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1530 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1517 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$opt_dff.cc:195:make_patterns_logic$1552 ($ne).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1398 ($eq).
+Removed top 3 bits (of 5) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$eq$src/nanoV/core.v:110$596 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$eq$src/nanoV/core.v:120$619 ($eq).
+Removed top 29 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$lt$src/nanoV/core.v:139$627 ($lt).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$eq$src/nanoV/core.v:150$639 ($eq).
+Removed top 2 bits (of 3) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$eq$src/nanoV/core.v:156$658 ($eq).
+Removed top 27 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$lt$src/nanoV/core.v:172$682 ($lt).
+Removed top 30 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.$lt$src/nanoV/core.v:172$684 ($lt).
+Removed top 1 bits (of 2) from port A of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$11 ($add).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$11 ($add).
+Removed top 5 bits (of 6) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$542 ($add).
+Removed top 1 bits (of 6) from port A of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$541 ($add).
+Removed top 2 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$eq$src/nanoV/register_sources.v:82$394 ($eq).
+Removed top 1 bits (of 5) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$eq$src/nanoV/register_sources.v:82$395 ($eq).
+Removed top 1 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$eq$src/nanoV/register_sources.v:83$396 ($eq).
+Removed top 2 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$eq$src/nanoV/register_sources.v:85$402 ($eq).
+Removed top 1 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\staging.$eq$src/nanoV/register_sources.v:86$404 ($eq).
+Removed top 7 bits (of 8) from mux cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:53$417 ($mux).
+Removed top 27 bits (of 32) from port A of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$sub$src/nanoV/register_spi.v:58$420 ($sub).
+Removed top 26 bits (of 32) from port Y of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$sub$src/nanoV/register_spi.v:58$420 ($sub).
+Removed top 26 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$shiftx$src/nanoV/register_spi.v:0$421 ($shiftx).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:68$431 ($eq).
+Removed top 1 bits (of 2) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$eq$src/nanoV/cpu_external.v:49$336 ($eq).
+Removed top 2 bits (of 5) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ne$src/nanoV/cpu_external.v:48$328 ($ne).
+Removed top 28 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$gt$src/nanoV/cpu_external.v:246$310 ($gt).
+Removed top 1 bits (of 3) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$eq$src/nanoV/cpu_external.v:246$308 ($eq).
+Removed top 10 bits (of 32) from mux cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ternary$src/nanoV/cpu_external.v:223$284 ($mux).
+Removed top 10 bits (of 32) from mux cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ternary$src/nanoV/cpu_external.v:225$283 ($mux).
+Removed top 29 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$add$src/nanoV/cpu_external.v:225$282 ($add).
+Removed top 10 bits (of 32) from port Y of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$add$src/nanoV/cpu_external.v:225$282 ($add).
+Removed top 10 bits (of 32) from port A of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$add$src/nanoV/cpu_external.v:170$268 ($add).
+Removed top 29 bits (of 32) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$add$src/nanoV/cpu_external.v:170$268 ($add).
+Removed top 9 bits (of 32) from port Y of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$add$src/nanoV/cpu_external.v:170$268 ($add).
+Removed top 24 bits (of 32) from mux cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ternary$src/nanoV/cpu_external.v:168$265 ($mux).
+Removed top 18 bits (of 24) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:50$415 ($add).
+Removed top 2 bits (of 3) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$eq$src/nanoV/cpu_external.v:109$220 ($eq).
+Removed top 3 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$eq$src/nanoV/cpu_external.v:104$215 ($eq).
+Removed top 1 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ne$src/nanoV/cpu_external.v:103$212 ($ne).
+Removed top 2 bits (of 4) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ne$src/nanoV/cpu_external.v:103$210 ($ne).
+Removed top 2 bits (of 3) from mux cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ternary$src/nanoV/cpu_external.v:100$208 ($mux).
+Removed top 2 bits (of 5) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$eq$src/nanoV/cpu_external.v:97$206 ($eq).
+Removed top 3 bits (of 5) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ne$src/nanoV/cpu_external.v:66$194 ($ne).
+Removed top 3 bits (of 5) from port B of cell tt_um_WaiMingLee888_nanov_1tile.$auto$fsm_map.cc:77:implement_pattern_cache$1427 ($eq).
+Removed top 1 bits (of 3) from wire tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$4\cycles_for_instr$func$src/nanoV/cpu_external.v:161$167.$result[2:0]$368.
+Removed top 10 bits (of 32) from wire tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$add$src/nanoV/cpu_external.v:225$282_Y.
+Removed top 16 bits (of 32) from wire tt_um_WaiMingLee888_nanov_1tile.$flatten\nano.$ternary$src/nanoV/cpu_external.v:225$283_Y.
+
+11.10. Executing PEEPOPT pass (run peephole optimizers).
+
+11.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+11.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module tt_um_WaiMingLee888_nanov_1tile:
+  creating $macc model for $flatten\nano.$add$src/nanoV/cpu_external.v:161$253 ($add).
+  creating $macc model for $flatten\nano.$add$src/nanoV/cpu_external.v:170$268 ($add).
+  creating $macc model for $flatten\nano.$add$src/nanoV/cpu_external.v:225$282 ($add).
+  creating $macc model for $flatten\nano.$add$src/nanoV/cpu_external.v:292$342 ($add).
+  creating $macc model for $flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$11 ($add).
+  creating $macc model for $flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$12 ($add).
+  creating $macc model for $flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$541 ($add).
+  creating $macc model for $flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$542 ($add).
+  creating $macc model for $flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:102$446 ($add).
+  creating $macc model for $flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:50$415 ($add).
+  creating $macc model for $flatten\nano.\spi_engine.$sub$src/nanoV/register_spi.v:58$420 ($sub).
+  merging $macc model for $flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$541 into $flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$542.
+  merging $macc model for $flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$11 into $flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$12.
+  creating $alu model for $macc $flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:102$446.
+  creating $alu model for $macc $flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$542.
+  creating $alu model for $macc $flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:50$415.
+  creating $alu model for $macc $flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$12.
+  creating $alu model for $macc $flatten\nano.\spi_engine.$sub$src/nanoV/register_spi.v:58$420.
+  creating $alu model for $macc $flatten\nano.$add$src/nanoV/cpu_external.v:292$342.
+  creating $alu model for $macc $flatten\nano.$add$src/nanoV/cpu_external.v:225$282.
+  creating $alu model for $macc $flatten\nano.$add$src/nanoV/cpu_external.v:170$268.
+  creating $alu model for $macc $flatten\nano.$add$src/nanoV/cpu_external.v:161$253.
+  creating $alu model for $flatten\nano.$ge$src/nanoV/cpu_external.v:161$254 ($ge): new $alu
+  creating $alu model for $flatten\nano.$gt$src/nanoV/cpu_external.v:246$310 ($gt): new $alu
+  creating $alu model for $flatten\nano.$lt$src/nanoV/cpu_external.v:280$340 ($lt): new $alu
+  creating $alu model for $flatten\nano.\core.$lt$src/nanoV/core.v:139$627 ($lt): new $alu
+  creating $alu model for $flatten\nano.\core.$lt$src/nanoV/core.v:172$682 ($lt): new $alu
+  creating $alu model for $flatten\nano.\core.$lt$src/nanoV/core.v:172$684 ($lt): new $alu
+  creating $alu model for $flatten\nano.$eq$src/nanoV/cpu_external.v:246$308 ($eq): merged with $flatten\nano.\core.$lt$src/nanoV/core.v:172$684.
+  creating $alu model for $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:98$445 ($eq): merged with $flatten\nano.\spi_engine.$sub$src/nanoV/register_spi.v:58$420.
+  creating $alu cell for $flatten\nano.\core.$lt$src/nanoV/core.v:172$684, $flatten\nano.$eq$src/nanoV/cpu_external.v:246$308: $auto$alumacc.cc:485:replace_alu$1613
+  creating $alu cell for $flatten\nano.\core.$lt$src/nanoV/core.v:172$682: $auto$alumacc.cc:485:replace_alu$1624
+  creating $alu cell for $flatten\nano.\core.$lt$src/nanoV/core.v:139$627: $auto$alumacc.cc:485:replace_alu$1635
+  creating $alu cell for $flatten\nano.$lt$src/nanoV/cpu_external.v:280$340: $auto$alumacc.cc:485:replace_alu$1646
+  creating $alu cell for $flatten\nano.$gt$src/nanoV/cpu_external.v:246$310: $auto$alumacc.cc:485:replace_alu$1651
+  creating $alu cell for $flatten\nano.$ge$src/nanoV/cpu_external.v:161$254: $auto$alumacc.cc:485:replace_alu$1656
+  creating $alu cell for $flatten\nano.$add$src/nanoV/cpu_external.v:161$253: $auto$alumacc.cc:485:replace_alu$1669
+  creating $alu cell for $flatten\nano.$add$src/nanoV/cpu_external.v:170$268: $auto$alumacc.cc:485:replace_alu$1672
+  creating $alu cell for $flatten\nano.$add$src/nanoV/cpu_external.v:225$282: $auto$alumacc.cc:485:replace_alu$1675
+  creating $alu cell for $flatten\nano.$add$src/nanoV/cpu_external.v:292$342: $auto$alumacc.cc:485:replace_alu$1678
+  creating $alu cell for $flatten\nano.\spi_engine.$sub$src/nanoV/register_spi.v:58$420, $flatten\nano.\spi_engine.$eq$src/nanoV/register_spi.v:98$445: $auto$alumacc.cc:485:replace_alu$1681
+  creating $alu cell for $flatten\nano.\core.\alu.$add$src/nanoV/alu.v:25$12: $auto$alumacc.cc:485:replace_alu$1686
+  creating $alu cell for $flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:50$415: $auto$alumacc.cc:485:replace_alu$1689
+  creating $alu cell for $flatten\nano.\core.\shifter.$add$src/nanoV/shift.v:22$542: $auto$alumacc.cc:485:replace_alu$1692
+  creating $alu cell for $flatten\nano.\spi_engine.$add$src/nanoV/register_spi.v:102$446: $auto$alumacc.cc:485:replace_alu$1695
+  created 15 $alu and 0 $macc cells.
+
+11.13. Executing SHARE pass (SAT-based resource sharing).
+
+11.14. Executing OPT pass (performing simple optimizations).
+
+11.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~2 debug messages>
+
+11.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~42 debug messages>
+
+11.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:266:slice$1558 ($dffe) from module tt_um_WaiMingLee888_nanov_1tile (D = { $procmux$1256_Y [26] $procmux$1256_Y [18] $procmux$1256_Y [10] }, Q = { \nano.staging.rs1_ring [28] \nano.staging.rs1_ring [20] \nano.staging.rs1_ring [12] }, rval = 3'000).
+Adding SRST signal on $auto$ff.cc:266:slice$1555 ($dffe) from module tt_um_WaiMingLee888_nanov_1tile (D = { $procmux$1256_Y [29:27] $procmux$1256_Y [25:19] $procmux$1256_Y [17:11] $procmux$1256_Y [9:7] $procmux$1276_Y }, Q = { \nano.staging.rs1_ring [31:29] \nano.staging.rs1_ring [27:21] \nano.staging.rs1_ring [19:13] \nano.staging.rs1_ring [11:9] \nano.staging.rs1_ring [0] }, rval = 21'000000000000000000000).
+Adding SRST signal on $auto$ff.cc:266:slice$1548 ($dffe) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1307_Y [28], Q = \nano.staging.rs2_ring [28], rval = 1'0).
+Adding SRST signal on $auto$ff.cc:266:slice$1545 ($dffe) from module tt_um_WaiMingLee888_nanov_1tile (D = { $procmux$1307_Y [31:29] $procmux$1307_Y [27:24] $procmux$1307_Y [0] }, Q = { \nano.staging.rs2_ring [31:29] \nano.staging.rs2_ring [27:24] \nano.staging.rs2_ring [0] }, rval = 8'00000000).
+
+11.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 3 unused cells and 10 unused wires.
+<suppressed ~4 debug messages>
+
+11.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~44 debug messages>
+
+11.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.14.16. Finished OPT passes. (There is nothing left to do.)
+
+11.15. Executing MEMORY pass.
+
+11.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+11.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+11.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+11.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+11.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+11.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+11.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+11.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+11.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.17. Executing OPT pass (performing simple optimizations).
+
+11.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~43 debug messages>
+
+11.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~11 debug messages>
+Removed a total of 3 cells.
+
+11.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $auto$ff.cc:266:slice$1587 ($sdff) from module tt_um_WaiMingLee888_nanov_1tile (D = $procmux$1065_Y [1:0], Q = \nano.pc [1:0]).
+
+11.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 1 unused cells and 30 unused wires.
+<suppressed ~2 debug messages>
+
+11.17.5. Rerunning OPT passes. (Removed registers in this run.)
+
+11.17.6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.17.7. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.17.8. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.17.10. Finished fast OPT passes.
+
+11.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+11.19. Executing OPT pass (performing simple optimizations).
+
+11.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~37 debug messages>
+
+11.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+    Consolidated identical input bits for $mux cell $flatten\nano.$ternary$src/nanoV/cpu_external.v:113$223:
+      Old ports: A={ \nano.staging.rs1_ring [0] \nano.staging.rs1_ring [31:1] }, B={ 16'0000000000000000 \nano.staging.rs1_ring [16:1] }, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:113$223_Y
+      New ports: A={ \nano.staging.rs1_ring [0] \nano.staging.rs1_ring [31:17] }, B=16'0000000000000000, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:113$223_Y [31:16]
+      New connections: $flatten\nano.$ternary$src/nanoV/cpu_external.v:113$223_Y [15:0] = \nano.staging.rs1_ring [16:1]
+    Consolidated identical input bits for $mux cell $flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:68$432:
+      Old ports: A=5'11111, B=5'01111, Y=$flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:68$432_Y
+      New ports: A=1'1, B=1'0, Y=$flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:68$432_Y [4]
+      New connections: $flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:68$432_Y [3:0] = 4'1111
+    Consolidated identical input bits for $mux cell $procmux$1247:
+      Old ports: A={ \nano.staging.rs1_ring [0] \nano.staging.rs1_ring [31:3] }, B={ \buffered_spi_in \nano.staging.rs1_ring [31:3] }, Y=$procmux$1247_Y
+      New ports: A=\nano.staging.rs1_ring [0], B=\buffered_spi_in, Y=$procmux$1247_Y [29]
+      New connections: $procmux$1247_Y [28:0] = \nano.staging.rs1_ring [31:3]
+    Consolidated identical input bits for $mux cell $procmux$1304:
+      Old ports: A={ \nano.staging.rs2_ring [0] \nano.staging.rs2_ring [31:1] }, B={ \buffered_spi_in \nano.staging.rs2_ring [31:1] }, Y=$procmux$1304_Y
+      New ports: A=\nano.staging.rs2_ring [0], B=\buffered_spi_in, Y=$procmux$1304_Y [31]
+      New connections: $procmux$1304_Y [30:0] = \nano.staging.rs2_ring [31:1]
+    Consolidated identical input bits for $mux cell $procmux$995:
+      Old ports: A={ \buffered_spi_in \nano.instruction [31:1] }, B={ \nano.instruction [24] \nano.instruction [25] \nano.instruction [26] \nano.instruction [27] \nano.instruction [28] \nano.instruction [29] \nano.instruction [30] \nano.instruction [31] \nano.instruction [16] \nano.instruction [17] \nano.instruction [18] \nano.instruction [19] \nano.instruction [20] \nano.instruction [21] \nano.instruction [22] \nano.instruction [23] \nano.instruction [8] \nano.instruction [9] \nano.instruction [10] \nano.instruction [11] \nano.instruction [12] \nano.instruction [13] \nano.instruction [14] \nano.instruction [15] \nano.instruction [0] \nano.instruction [1] \nano.instruction [2] \nano.instruction [3] \nano.instruction [4] \nano.instruction [5] \nano.instruction [6] \nano.instruction [7] }, Y=$procmux$995_Y
+      New ports: A={ \buffered_spi_in \nano.instruction [31:29] \nano.instruction [27:21] \nano.instruction [19:13] \nano.instruction [11:5] \nano.instruction [3:1] }, B={ \nano.instruction [24] \nano.instruction [25] \nano.instruction [26] \nano.instruction [27] \nano.instruction [29] \nano.instruction [30] \nano.instruction [31] \nano.instruction [16] \nano.instruction [17] \nano.instruction [18] \nano.instruction [19] \nano.instruction [21] \nano.instruction [22] \nano.instruction [23] \nano.instruction [8] \nano.instruction [9] \nano.instruction [10] \nano.instruction [11] \nano.instruction [13] \nano.instruction [14] \nano.instruction [15] \nano.instruction [0] \nano.instruction [1] \nano.instruction [2] \nano.instruction [3] \nano.instruction [5] \nano.instruction [6] \nano.instruction [7] }, Y={ $procmux$995_Y [31:28] $procmux$995_Y [26:20] $procmux$995_Y [18:12] $procmux$995_Y [10:4] $procmux$995_Y [2:0] }
+      New connections: { $procmux$995_Y [27] $procmux$995_Y [19] $procmux$995_Y [11] $procmux$995_Y [3] } = { \nano.instruction [28] \nano.instruction [20] \nano.instruction [12] \nano.instruction [4] }
+    Consolidated identical input bits for $mux cell $ternary$src/tt_top.v:37$3:
+      Old ports: A=8'00000000, B=8'10000111, Y=\uio_oe
+      New ports: A=1'0, B=1'1, Y=\uio_oe [0]
+      New connections: \uio_oe [7:1] = { \uio_oe [0] 4'0000 \uio_oe [0] \uio_oe [0] }
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+    Consolidated identical input bits for $mux cell $flatten\nano.$ternary$src/nanoV/cpu_external.v:111$224:
+      Old ports: A=$flatten\nano.$ternary$src/nanoV/cpu_external.v:113$223_Y, B={ 24'000000000000000000000000 \nano.staging.rs1_ring [8:1] }, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:111$224_Y
+      New ports: A={ $flatten\nano.$ternary$src/nanoV/cpu_external.v:113$223_Y [31:16] \nano.staging.rs1_ring [16:9] }, B=24'000000000000000000000000, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:111$224_Y [31:8]
+      New connections: $flatten\nano.$ternary$src/nanoV/cpu_external.v:111$224_Y [7:0] = \nano.staging.rs1_ring [8:1]
+    Consolidated identical input bits for $mux cell $flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:67$433:
+      Old ports: A=$flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:68$432_Y, B=5'00111, Y=\nano.spi_engine.final_data_bit
+      New ports: A={ $flatten\nano.\spi_engine.$ternary$src/nanoV/register_spi.v:68$432_Y [4] 1'1 }, B=2'00, Y=\nano.spi_engine.final_data_bit [4:3]
+      New connections: \nano.spi_engine.final_data_bit [2:0] = 3'111
+    Consolidated identical input bits for $mux cell $procmux$1250:
+      Old ports: A=$procmux$1247_Y, B={ \buffered_spi_in \nano.staging.rs1_ring [31:3] }, Y=$procmux$1250_Y
+      New ports: A=$procmux$1247_Y [29], B=\buffered_spi_in, Y=$procmux$1250_Y [29]
+      New connections: $procmux$1250_Y [28:0] = \nano.staging.rs1_ring [31:3]
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+    Consolidated identical input bits for $mux cell $flatten\nano.$ternary$src/nanoV/cpu_external.v:109$225:
+      Old ports: A=$flatten\nano.$ternary$src/nanoV/cpu_external.v:111$224_Y, B={ \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16:1] }, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:109$225_Y
+      New ports: A=$flatten\nano.$ternary$src/nanoV/cpu_external.v:111$224_Y [31:8], B={ \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16] \nano.staging.rs1_ring [16:9] }, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:109$225_Y [31:8]
+      New connections: $flatten\nano.$ternary$src/nanoV/cpu_external.v:109$225_Y [7:0] = \nano.staging.rs1_ring [8:1]
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+    Consolidated identical input bits for $mux cell $flatten\nano.$ternary$src/nanoV/cpu_external.v:107$226:
+      Old ports: A=$flatten\nano.$ternary$src/nanoV/cpu_external.v:109$225_Y, B={ \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8:1] }, Y=\nano.load_value
+      New ports: A=$flatten\nano.$ternary$src/nanoV/cpu_external.v:109$225_Y [31:8], B={ \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] \nano.staging.rs1_ring [8] }, Y=\nano.load_value [31:8]
+      New connections: \nano.load_value [7:0] = \nano.staging.rs1_ring [8:1]
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+    Consolidated identical input bits for $mux cell $flatten\nano.$ternary$src/nanoV/cpu_external.v:138$236:
+      Old ports: A={ \nano.staging.rs1_ring [0] \nano.staging.rs1_ring [31:1] }, B=\nano.load_value, Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:138$236_Y
+      New ports: A={ \nano.staging.rs1_ring [0] \nano.staging.rs1_ring [31:9] }, B=\nano.load_value [31:8], Y=$flatten\nano.$ternary$src/nanoV/cpu_external.v:138$236_Y [31:8]
+      New connections: $flatten\nano.$ternary$src/nanoV/cpu_external.v:138$236_Y [7:0] = \nano.staging.rs1_ring [8:1]
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 12 changes.
+
+11.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.19.6. Executing OPT_SHARE pass.
+
+11.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~2 debug messages>
+
+11.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_WaiMingLee888_nanov_1tile..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~36 debug messages>
+
+11.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_WaiMingLee888_nanov_1tile.
+Performed a total of 0 changes.
+
+11.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+Removed a total of 0 cells.
+
+11.19.14. Executing OPT_SHARE pass.
+
+11.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+
+11.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+
+11.19.18. Finished OPT passes. (There is nothing left to do.)
+
+11.20. Executing TECHMAP pass (map to technology primitives).
+
+11.20.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+11.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$79fc7abbb3333dbd5736999d565fd903198fb1eb\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $sdffce.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $sdff.
+Using template $paramod$1d1e68f77481583066c6d429218f48ea9d5739b3\_90_alu for cells of type $alu.
+Using template $paramod$b3b6ac92d800c6f07aa48f510f923d86a674e5a7\_90_pmux for cells of type $pmux.
+Using template $paramod$4e99ce8f3ff8355c2fa6eaa8d174fb317480c146\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$constmap:09e8cffe755c4655b20709a667f3c8a396cf4419$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Bit 12 of port A and bit 11 of port A are connected.
+  Bit 13 of port A and bit 11 of port A are connected.
+  Bit 14 of port A and bit 11 of port A are connected.
+  Bit 15 of port A and bit 11 of port A are connected.
+  Bit 16 of port A and bit 11 of port A are connected.
+  Bit 17 of port A and bit 11 of port A are connected.
+  Bit 18 of port A and bit 11 of port A are connected.
+  Bit 19 of port A and bit 11 of port A are connected.
+  Bit 20 of port A and bit 11 of port A are connected.
+  Bit 21 of port A and bit 11 of port A are connected.
+  Bit 22 of port A and bit 11 of port A are connected.
+  Bit 23 of port A and bit 11 of port A are connected.
+  Bit 24 of port A and bit 11 of port A are connected.
+  Bit 25 of port A and bit 11 of port A are connected.
+  Bit 26 of port A and bit 11 of port A are connected.
+  Bit 27 of port A and bit 11 of port A are connected.
+  Bit 28 of port A and bit 11 of port A are connected.
+  Bit 29 of port A and bit 11 of port A are connected.
+  Bit 30 of port A and bit 11 of port A are connected.
+  Bit 31 of port A and bit 11 of port A are connected.
+Creating constmapped module `$paramod$constmap:ba1700f3340aeadd21b29242e4780c97fbddd699$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx'.
+
+11.20.16. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:ba1700f3340aeadd21b29242e4780c97fbddd699$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$2970.
+    dead port 2/2 on $mux $procmux$2964.
+    dead port 2/2 on $mux $procmux$2958.
+    dead port 2/2 on $mux $procmux$2952.
+    dead port 2/2 on $mux $procmux$2946.
+Removed 5 multiplexer ports.
+<suppressed ~495 debug messages>
+
+11.20.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:ba1700f3340aeadd21b29242e4780c97fbddd699$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 11 unused wires.
+Using template $paramod$constmap:ba1700f3340aeadd21b29242e4780c97fbddd699$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Bit 13 of port A and bit 12 of port A are connected.
+  Bit 14 of port A and bit 12 of port A are connected.
+  Bit 15 of port A and bit 12 of port A are connected.
+  Bit 16 of port A and bit 12 of port A are connected.
+  Bit 17 of port A and bit 12 of port A are connected.
+  Bit 18 of port A and bit 12 of port A are connected.
+  Bit 19 of port A and bit 12 of port A are connected.
+  Bit 20 of port A and bit 12 of port A are connected.
+  Bit 21 of port A and bit 12 of port A are connected.
+  Bit 22 of port A and bit 12 of port A are connected.
+  Bit 23 of port A and bit 12 of port A are connected.
+  Bit 24 of port A and bit 12 of port A are connected.
+  Bit 25 of port A and bit 12 of port A are connected.
+  Bit 26 of port A and bit 12 of port A are connected.
+  Bit 27 of port A and bit 12 of port A are connected.
+  Bit 28 of port A and bit 12 of port A are connected.
+  Bit 29 of port A and bit 12 of port A are connected.
+  Bit 30 of port A and bit 12 of port A are connected.
+  Bit 31 of port A and bit 12 of port A are connected.
+Creating constmapped module `$paramod$constmap:bfe5dce9e0f4c5e2266292dcb8ec2c739cb552b3$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx'.
+
+11.20.18. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:bfe5dce9e0f4c5e2266292dcb8ec2c739cb552b3$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$2970.
+    dead port 2/2 on $mux $procmux$2964.
+    dead port 2/2 on $mux $procmux$2958.
+    dead port 2/2 on $mux $procmux$2952.
+    dead port 2/2 on $mux $procmux$2946.
+Removed 5 multiplexer ports.
+<suppressed ~14 debug messages>
+
+11.20.19. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:bfe5dce9e0f4c5e2266292dcb8ec2c739cb552b3$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 11 unused wires.
+Using template $paramod$constmap:bfe5dce9e0f4c5e2266292dcb8ec2c739cb552b3$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'0
+Creating constmapped module `$paramod$constmap:0a7d3e565dd5506d8282ab0bde3636f22c7bf390$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx'.
+
+11.20.20. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:0a7d3e565dd5506d8282ab0bde3636f22c7bf390$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$2970.
+    dead port 2/2 on $mux $procmux$2964.
+    dead port 2/2 on $mux $procmux$2958.
+    dead port 2/2 on $mux $procmux$2952.
+    dead port 2/2 on $mux $procmux$2946.
+Removed 5 multiplexer ports.
+<suppressed ~11 debug messages>
+
+11.20.21. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:0a7d3e565dd5506d8282ab0bde3636f22c7bf390$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 11 unused wires.
+Using template $paramod$constmap:0a7d3e565dd5506d8282ab0bde3636f22c7bf390$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using template $paramod$78e969f2586efcf3a5b0b0440bcca0db83d5cca2\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod$f85408ed1aa3d09e465edae8a7bf590332ae9f7b\_90_alu for cells of type $alu.
+Analyzing pattern of constant bits for this cell:
+Creating constmapped module `$paramod$constmap:e2101c44e3f83a0dc2da774cd1fdd19ff2da5f4f$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx'.
+
+11.20.28. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:e2101c44e3f83a0dc2da774cd1fdd19ff2da5f4f$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$2970.
+    dead port 2/2 on $mux $procmux$2964.
+    dead port 2/2 on $mux $procmux$2958.
+    dead port 2/2 on $mux $procmux$2952.
+    dead port 2/2 on $mux $procmux$2946.
+Removed 5 multiplexer ports.
+<suppressed ~145 debug messages>
+
+11.20.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:e2101c44e3f83a0dc2da774cd1fdd19ff2da5f4f$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 11 unused wires.
+Using template $paramod$constmap:e2101c44e3f83a0dc2da774cd1fdd19ff2da5f4f$paramod$e194a9e890de0a7be18db8bd15a1479dea055e42\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using template $paramod$constmap:aa5e4e4bbbc786b673e61988dc985d7d0b46e7da$paramod$00907cac109f586baf7e00101cd19918c729f0d4\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$1a3a0c35c4a4896fbfd612699525c057298e72d2\_90_alu for cells of type $alu.
+Using template $paramod$b18e16801adf491a64caa0542270798e5d4ac6b6\_90_alu for cells of type $alu.
+Using template $paramod$ce0ec84be7047712840b0952f343ee9e63ef75d1\_90_alu for cells of type $alu.
+Using template $paramod$dda8c3c4c16f48e814635535d33f1885d9d0fd30\_90_alu for cells of type $alu.
+Using template $paramod$e04283ca12514baf3d204c6994bec8f178dd89f8\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010100 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1647 debug messages>
+
+11.21. Executing OPT pass (performing simple optimizations).
+
+11.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~1646 debug messages>
+
+11.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~1377 debug messages>
+Removed a total of 459 cells.
+
+11.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 777 unused cells and 907 unused wires.
+<suppressed ~778 debug messages>
+
+11.21.5. Finished fast OPT passes.
+
+11.22. Executing ABC pass (technology mapping using ABC).
+
+11.22.1. Extracting gate netlist of module `\tt_um_WaiMingLee888_nanov_1tile' to `<abc-temp-dir>/input.blif'..
+Replacing 18 occurrences of constant undef bits with constant zero bits
+Extracted 1665 gates and 1867 wires to a netlist network with 199 inputs and 204 outputs.
+
+11.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+11.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               XOR cells:       46
+ABC RESULTS:              XNOR cells:        8
+ABC RESULTS:               NOR cells:       32
+ABC RESULTS:               NOT cells:      201
+ABC RESULTS:                OR cells:      334
+ABC RESULTS:               MUX cells:      743
+ABC RESULTS:              NAND cells:       40
+ABC RESULTS:             ORNOT cells:       38
+ABC RESULTS:            ANDNOT cells:      256
+ABC RESULTS:               AND cells:       34
+ABC RESULTS:        internal signals:     1464
+ABC RESULTS:           input signals:      199
+ABC RESULTS:          output signals:      204
+Removing temp directory.
+
+11.23. Executing OPT pass (performing simple optimizations).
+
+11.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_WaiMingLee888_nanov_1tile.
+<suppressed ~177 debug messages>
+
+11.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_WaiMingLee888_nanov_1tile'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+11.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_WaiMingLee888_nanov_1tile..
+Removed 5 unused cells and 867 unused wires.
+<suppressed ~111 debug messages>
+
+11.23.5. Finished fast OPT passes.
+
+11.24. Executing HIERARCHY pass (managing design hierarchy).
+
+11.24.1. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+
+11.24.2. Analyzing design hierarchy..
+Top module:  \tt_um_WaiMingLee888_nanov_1tile
+Removed 0 unused modules.
+
+11.25. Printing statistics.
+
+=== tt_um_WaiMingLee888_nanov_1tile ===
+
+   Number of wires:               1811
+   Number of wire bits:           2959
+   Number of public wires:         121
+   Number of public wire bits:    1248
+   Number of ports:                  8
+   Number of port bits:             43
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1927
+     $_ANDNOT_                     256
+     $_AND_                         32
+     $_DFFE_PP_                     69
+     $_DFF_N_                        1
+     $_DFF_P_                       17
+     $_MUX_                        743
+     $_NAND_                        40
+     $_NOR_                         32
+     $_NOT_                        196
+     $_ORNOT_                       38
+     $_OR_                         334
+     $_SDFFCE_PP0P_                 33
+     $_SDFFE_PN0P_                  53
+     $_SDFFE_PN1P_                   4
+     $_SDFF_PN0_                    20
+     $_XNOR_                         7
+     $_XOR_                         46
+     $scopeinfo                      6
+
+11.26. Executing CHECK pass (checking for obvious problems).
+Checking module tt_um_WaiMingLee888_nanov_1tile...
+Found and reported 0 problems.
+
+12. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_2 (noninv, pins=3, area=21.27) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__dfbbn_2 (noninv, pins=6, area=35.03) is a direct match for cell type $_DFFSR_NNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_2 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_2 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    \sky130_fd_sc_hd__dfbbn_2 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+12.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\tt_um_WaiMingLee888_nanov_1tile':
+  mapped 197 $_DFF_P_ cells to \sky130_fd_sc_hd__dfxtp_2 cells.
+
+13. Executing ABC pass (technology mapping using ABC).
+
+13.1. Extracting gate netlist of module `\tt_um_WaiMingLee888_nanov_1tile' to `<abc-temp-dir>/input.blif'..
+Extracted 1994 gates and 2203 wires to a netlist network with 207 inputs and 199 outputs.
+
+13.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/ai/ttsetup/gds-run-33257620930/runs/wokwi/tmp/f86ce36cc21f4640a293ca28932ff2d5.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.04 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/home/ai/ttsetup/gds-run-33257620930/runs/wokwi/tmp/f86ce36cc21f4640a293ca28932ff2d5.lib" has 175 cells (17 skipped: 14 seq; 3 tri-state; 0 no func; 0 dont_use).  Time =     0.06 sec
+ABC: Memory =    9.54 MB. Time =     0.06 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+13.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__nor4_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o32a_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o311a_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor3_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__or4_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__a21bo_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a311o_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a2111o_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__nand3_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__mux4_2 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__and3b_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__or4b_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o41a_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o22a_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__and4_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o2111a_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a41o_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__xor2_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__and2b_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_2 cells:       18
+ABC RESULTS:   sky130_fd_sc_hd__and4bb_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__nand4_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__or3b_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o31a_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2a_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_2 cells:       21
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__or2_2 cells:       81
+ABC RESULTS:   sky130_fd_sc_hd__nand2_2 cells:       50
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2o_2 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__o21a_2 cells:       37
+ABC RESULTS:   sky130_fd_sc_hd__and3_2 cells:       33
+ABC RESULTS:   sky130_fd_sc_hd__a221o_2 cells:       47
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__and4b_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__a21o_2 cells:       55
+ABC RESULTS:   sky130_fd_sc_hd__or3_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o211a_2 cells:       84
+ABC RESULTS:   sky130_fd_sc_hd__a211o_2 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__o221a_2 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__and2_2 cells:       31
+ABC RESULTS:   sky130_fd_sc_hd__a31o_2 cells:       22
+ABC RESULTS:   sky130_fd_sc_hd__a22o_2 cells:       52
+ABC RESULTS:   sky130_fd_sc_hd__mux2_1 cells:      244
+ABC RESULTS:   sky130_fd_sc_hd__nor2_2 cells:       81
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_2 cells:       32
+ABC RESULTS:   sky130_fd_sc_hd__a32o_2 cells:       18
+ABC RESULTS:   sky130_fd_sc_hd__inv_2 cells:       45
+ABC RESULTS:        internal signals:     1797
+ABC RESULTS:           input signals:      207
+ABC RESULTS:          output signals:      199
+Removing temp directory.
+
+14. Printing statistics.
+
+=== tt_um_WaiMingLee888_nanov_1tile ===
+
+   Number of wires:               3403
+   Number of wire bits:           4551
+   Number of public wires:         121
+   Number of public wire bits:    1248
+   Number of ports:                  8
+   Number of port bits:             43
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1318
+     $scopeinfo                      6
+     sky130_fd_sc_hd__a2111o_2       3
+     sky130_fd_sc_hd__a211o_2       14
+     sky130_fd_sc_hd__a211oi_2       4
+     sky130_fd_sc_hd__a21bo_2        1
+     sky130_fd_sc_hd__a21boi_2       1
+     sky130_fd_sc_hd__a21o_2        55
+     sky130_fd_sc_hd__a21oi_2       32
+     sky130_fd_sc_hd__a221o_2       47
+     sky130_fd_sc_hd__a22o_2        52
+     sky130_fd_sc_hd__a22oi_2        1
+     sky130_fd_sc_hd__a2bb2o_2      12
+     sky130_fd_sc_hd__a311o_2        4
+     sky130_fd_sc_hd__a31o_2        22
+     sky130_fd_sc_hd__a31oi_2        2
+     sky130_fd_sc_hd__a32o_2        18
+     sky130_fd_sc_hd__a41o_2         5
+     sky130_fd_sc_hd__and2_2        31
+     sky130_fd_sc_hd__and2b_2        7
+     sky130_fd_sc_hd__and3_2        33
+     sky130_fd_sc_hd__and3b_2        9
+     sky130_fd_sc_hd__and4_2         4
+     sky130_fd_sc_hd__and4b_2        7
+     sky130_fd_sc_hd__and4bb_2       3
+     sky130_fd_sc_hd__dfxtp_2      197
+     sky130_fd_sc_hd__inv_2         45
+     sky130_fd_sc_hd__mux2_1       244
+     sky130_fd_sc_hd__mux4_2        12
+     sky130_fd_sc_hd__nand2_2       50
+     sky130_fd_sc_hd__nand2b_2       4
+     sky130_fd_sc_hd__nand3_2        2
+     sky130_fd_sc_hd__nand3b_2       3
+     sky130_fd_sc_hd__nand4_2        1
+     sky130_fd_sc_hd__nor2_2        81
+     sky130_fd_sc_hd__nor3_2         2
+     sky130_fd_sc_hd__nor3b_2        1
+     sky130_fd_sc_hd__nor4_2         1
+     sky130_fd_sc_hd__o2111a_2       3
+     sky130_fd_sc_hd__o211a_2       84
+     sky130_fd_sc_hd__o211ai_2       3
+     sky130_fd_sc_hd__o21a_2        37
+     sky130_fd_sc_hd__o21ai_2       21
+     sky130_fd_sc_hd__o21ba_2        1
+     sky130_fd_sc_hd__o221a_2        8
+     sky130_fd_sc_hd__o22a_2         5
+     sky130_fd_sc_hd__o2bb2a_2       3
+     sky130_fd_sc_hd__o311a_2        2
+     sky130_fd_sc_hd__o31a_2         6
+     sky130_fd_sc_hd__o32a_2         2
+     sky130_fd_sc_hd__o41a_2         2
+     sky130_fd_sc_hd__or2_2         81
+     sky130_fd_sc_hd__or3_2          7
+     sky130_fd_sc_hd__or3b_2         6
+     sky130_fd_sc_hd__or4_2          5
+     sky130_fd_sc_hd__or4b_2         4
+     sky130_fd_sc_hd__xnor2_2       18
+     sky130_fd_sc_hd__xor2_2         4
+
+   Area for cell type $scopeinfo is unknown!
+
+   Chip area for module '\tt_um_WaiMingLee888_nanov_1tile': 14652.803200
+     of which used for sequential elements: 4190.268800 (28.60%)
+
+Warnings: 1 unique messages, 2 total
+End of script. Logfile hash: ec8bc47f6a, CPU: user 0.78s system 0.06s, MEM: 38.42 MB peak
+Yosys 0.45+106 (git sha1 dcf9f5831, g++ 9.5.0-1ubuntu1~22.04 -fPIC -O3)
+Time spent: 38% 2x abc (0 sec), 12% 41x opt_expr (0 sec), ...

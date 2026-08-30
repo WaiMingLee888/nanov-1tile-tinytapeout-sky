@@ -60,6 +60,7 @@ module nanoV_external_core_harness (
     ) core (
         .clk(clk),
         .rstn(rstn),
+        .execute_enable(execute),
         .next_instr(instruction_latched[30:2]),
         .instr(instruction_latched[31:2]),
         .cycle(3'd0),

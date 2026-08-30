@@ -61,7 +61,7 @@ def main() -> None:
     config = (ROOT / "src" / "config.json").read_text(encoding="utf-8")
     top = (ROOT / "src" / "tt_top.v").read_text(encoding="utf-8")
     core = (ROOT / "src" / "nanoV" / "core.v").read_text(encoding="utf-8")
-    cpu = (ROOT / "src" / "nanoV" / "cpu.v").read_text(encoding="utf-8")
+    cpu = (ROOT / "src" / "nanoV" / "cpu_external.v").read_text(encoding="utf-8")
     makefile = (ROOT / "test" / "Makefile").read_text(encoding="utf-8")
 
     require(r'^\s*tiles:\s*"1x1"\s*$', info, "1x1 footprint")
@@ -71,11 +71,13 @@ def main() -> None:
         "one-tile top-module metadata",
     )
     require(r'module\s+tt_um_WaiMingLee888_nanov_1tile\s*\(', top, "one-tile RTL top")
-    require(r'nanoV_cpu\s*#\s*\(\s*\.NUM_REGS\s*\(\s*16\s*\)', top, "16-register CPU")
+    require(r'nanoV_cpu_external\s+nano\s*\(', top, "external-register CPU")
     require(r'parameter\s+NUM_REGS\s*=\s*16', core, "16-register core default")
-    require(r'parameter\s+NUM_REGS\s*=\s*16', cpu, "16-register CPU default")
+    require(r'\.NUM_REGS\s*\(\s*16\s*\)', cpu, "16-register RV32E core instance")
+    require(r'rd\s*!=\s*0\s*&&\s*rd\s*!=\s*3\s*&&\s*rd\s*!=\s*4', cpu,
+            "writable external RV32E register namespace")
     require(r'wire\s+is_mul\s*=\s*1\'b0\s*;', core, "disabled optional multiplier")
-    require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*80', config, "initial 80% placement target")
+    require(r'"PL_TARGET_DENSITY_PCT"\s*:\s*92', config, "measured 92% placement target")
     require(r'"RUN_LINTER"\s*:\s*1', config, "enabled RTL linter")
     require(r'"RUN_CTS"\s*:\s*1', config, "enabled clock-tree synthesis")
 

@@ -22,6 +22,8 @@ module external_register_tb;
     wire data_rs2;
     wire [31:0] write_word;
     wire write_required;
+    wire [31:0] rs1_value;
+    wire [31:0] rs2_value;
 
     reg [31:0] expected_rs1 = 32'h89abcdef;
     reg [31:0] expected_rs2 = 32'h13579bdf;
@@ -41,6 +43,8 @@ module external_register_tb;
         .normalize_sources(1'b0),
         .serial_bit(1'b0),
         .rotate(rotate),
+        .capture_writeback(1'b0),
+        .load_writeback(1'b0),
         .wr_en(wr_en),
         .wr_next_en(wr_next_en),
         .read_through(read_through),
@@ -55,7 +59,9 @@ module external_register_tb;
         .data_rd(data_rd),
         .data_rd_next(data_rd_next),
         .write_word(write_word),
-        .write_required(write_required)
+        .write_required(write_required),
+        .rs1_value(rs1_value),
+        .rs2_value(rs2_value)
     );
 
     initial begin

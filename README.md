@@ -19,9 +19,10 @@ datapath operation. See [the architecture contract](docs/ARCHITECTURE.md).
 
 ## Status
 
-**Experimental, not signed off.** Declaring `tiles: "1x1"` is only a floorplan
-request. This project is not tapeout-ready until the exact proposed commit
-passes RTL regression, synthesis, 1x1 placement and routing, extracted
+**Experimental, not signed off.** The external-register candidate passes both
+the 97-word self-check and compiler-generated C firmware. Its complete SKY130
+wrapper maps to 14,652.8032 um^2, but mapping is not placement. This project is
+not tapeout-ready until the exact proposed commit passes 1x1 placement and routing, extracted
 multi-corner setup and hold timing, DRC, LVS, antenna, gate-level regression,
 and Tiny Tapeout precheck.
 

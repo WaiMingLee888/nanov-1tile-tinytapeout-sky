@@ -63,6 +63,8 @@ module nanoV_external_register_subsystem (
         rd_latched;
 
     wire [31:0] write_word;
+    wire [31:0] unused_rs1_value;
+    wire [31:0] unused_rs2_value;
     wire write_required;
     wire [31:0] unused_read_word;
     wire engine_read_bit;
@@ -85,7 +87,10 @@ module nanoV_external_register_subsystem (
         .spi_data_in(spi_data_in),
         .spi_select(spi_select),
         .spi_out(spi_out),
-        .spi_clk_enable(spi_clk_enable)
+        .spi_clk_enable(spi_clk_enable),
+        .direct_address_enable(1'b0),
+        .direct_address(24'b0),
+        .transfer_size(2'd2)
     );
 
     nanoV_external_registers staging (
@@ -99,6 +104,8 @@ module nanoV_external_register_subsystem (
         .normalize_sources(state == STATE_NORMALIZE),
         .serial_bit(engine_read_bit),
         .rotate(execute),
+        .capture_writeback(1'b0),
+        .load_writeback(1'b0),
         .wr_en(wr_en),
         .wr_next_en(wr_next_en),
         .read_through(read_through),
@@ -113,7 +120,9 @@ module nanoV_external_register_subsystem (
         .data_rd(data_rd),
         .data_rd_next(data_rd_next),
         .write_word(write_word),
-        .write_required(write_required)
+        .write_required(write_required),
+        .rs1_value(unused_rs1_value),
+        .rs2_value(unused_rs2_value)
     );
 
     assign transaction_busy = state != STATE_IDLE || engine_busy;
