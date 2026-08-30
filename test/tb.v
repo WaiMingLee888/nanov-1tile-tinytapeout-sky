@@ -69,7 +69,7 @@ end
     );
 
     defparam spi_ram.INIT_FILE = `PROG_FILE;
-    defparam spi_ram.INIT_WORDS = 97;
+    defparam spi_ram.INIT_WORDS = `PROG_WORDS;
 
 endmodule
 

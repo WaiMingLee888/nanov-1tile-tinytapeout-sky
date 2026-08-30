@@ -13,4 +13,6 @@ test/results.xml
 test/gate_level_netlist.v
 .venv/
 __pycache__/
+/firmware/build/
 /tt/
+/.artifacts/

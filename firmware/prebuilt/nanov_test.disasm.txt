@@ -1,0 +1,57 @@
+
+build/nanov_test.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00010137          	lui	sp,0x10
+   4:	00000097          	auipc	ra,0x0
+   8:	00c080e7          	jalr	12(ra) # 10 <main>
+   c:	0000006f          	j	c <_start+0xc>
+
+00000010 <main>:
+  10:	10000737          	lui	a4,0x10000
+  14:	00100793          	li	a5,1
+  18:	00f72023          	sw	a5,0(a4) # 10000000 <__scratch+0xffff800>
+  1c:	00472583          	lw	a1,4(a4)
+  20:	000066b7          	lui	a3,0x6
+  24:	aa568693          	add	a3,a3,-1371 # 5aa5 <__scratch+0x52a5>
+  28:	0ff5f593          	zext.b	a1,a1
+  2c:	00859793          	sll	a5,a1,0x8
+  30:	00001637          	lui	a2,0x1
+  34:	00d7c7b3          	xor	a5,a5,a3
+  38:	23460693          	add	a3,a2,564 # 1234 <__scratch+0xa34>
+  3c:	00d787b3          	add	a5,a5,a3
+  40:	a5a56537          	lui	a0,0xa5a56
+  44:	000016b7          	lui	a3,0x1
+  48:	80068693          	add	a3,a3,-2048 # 800 <__scratch>
+  4c:	a5a50513          	add	a0,a0,-1446 # a5a55a5a <__scratch+0xa5a5525a>
+  50:	00f6a023          	sw	a5,0(a3)
+  54:	00a7c7b3          	xor	a5,a5,a0
+  58:	00f6a223          	sw	a5,4(a3)
+  5c:	05a00793          	li	a5,90
+  60:	00f58a63          	beq	a1,a5,74 <main+0x64>
+  64:	0ee00793          	li	a5,238
+  68:	00f72023          	sw	a5,0(a4)
+  6c:	00000013          	nop
+  70:	ffdff06f          	j	6c <main+0x5c>
+  74:	0006a783          	lw	a5,0(a3)
+  78:	2d960613          	add	a2,a2,729
+  7c:	00c78a63          	beq	a5,a2,90 <main+0x80>
+  80:	0ee00793          	li	a5,238
+  84:	00f72023          	sw	a5,0(a4)
+  88:	00000013          	nop
+  8c:	ffdff06f          	j	88 <main+0x78>
+  90:	0046a683          	lw	a3,4(a3)
+  94:	a5a557b7          	lui	a5,0xa5a55
+  98:	88378793          	add	a5,a5,-1917 # a5a54883 <__scratch+0xa5a54083>
+  9c:	00f68a63          	beq	a3,a5,b0 <main+0xa0>
+  a0:	0ee00793          	li	a5,238
+  a4:	00f72023          	sw	a5,0(a4)
+  a8:	00000013          	nop
+  ac:	ffdff06f          	j	a8 <main+0x98>
+  b0:	0a500793          	li	a5,165
+  b4:	00f72023          	sw	a5,0(a4)
+  b8:	00000013          	nop
+  bc:	ffdff06f          	j	b8 <main+0xa8>

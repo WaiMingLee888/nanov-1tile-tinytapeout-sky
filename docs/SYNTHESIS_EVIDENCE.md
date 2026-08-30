@@ -1,7 +1,8 @@
 # Generic synthesis evidence
 
 Yosys 0.45+106 synthesized both source trees with the same generic `synth`
-flow and hierarchy checking.
+flow and hierarchy checking. The standard SPI instruction-word correction is
+a static bit permutation and left the derivative at exactly 1,728 cells.
 
 | Source | Generic cells | Wire bits |
 | --- | ---: | ---: |
@@ -18,6 +19,6 @@ Artifact SHA-256 values:
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `docs/SYNTH_GENERIC.log` | `04fea0bc25701008f3dc7a31e9288dc091c4179dbcf940c4c2e458502c3f0850` |
-| `docs/SYNTH_GENERIC.json` | `0e42a3ed7eb3265340426722b5050aceca806a666bf55a15d4d64062563cbb5e` |
+| `docs/SYNTH_GENERIC.log` | `ff49cc2ada6f814b00c2ca7c361f81b6b14fe16878d6ee71259208984ee60cd5` |
+| `docs/SYNTH_GENERIC.json` | `a774a2dc800c70db6bcf175c37c6f27e9a94100b088f3f94e085a0f6c436cbc0` |
 | `docs/SYNTH_BASELINE_1X2.log` | `24620af79f9c1912d5379f54a2c8734b1457b5975c7a2c1092e4e56822a58eb1` |

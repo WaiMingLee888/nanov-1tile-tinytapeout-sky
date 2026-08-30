@@ -1,6 +1,6 @@
 # RTL simulation evidence
 
-Run started: 2026-08-30T08:35:30-04:00.
+Run started: 2026-08-30T09:04:59-04:00.
 
 Environment:
 
@@ -24,11 +24,12 @@ Artifact SHA-256 values from the passing run:
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `docs/RTL_TEST_LATEST.log` | `36829c88fc381d343e63d865e54d14800bfd136db846492f823a9a605616092b` |
-| `test/results.xml` | `cb8a8351991ea42f7bd501a21631358652f9e753e61b30e676e198a43a24d947` |
-| `test/test.mem` | `fe0ff6d1e23d4296b8454c219ecf72c1a0027a2c8256f1b034b6a5fa3fa93c85` |
-| `test/sim_build/rtl/sim.vvp` | `4b8e53c90fd3c491686eecf47919c92b27c5d92d5b962279c159e7751a648b68` |
-| `test/tb.fst` | `8238dd1411c6ab7f81d02ce148dbe0e278eb68d63d35d125f01477b7dc0eb2c2` |
+| `docs/RTL_TEST_LATEST.log` | `7e86c6d03874f9a9f696fde3a946d057a571607d7ab7bb3e18a8e99c1d02e7e9` |
+| `test/results.xml` | `217bbe2ae15e5a20faf6c35c8d0262fff8959d65bf7b8fe3f0e034a43870abe2` |
+| `test/test.mem` | `acec845bf0b9ad02dcbbbdad4eb28471f6d5e455fc2b7f084dbfd54ccebf4e69` |
+| `test/sim_build/rtl/sim.vvp` | `b549930bcc37c502576c29d89afb558253c451916601842325d68917bd10038a` |
+| `test/tb.fst` | `f969629be3d92438748bb7d574981a8bb969eff2ede33d7100cd77187d091bce` |
 
-This clean rerun includes FST waveform dumping and constrains `$readmemh` to
-the generated 97-word range. It completed without warnings or errors.
+This clean rerun uses conventional RV32 little-endian words with no per-byte
+bit reversal, includes FST waveform dumping, and constrains `$readmemh` to the
+generated 97-word range. It completed without warnings or errors.

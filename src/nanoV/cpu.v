@@ -26,6 +26,20 @@ module nanoV_cpu #(parameter NUM_REGS=16) (
     // equivalent to the upstream ordering but avoids implicit-net conflicts
     // in strict IEEE-1364 elaborators such as current Icarus Verilog.
     reg [31:0] next_instr;
+    // SPI transmits each byte most-significant bit first.  The serial shift
+    // register below therefore holds the bits of each byte in reverse order.
+    // Present the rest of the CPU with the conventional RV32 little-endian
+    // instruction word.  This is only wiring; it synthesizes to no logic.
+    wire [31:0] decoded_next_instr = {
+        next_instr[24], next_instr[25], next_instr[26], next_instr[27],
+        next_instr[28], next_instr[29], next_instr[30], next_instr[31],
+        next_instr[16], next_instr[17], next_instr[18], next_instr[19],
+        next_instr[20], next_instr[21], next_instr[22], next_instr[23],
+        next_instr[8],  next_instr[9],  next_instr[10], next_instr[11],
+        next_instr[12], next_instr[13], next_instr[14], next_instr[15],
+        next_instr[0],  next_instr[1],  next_instr[2],  next_instr[3],
+        next_instr[4],  next_instr[5],  next_instr[6],  next_instr[7]
+    };
     reg [31:2] instr;
     wire take_branch;
     wire [31:0] core_data_out;
@@ -67,18 +81,18 @@ module nanoV_cpu #(parameter NUM_REGS=16) (
         end else begin
             if (next_cycle == instr_cycles) begin
                 cycle <= 0;
-                instr <= next_instr[31:2];
-                instr_cycles_reg <= cycles_for_instr(next_instr[31:2]);
+                instr <= decoded_next_instr[31:2];
+                instr_cycles_reg <= cycles_for_instr(decoded_next_instr[31:2]);
             end else
                 cycle <= next_cycle;
         end
 
-    wire is_fast_addr = next_instr[6] == 0 && next_instr[4:2] == 0 && next_instr[19:15] == 5'b00100 && next_cycle == instr_cycles;
+    wire is_fast_addr = decoded_next_instr[6] == 0 && decoded_next_instr[4:2] == 0 && decoded_next_instr[19:15] == 5'b00100 && next_cycle == instr_cycles;
     assign store_data_out = (counter == 31 && is_store && cycle == (is_normal_mem ? 1 : 0));
     assign data_in_read = (counter == 31 && is_load && cycle == (is_normal_mem ? 2 : 0));
     assign store_addr_out = is_fast_addr || (counter == 0 && is_normal_mem && cycle == 1);
 
-    wire [11:0] fast_addr_imm = {next_instr[31:25], next_instr[5] ? next_instr[11:9] : next_instr[24:22], 2'b00};
+    wire [11:0] fast_addr_imm = {decoded_next_instr[31:25], decoded_next_instr[5] ? decoded_next_instr[11:9] : decoded_next_instr[24:22], 2'b00};
     wire [31:0] fast_addr = {20'h10000, fast_addr_imm};
     assign addr_out = is_fast_addr ? fast_addr : core_data_out;
     
@@ -101,7 +115,7 @@ module nanoV_cpu #(parameter NUM_REGS=16) (
     nanoV_core #(.REG_ADDR_BITS($clog2(NUM_REGS)), .NUM_REGS(NUM_REGS)) core (
         clk,
         rstn,
-        (next_cycle == instr_cycles_assume_branch_not_taken) ? next_instr[30:2] : instr[30:2],
+        (next_cycle == instr_cycles_assume_branch_not_taken) ? decoded_next_instr[30:2] : instr[30:2],
         instr,
         cycle,
         counter,
@@ -245,7 +259,8 @@ module nanoV_cpu #(parameter NUM_REGS=16) (
 
     always @(posedge clk) begin
         if (!rstn) begin
-            next_instr <= 32'b000000000000_00000_000_00000_0010011;
+            // Physical shift-register representation of the NOP 0x00000013.
+            next_instr <= 32'h000000c8;
         end else begin
             next_instr <= {next_instr_new_bit, next_instr[31:1]};
         end

@@ -1,0 +1,5 @@
+read_verilog -I src src/tt_top.v src/nanoV/alu.v src/nanoV/core.v src/nanoV/cpu.v src/nanoV/register.v src/nanoV/shift.v
+hierarchy -check -top tt_um_WaiMingLee888_nanov_1tile
+synth -top tt_um_WaiMingLee888_nanov_1tile
+stat
+write_json docs/SYNTH_GENERIC.json

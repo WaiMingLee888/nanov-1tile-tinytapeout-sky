@@ -8,6 +8,8 @@ result, precheck result, shuttle order, or fabricated silicon claim.
 - The source manifest declares `1x1` and excludes UART and multiplier sources.
 - The machine-checkable architecture contract passes with `NUM_REGS=16`.
 - The self-checking SPI image generator emits 97 RV32E regression words.
+- Instruction images now use conventional RV32 little-endian words; the RTL
+  corrects the serial receiver's internal bit order without added cells.
 - RTL simulation passed under Icarus Verilog 13.0 and Cocotb 2.0.1. The
   97-word self-checking program reached `0xA5` after 331,585.986 ns with one
   test passed and zero failures/errors. A clean rerun generated an FST waveform
@@ -17,6 +19,13 @@ result, precheck result, shuttle order, or fabricated silicon claim.
 - Generic Yosys synthesis reports 1,728 cells, down from 2,087 cells for the
   signed 1x2 source baseline (359 cells, or 17.2%). This comparison proves a
   real reduction but does not substitute for SKY130 placement and routing.
+- GCC 12.3 compiled a freestanding 48-word RV32E/ILP32E firmware image. It
+  passed RTL simulation and reached `0xA5` after exercising GPIO and external
+  SPI-memory load/store. Prebuilt ELF, binary, memory image, and disassembly are
+  provided under `firmware/prebuilt/`.
+- Official GDS trial `33312477537` measured 21,577.910 um^2 of movable standard
+  cells in a 16,493.318 um^2 core: 135.548% utilization. This proves the first
+  derivative does not yet fit one tile and requires substantial RTL area work.
 
 ## Required before any tapeout claim
 

@@ -1,18 +1,18 @@
-RUN_STARTED=2026-08-30T08:35:30-04:00
+RUN_STARTED=2026-08-30T09:04:59-04:00
 one-tile contract passed: footprint=1x1, NUM_REGS=16, base regression words=97, optional multiplier/UART excluded
 wrote 97 RV32E test words to test.mem
 rm -f results.xml
 "make" -f Makefile results.xml
 make[1]: Entering directory '/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test'
 mkdir -p sim_build/rtl
-/usr/bin/iverilog -o sim_build/rtl/sim.vvp -s tb -g2012 -DPROG_FILE=\"test.mem\" -I/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src -DCOCOTB_SIM -f sim_build/rtl/cmds.f  /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/tt_top.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/alu.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/core.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/cpu.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/register.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/shift.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/sim_spi_ram.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/tb.v
+/usr/bin/iverilog -o sim_build/rtl/sim.vvp -s tb -g2012 -DPROG_FILE=\"test.mem\" -DPROG_WORDS=97 -I/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src -DCOCOTB_SIM -f sim_build/rtl/cmds.f  /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/tt_top.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/alu.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/core.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/cpu.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/register.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/../src/nanoV/shift.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/sim_spi_ram.v /mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test/tb.v
 rm -f results.xml
 COCOTB_TEST_MODULES=test COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tb TOPLEVEL_LANG=verilog \
          /usr/bin/vvp -M /mnt/d/riscv/nanov-tinytapeout-sky/.venv/lib/python3.10/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/rtl/sim.vvp -fst  
      -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.10.14 interpreter at /mnt/d/riscv/nanov-tinytapeout-sky/.venv/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Icarus Verilog version 13.0 (stable)
-     0.00ns INFO     cocotb                             Seeding Python random module with 1788093339
+     0.00ns INFO     cocotb                             Seeding Python random module with 1788095106
      0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /mnt/d/riscv/nanov-tinytapeout-sky/.venv/lib/python3.10/site-packages/cocotb
      0.00ns INFO     cocotb                             Running tests
      0.00ns INFO     cocotb.regression                  running test.test_rv32e_program (1/1)
@@ -20,9 +20,9 @@ COCOTB_TEST_MODULES=test COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tb
 331585.99ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test.test_rv32e_program        PASS      331585.99           0.39     848417.38  **
+                                                        ** test.test_rv32e_program        PASS      331585.99           0.39     847041.34  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             331585.99           0.40     830558.34  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             331585.99           0.40     832324.88  **
                                                         **************************************************************************************
 FST info: dumpfile tb.fst opened for output.
 make[1]: Leaving directory '/mnt/c/Users/waimi/Documents/Codex/2026-07-10/can/projects/nanov-1tile-tinytapeout-sky/test'

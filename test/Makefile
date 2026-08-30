@@ -4,6 +4,7 @@ SIM ?= icarus
 FST ?= -fst
 TOPLEVEL_LANG ?= verilog
 PROG_FILE ?= test.mem
+PROG_WORDS ?= 97
 
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES = \
@@ -15,6 +16,7 @@ PROJECT_SOURCES = \
 	nanoV/shift.v
 
 COMPILE_ARGS += -DPROG_FILE=\"$(PROG_FILE)\"
+COMPILE_ARGS += -DPROG_WORDS=$(PROG_WORDS)
 COMPILE_ARGS += -I$(SRC_DIR)
 COMPILE_ARGS += -DCOCOTB_SIM
 

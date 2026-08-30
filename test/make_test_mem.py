@@ -190,20 +190,12 @@ def build_program() -> list[int]:
     return p.resolve()
 
 
-def reverse_byte(value: int) -> int:
-    return int(f"{value:08b}"[::-1], 2)
-
-
-def spi_mem_word(word: int) -> int:
-    return sum(reverse_byte((word >> (8 * i)) & 0xFF) << (8 * i) for i in range(4))
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("output", type=Path, nargs="?", default=Path("test.mem"))
     args = parser.parse_args()
     words = build_program()
-    args.output.write_text("".join(f"{spi_mem_word(word):08x}\n" for word in words), encoding="ascii")
+    args.output.write_text("".join(f"{word:08x}\n" for word in words), encoding="ascii")
     print(f"wrote {len(words)} RV32E test words to {args.output}")
 
 
