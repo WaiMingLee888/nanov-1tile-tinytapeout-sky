@@ -36,11 +36,13 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   the same 1,999.541 um^2 pin-density adjustment even with routability-driven
   placement disabled. Trial `33318273256` confirmed that skipping initial
   placement also leaves the adjustment active. Trial `33318697303` showed the
-  first workflow injection was overwritten by the action's Python setup, so
-  the OpenROAD command remained unchanged. The next bounded trial preserves
-  OpenROAD's documented `-disable_pin_density_adjust` switch across that
-  setup. Raw movable plus fixed utilization is 94.12%, below the configured
-  95% target; routing and DRC remain mandatory.
+  first workflow injection was overwritten by the action's Python setup, and
+  trial `33318909097` confirmed a startup guard still targeted the wrong
+  runtime context. The next bounded trial runs the published TinyTapeout
+  support-tool commands explicitly and applies OpenROAD's documented
+  `-disable_pin_density_adjust` switch immediately before hardening. Raw
+  movable plus fixed utilization is 94.12%, below the configured 95% target;
+  routing and DRC remain mandatory.
 
 ## Required before any tapeout claim
 

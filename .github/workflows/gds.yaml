@@ -7,25 +7,44 @@ on:
 jobs:
   gds:
     runs-on: ubuntu-24.04
+    env:
+      PDK: sky130A
+      PDK_ROOT: /home/runner/pdk
+      TT_ARGS: ""
     steps:
       - name: checkout repo
         uses: actions/checkout@v6
         with:
           submodules: recursive
 
-      # LibreLane 3.0.5 does not expose OpenROAD's
-      # -disable_pin_density_adjust switch as a configuration variable. The
-      # raw design plus fixed cells uses 94.12% of the core, but the default
-      # pin-density heuristic inflates it to 106.47% before placement starts.
-      - name: Setup Python for LibreLane patch
+      - name: Checkout TinyTapeout support tools
+        uses: actions/checkout@v6
+        with:
+          repository: TinyTapeout/tt-support-tools
+          ref: main
+          path: tt
+
+      - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+          cache: pip
+
+      - name: Install TinyTapeout dependencies
+        shell: bash
+        run: pip install -r tt/requirements.txt
+
+      - name: Fetch Verilog and build configuration
+        shell: bash
+        run: ./tt/tt_tool.py --create-user-config $TT_ARGS
+
+      - name: Install LibreLane
+        shell: bash
+        run: pip install librelane==3.0.5
 
       - name: Enable exact-density OpenROAD placement
         shell: bash
         run: |
-          pip install librelane==3.0.5
           python - <<'PY'
           from pathlib import Path
           import librelane
@@ -38,38 +57,46 @@ jobs:
               raise SystemExit(f"unexpected LibreLane GPL script: {script}")
           script.write_text(text.replace(marker, replacement), encoding="utf-8")
           print(f"patched {script}")
-
-          # The composite TinyTapeout action runs setup-python again. Install
-          # an idempotent startup guard so any package restoration is patched
-          # before tt_tool starts LibreLane.
-          import base64
-          import site
-
-          guard = '''
-          from pathlib import Path
-          import librelane
-          p = Path(librelane.__file__).parent / "scripts/openroad/gpl.tcl"
-          t = p.read_text(encoding="utf-8")
-          m = "set arg_list [list]\\n"
-          r = m + "lappend arg_list -disable_pin_density_adjust\\n"
-          if r not in t:
-              if t.count(m) != 1:
-                  raise RuntimeError(f"unexpected LibreLane GPL script: {p}")
-              p.write_text(t.replace(m, r), encoding="utf-8")
-          '''
-          encoded = base64.b64encode(guard.encode("utf-8")).decode("ascii")
-          startup = Path(site.getsitepackages()[0]) / "nanov_exact_density.pth"
-          startup.write_text(
-              f"import base64;exec(base64.b64decode('{encoded}'))\n",
-              encoding="utf-8",
-          )
-          print(f"installed startup guard {startup}")
           PY
 
       - name: Build GDS
-        uses: TinyTapeout/tt-gds-action@ttsky26c
+        shell: bash
+        run: ./tt/tt_tool.py --harden $TT_ARGS
+
+      - name: Publish build logs
+        if: success() || failure()
+        uses: actions/upload-artifact@v7
         with:
-          pdk: sky130A
+          name: GDS_logs
+          path: |
+            src/*
+            runs/wokwi/*
+
+      - name: Prepare TinyTapeout submission
+        shell: bash
+        run: ./tt/tt_tool.py --create-tt-submission $TT_ARGS
+
+      - name: Publish TinyTapeout submission
+        uses: actions/upload-artifact@v7
+        with:
+          name: tt_submission
+          path: |
+            src/*
+            docs/*
+            tt_submission/*
+            info.yaml
+            LICENSE
+
+      - name: Render GDS preview
+        shell: bash
+        run: ./tt/tt_tool.py --create-png $TT_ARGS 2>&1 || true
+
+      - name: Publish GDS preview
+        uses: actions/upload-artifact@v7
+        with:
+          name: gds_render
+          path: gds_render.png
+          if-no-files-found: ignore
 
   precheck:
     needs: gds
