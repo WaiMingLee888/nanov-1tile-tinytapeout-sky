@@ -18,6 +18,12 @@
   "SYNTH_STRATEGY": "AREA 0",
   "RUN_POST_GPL_DESIGN_REPAIR": false,
 
+  "//": "Use a compact 12 MHz clock tree sized for this 1x1 macro.",
+  "MAX_FANOUT_CONSTRAINT": 30,
+  "CTS_SINK_CLUSTERING_SIZE": 30,
+  "CTS_ROOT_BUFFER": "sky130_fd_sc_hd__clkbuf_2",
+  "CTS_CLK_BUFFERS": ["sky130_fd_sc_hd__clkbuf_2"],
+
   "//": "Tiny Tapeout supplies a 12 MHz input clock (83.333 ns period).",
   "CLOCK_PERIOD": 83.333,
 

@@ -62,6 +62,14 @@ or tapeout signoff, so no GDS-ready or fabricated-silicon claim is made.
   as an inverter clock sink with no downstream instance. The wrapper now uses
   mode-0 non-inverted SCK and no falling-edge MISO register, eliminating that
   invalid CTS topology while preserving the SPI protocol in RTL regression.
+- Trial `33320934344` proved the mode-0 wrapper clears the OpenROAD crash and
+  completes clock-tree construction. Generic CTS defaults inserted 56 clock
+  buffers occupying 1,151.10 um^2, which could not legalize. An exact local
+  replay of that run's step-33 database now passes CTS legalization with a
+  genuine 17-buffer `clkbuf_2` tree occupying 85.08 um^2. The replay uses a
+  30-sink fanout/cluster constraint and OpenROAD's documented no-dummy-load and
+  no-insertion-delay modes; timing, slew, routing, and signoff checks remain
+  enabled to validate the smaller tree.
 
 ## Required before any tapeout claim
 

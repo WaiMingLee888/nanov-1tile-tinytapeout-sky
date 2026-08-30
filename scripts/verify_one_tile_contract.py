@@ -90,6 +90,14 @@ def main() -> None:
             "best measured synthesis strategy")
     require(r'"RUN_POST_GPL_DESIGN_REPAIR"\s*:\s*false', config,
             "deferred high-fanout repair until after legalization")
+    require(r'"MAX_FANOUT_CONSTRAINT"\s*:\s*30', config,
+            "measured 30-sink fanout constraint")
+    require(r'"CTS_SINK_CLUSTERING_SIZE"\s*:\s*30', config,
+            "measured compact CTS clustering")
+    require(r'"CTS_ROOT_BUFFER"\s*:\s*"sky130_fd_sc_hd__clkbuf_2"', config,
+            "compact CTS root buffer")
+    require(r'"CTS_CLK_BUFFERS"\s*:\s*\[\s*"sky130_fd_sc_hd__clkbuf_2"\s*\]',
+            config, "compact CTS buffer list")
     workflow = (ROOT / ".github" / "workflows" / "gds.yaml").read_text(
         encoding="utf-8"
     )
@@ -98,8 +106,12 @@ def main() -> None:
     )
     require(r'LIBRELANE_IMAGE_OVERRIDE:\s*nanov-librelane:3\.0\.5', workflow,
             "patched LibreLane container selection")
-    require(r'lappend arg_list -disable_pin_density_adjust', placement_patch,
+    require(r'"-disable_pin_density_adjust"', placement_patch,
             "exact-density OpenROAD placement flag")
+    require(r'"-dont_use_dummy_load"', placement_patch,
+            "disabled CTS dummy loads")
+    require(r'"-no_insertion_delay"', placement_patch,
+            "single compact CTS tree")
     require(r'"RUN_LINTER"\s*:\s*1', config, "enabled RTL linter")
     require(r'"RUN_CTS"\s*:\s*1', config, "enabled clock-tree synthesis")
 
