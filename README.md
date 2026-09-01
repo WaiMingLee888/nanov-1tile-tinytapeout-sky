@@ -19,12 +19,15 @@ datapath operation. See [the architecture contract](docs/ARCHITECTURE.md).
 
 ## Status
 
-**Experimental, not signed off.** The external-register candidate passes both
-the 97-word self-check and compiler-generated C firmware. Its complete SKY130
-wrapper maps to 14,652.8032 um^2, but mapping is not placement. This project is
-not tapeout-ready until the exact proposed commit passes 1x1 placement and routing, extracted
-multi-corner setup and hold timing, DRC, LVS, antenna, gate-level regression,
-and Tiny Tapeout precheck.
+**Signed off for TTSKY26c.** Physical revision
+`aea43d652be6ea42b024105291aadba46a345347` completed the official SKY130
+hardening flow in run `33322018202`, with an independent successful rerun in
+`33323135770`. The exact 1x1 design passed placement, routing, antenna, Magic
+DRC, LVS, power-grid checks, extracted nine-corner setup and hold timing,
+gate-level regression, and Tiny Tapeout precheck. The 97-word self-check and
+compiler-generated RV32E firmware also pass. See
+[the complete signoff record](docs/SIGNOFF.md) for immutable artifact identities,
+physical metrics, and the remaining claim boundaries.
 
 Generate and run the self-checking RTL regression under Ubuntu/WSL:
 
